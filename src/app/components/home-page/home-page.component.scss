@@ -17,7 +17,7 @@ ul li a{
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    color: #e72929;
+    color: black;
 }
 li a:hover{
     opacity: 0.9;
@@ -39,8 +39,8 @@ hr{
     text-align: right;
     margin: 0.5rem;
 }
-.opis {
-    height: 2.5em; // Adjust height to fit two lines of text
+.naziv {
+    height: 2.45em; // Adjust height to fit two lines of text
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -55,16 +55,30 @@ hr{
     display: grid;
     height: 4rem; // Adjust height to fit two rows of text
     grid-template-columns: repeat(3, 1fr); // Display 3 items per row
-    gap: 0.2rem; // Adjust gap between items
+    gap: 0.1rem; // Adjust gap between items
     overflow-x: hidden;
     overflow-y: auto; // Make the div scrollable if it overflows
 }
 .kategorije span {
-    font-size: 0.75rem;
-    height: fit-content;
-    background-color: #f0f0f0;
-    border-radius: 0.5rem;
-    padding: 0.2rem 0.5rem;
+    
+    white-space: nowrap;
+    padding: 0;
+    margin: 0;
+    width: 100px;
+}
+.content ::ng-deep app-button{
+    width: 80%;
+    height: 100%;
+}
+.content ::ng-deep app-button button span{
+    font-size: 0.8rem;
+    height: fit-content !important;
+}
+.content ::ng-deep app-button button{
+    height: 1.5rem !important;
+    width: 95px;
+    background-color: #FFF;
+    border-radius: 0.72rem;
     margin: 0.2rem;
     white-space: nowrap;
 }

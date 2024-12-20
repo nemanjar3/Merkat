@@ -1,0 +1,21 @@
+
+<div class="oglas-detalji">
+    <img class="oglas-image" [src]="oglas.slika" alt="{{ oglas.naziv }}" />
+  
+    <h1 class="oglas-name">{{ oglas.naziv }}</h1>
+  
+    <h2 class="oglas-title">Opis</h2>
+    <p class="oglas-description">{{ oglas.opis }}</p>
+  
+    <p class="oglas-price">
+      <strong>Cijena:</strong> {{ oglas.cijena }}
+    </p>
+  
+    <p class="oglas-categories">
+      <strong>Kategorije: </strong>
+      <span class="oglas-category" *ngFor="let kategorija of oglas.kategorije">
+        <app-button [text]="kategorija"></app-button>
+      </span>
+    </p>
+  </div>
+  

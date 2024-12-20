@@ -21,9 +21,11 @@ color: black !important; /* Или нека друга боја */
     font-weight: bold;
     text-transform: uppercase;
   }
-  ::ng-deep app-navbar-button button {
+  ::ng-deep app-button button {
       width: 100%;
       height: 4rem;
+      font-style: bold;
+      font-size: 1.25rem;
   }
 }
 

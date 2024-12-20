@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     standalone: true,
-    selector: 'app-navbar-button',
+    selector: 'app-button',
     imports: [RouterModule, MatButtonModule, TranslateModule],
     templateUrl: './navbar-button.component.html',
     styleUrl: './navbar-button.component.scss'
