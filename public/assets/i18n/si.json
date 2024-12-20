@@ -1,0 +1,15 @@
+{
+    "selectLanguage": "Izaberite jezik",
+    "homePage": "Domov",
+    "stores": "Prodavnice",
+    "marketing": "Marketing",
+    "help": "Pomoč",
+    "login": "Prijava",
+    "register": "Registracija",
+    "firstName": "Ime",
+    "lastName": "Priimek",
+    "email": "E-pošta",
+    "password": "Geslo",
+    "emailError": "Vnesite validno e-pošto"
+
+}

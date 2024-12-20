@@ -1,0 +1,24 @@
+
+<!-- display all oglasi -->
+<ul>
+    <li *ngFor="let oglas of oglasi">
+        <a>
+            <img src="{{oglas.slika}}" alt="">
+            <div class="content">
+                <div class="opis">
+                   {{oglas.opis}}
+                </div>
+                <hr>
+                <div class="kategorije">
+                    <span *ngFor="let kategorija of oglas.kategorije">
+                        {{kategorija}}
+                    </span>
+                </div>
+                <div class="cijena">
+                    {{oglas.cijena}}
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>
+

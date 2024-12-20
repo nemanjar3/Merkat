@@ -1,0 +1,64 @@
+/* Stilizujte mat-option */
+.mat-option {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+}
+
+span{
+  display: flex;
+  align-items: center;
+}
+
+/* Stilizujte img-container */
+.img-container {
+  width: 30px; 
+  height: 30px;
+  display: inline-flex;
+  align-items: center; 
+  justify-content: center; 
+}
+
+/* Stilizujte img */
+.img-container img {
+  margin: 0;
+  padding: 0;
+  max-width: 25px; 
+  max-height: 25px;
+}
+
+/* Stilizujte jezik */
+.jezik {
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+/* Stilizujte mat-form-field */
+.custom-form-field {
+  padding: 0;
+  margin: 0;
+  height: fit-content;
+  width: fit-content;
+  display: flex; 
+  min-width: 150px; 
+}
+
+.mat-mdc-select-value-text, .mat-mdc-select-arrow-wrapper{
+  margin-top: 23px;
+}
+mat-form-field{
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
+.selector-container {
+  margin-bottom: 7px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 40px;
+  width: 150px;
+  overflow-y: hidden;
+}

@@ -1,0 +1,17 @@
+
+<div class="selector-container">
+  <mat-form-field padding="none" class="custom-form-field">
+    <!-- <mat-label>{{ 'selectLanguage' | translate }}</mat-label> -->
+    <mat-select 
+    [(value)]="selectedLanguage"
+    (selectionChange)="onLanguageChange($event)">
+      <mat-option *ngFor="let lang of languages" [value]="lang.code">
+        <div class="img-container">
+          <img src="assets/images/flags/{{ lang.code }}.png"> 
+        </div>
+  
+        <div class="jezik">{{ lang.name }}</div>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

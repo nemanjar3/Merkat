@@ -1,0 +1,16 @@
+{
+    "selectLanguage": "Select language",
+    "homePage": "Home",
+    "stores": "Stores",
+    "marketing": "Marketing",
+    "help": "Help",
+    "login": "Login",
+    "register": "Register",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "E-mail",
+    "password": "Password",
+    "emailError": "Enter a valid e-mail",
+    "registerYou": "Register"
+
+}

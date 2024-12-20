@@ -1,0 +1,142 @@
+/* Navbar container */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f0f0f0;
+  position: relative;
+}
+
+/* Logo */
+.logo img {
+  max-height: 40px;
+}
+.left-side:hover{
+  opacity: 70%;
+}
+
+/* Hamburger menu */
+.hamburger-menu {
+  display: block;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.hamburger-menu:hover {
+  color: #555; /* Change color on hover */
+}
+
+/* Collapsible menu (hidden by default for mobile) */
+.collapsible-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #f0f0f0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  padding: 0 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  overflow: hidden; /* Hide content when collapsed */
+  max-height: 0; /* Initially collapsed */
+  opacity: 0; /* Start invisible */
+  transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease; /* Smooth expand/collapse */
+}
+
+/* Show the menu when not collapsed */
+.collapsible-menu.collapsed {
+  display: flex;
+  max-height: fit-content; /* Adjust based on content height */
+  opacity: 1; /* Fade in */
+  padding: 1rem 1rem;
+  transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease; /* Smooth expand/collapse */
+}
+
+/* Left buttons */
+.left-buttons {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Align to the left */
+  justify-content: center;
+  gap: 1rem;
+  width: 100%; /* Ensure full width */
+}
+
+/* Right buttons */
+.right-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Align to the right */
+  gap: 1rem;
+  width: 100%; /* Ensure full width */
+}
+
+.right-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Align buttons to the right */
+  gap: 1rem;
+  transition: transform 0.3s ease; /* Smooth animation for mobile toggle */
+}
+
+/* Add hover effects to buttons */
+.left-buttons button, .right-buttons button {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.left-buttons button:hover, .right-buttons button:hover {
+  transform: scale(1.05); /* Slight zoom-in effect */
+  color: #333;
+}
+
+/* Desktop view styles */
+@media (min-width: 995px) {
+  .hamburger-menu {
+    display: none; /* Hide hamburger on larger screens */
+  }
+
+  .collapsible-menu {
+    display: flex; /* Always visible on larger screens */
+    flex-direction: row;
+    position: static;
+    width: 100%;
+    padding: 0;
+    box-shadow: none;
+    max-height: none; /* Remove max-height restriction */
+    opacity: 1; /* Ensure full visibility */
+    gap: 1rem;
+    transition: none; /* No transition needed for desktop layout */
+  }
+
+  .left-buttons {
+    margin-left: 1rem;
+    margin-right: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; /* Align left */
+    gap: 1rem;
+    width: auto; /* Remove full-width for desktop */
+  }
+
+  .right-side {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end; /* Align right */
+    gap: 1rem;
+    width: auto; /* Remove full-width for desktop */
+  }
+
+  .right-buttons {
+    flex-direction: row; /* Align buttons horizontally */
+    align-items: center;
+    gap: 1rem;
+  }
+}
