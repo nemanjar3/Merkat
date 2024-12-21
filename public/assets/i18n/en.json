@@ -11,6 +11,12 @@
     "email": "E-mail",
     "password": "Password",
     "emailError": "Enter a valid e-mail",
-    "registerYou": "Register"
-
+    "registerYou": "Register",
+    "back": "Back",
+    "description": "Description",
+    "price": "Price",
+    "categories": "Categories",
+    "publisher": "Published by",
+    "call": "Call",
+    "sendMessage": "Send message"
 }

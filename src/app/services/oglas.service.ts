@@ -95,7 +95,6 @@ export class OglasService {
       if (!oglas) {
           throw new Error(`Oglas with id ${id} not found`);
       }
-      console.log(oglas.slika);
       return oglas;
   }
 

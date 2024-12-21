@@ -11,5 +11,12 @@
     "email": "E-pošta",
     "password": "Lozinka",
     "emailError": "Unesite validnu e-poštu",
-    "registerYou": "Registruj se"
+    "registerYou": "Registruj se",
+    "back": "Nazad",
+    "description": "Opis",
+    "price": "Cijena",
+    "categories": "Kategorije",
+    "publisher": "Objavljeno od",
+    "call": "Pozovi",
+    "sendMessage": "Pošalji poruku"
 }

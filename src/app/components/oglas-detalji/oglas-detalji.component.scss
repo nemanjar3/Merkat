@@ -1,94 +1,201 @@
 /* Base styling */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    background-color: #f9f9f9;
-    color: #333;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Header container */
+.oglas-header {
+  display: flex;
+  flex-direction: column; /* Stack items vertically by default */
+  align-items: center; /* Align items to the left */
+  padding: 15px;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+hr{
+  background-color: #f1f1f1;
+  width: 97%;
+  size: 3px;
+  color: purple;
+  margin: 0 auto;
+}
+
+
+/* Back button styling */
+.back-button {
+  font-size: 1rem;
+  padding: 8px 16px;
+  color: #fff;
+  border: none;
+  margin: auto 0;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 85%;
+}
+.back-button ::ng-deep button{
+  width: 100%;
+}
+
+.oglas-name {
+  font-size: 1.5rem;
+  color: #222;
+  margin: auto;
+  margin-top: 1.5rem;
+}
+
+/* Content styling */
+.oglas-detalji {
+  max-width: 600px;
+  margin: 15px auto;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+/* Image styling */
+.oglas-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+/* Title styling */
+.oglas-title {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* Description styling */
+.oglas-description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+/* Price styling */
+.oglas-price {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Categories styling */
+.oglas-category {
+  display: inline-block;
+  padding: 4px 8px;
+  color: #00796b;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  margin-right: 5px;
+}
+
+@media (min-wdith: 490px){
+  .back-button{
+    width: fit-content;
   }
-  
+  .oglas-header{
+    flex-direction: row;
+  }
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
   .oglas-detalji {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    padding: 20px;
   }
-  
-  /* Image styling */
-  .oglas-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
+  .back-button{
+    width: fit-content;
   }
-  
-  /* Name styling */
+
   .oglas-name {
-    font-size: 1.5rem;
-    color: #222;
-    margin-bottom: 10px;
-    text-align: center;
+    font-size: 2rem;
+    padding-right: 6rem;
+    margin: auto;
   }
-  
-  /* Title styling */
+
   .oglas-title {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 5px;
+    font-size: 1.5rem;
   }
-  
-  /* Description styling */
+
   .oglas-description {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 15px;
-    text-align: justify;
+    font-size: 1.1rem;
   }
-  
-  /* Price styling */
+
   .oglas-price {
-    font-size: 1.2rem;
-    color: #333;
-    margin-bottom: 10px;
+    font-size: 1.4rem;
   }
-  
-  
+
   .oglas-category {
-    display: inline-block;
+    font-size: 1rem;
   }
-  
-  /* Responsive Design */
-  @media (min-width: 768px) {
-    .oglas-detalji {
-      max-width: 800px;
-      padding: 20px;
-    }
-  
-    .oglas-name {
-      font-size: 2.1rem;
-    }
-  
-    .oglas-title {
-      font-size: 2rem;
-    }
-  
-    .oglas-description {
-      font-size: 1.1rem;
-    }
-  
-    .oglas-price {
-      font-size: 1.4rem;
-    }
-  
-    .oglas-categories {
-      font-size: 1.1rem;
-    }
-  
-    .oglas-category {
-      padding: 6px 8px;
-    }
+  .oglas-header{
+    flex-direction: row;
   }
-  
+
+
+
+}
+
+/* User card container */
+.user-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin: auto;
+  margin-top: 20px;
+}
+
+/* User profile picture */
+.user-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* User info text */
+.user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.user-name {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: bold;
+  margin: 1rem auto;
+}
+
+/* Action buttons */
+.user-actions {
+  display: flex;
+  gap: 10px;
+}
+.user-action-button{
+  width: 100%;
+}
+.user-actions ::ng-deep app-button button{
+  width: 100% !important;
+}
+
+
+
+

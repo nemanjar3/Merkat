@@ -10,6 +10,12 @@
     "lastName": "Priimek",
     "email": "E-pošta",
     "password": "Geslo",
-    "emailError": "Vnesite validno e-pošto"
-
+    "emailError": "Vnesite validno e-pošto",
+    "back": "Nazaj",
+    "description": "Opis",
+    "price": "Cena",
+    "categories": "Kategorije",
+    "publisher": "Objavil",
+    "call": "Pokliči",
+    "sendMessage": "Pošlji sporočilo"
 }

@@ -9,5 +9,12 @@
     "firstName": "Ime",
     "lastName": "Prezime",
     "email": "E-pošta",
-    "password": "Lozinka"
+    "password": "Lozinka",
+    "back": "Nazad",
+    "description": "Opis",
+    "price": "Cena",
+    "categories": "Kategorije",
+    "publisher": "Objaveno od",
+    "call": "Javete se",
+    "sendMessage": "Isprati poraka"
 }
