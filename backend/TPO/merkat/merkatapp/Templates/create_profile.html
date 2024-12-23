@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Profile and Listing</title>
+</head>
+<body>
+    <h1>Create Your Profile and Add a Listing</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <h2>User Profile</h2>
+        {{ profile_form.as_p }}
+        
+        <h2>Listing Details</h2>
+        {{ listing_form.as_p }}
+        
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
