@@ -38,5 +38,11 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.5.2"
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:8000",
+      "changeOrigin": true
+    }
   }
 }
