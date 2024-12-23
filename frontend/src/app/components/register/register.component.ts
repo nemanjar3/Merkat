@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MatFormField, MatLabel,MatError } from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input'
 import { NavbarButtonComponent } from "../navbar-button/navbar-button.component";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   standalone: true,
@@ -25,19 +26,44 @@ import { NavbarButtonComponent } from "../navbar-button/navbar-button.component"
 export class RegisterComponent {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private http: HttpClient) {
     this.registerForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      user_name: ['', Validators.required],
+      user_surname: ['', Validators.required],
+      username: ['', Validators.required],
+      tel_num: [
+        '', 
+        [Validators.required, Validators.pattern('^[0-9]*$')] // Both validators should be in the same array
+      ],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+    
   }
 
   onSubmit() {
+    console.log('Form submitted:', this.registerForm.value);
     if (this.registerForm.valid) {
-      // Пошаљите податке на бекенд
-      console.log(this.registerForm.value);
+      // Call the API using HttpClient
+      const observer = {
+        next: (response: any) => {
+          // Handle successful response
+          console.log('User created successfully:', response);
+          // Optionally navigate to login page:
+          // this.router.navigate(['/login']);
+        },
+        error: (error: any) => {
+          // Handle error
+          console.error('Error creating user:', error);
+        },
+        complete: () => {
+          // Optional: Handle completion (e.g., hide loading indicator)
+          console.log('API call completed');
+        }
+      };
+  
+      this.http.post('http://127.0.0.1:8000/api/users/create/', this.registerForm.value)
+        .subscribe(observer);
     }
   }
 }

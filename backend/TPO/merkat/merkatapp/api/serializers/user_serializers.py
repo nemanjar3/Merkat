@@ -1,12 +1,16 @@
 # serializers.py
 from rest_framework import serializers
 # from ...models import User
-from ...models import User, Listing, Store
+from ...models import User, Listing, Store, ListingAttributeValue, CategoryAttributes, SubCategoryAttributes
+from .listing_serializers import ListingSerializer
+from .shared_serializers import ListingAttributeValueSerializer, ListingSerializer
 
-class ListingSerializer(serializers.ModelSerializer):
+
+# vrati ako treba posle izbrisi iz shared i importuju dje treba i kako treba
+"""class ListingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Listing
-        fields = ['listing_id', 'title', 'description', 'price', 'posted_date', 'status', 'location']
+        fields = ['listing_id', 'title', 'description', 'price', 'posted_date', 'status', 'location']"""
 
 class StoreSerializer(serializers.ModelSerializer):
     class Meta:
