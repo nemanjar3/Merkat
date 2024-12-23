@@ -2,7 +2,7 @@
     <hr>
   </div>
   <div class="oglas-header">
-    <app-button class="back-button">{{ "back" | translate }}</app-button>
+    <app-button class="back-button" [routerLink]="['/']">{{ "back" | translate }}</app-button>
     <h1 class="oglas-name">{{ oglas.naziv }}</h1>
   </div>
   
@@ -25,7 +25,7 @@
   
     <!-- User info card -->
     <strong>{{"publisher" | translate}}: </strong>
-    <div class="user-card">
+    <div class="user-card" [routerLink]="['/user']">
       <img class="user-image" [src]="user.slika" alt="{{ user.username }}" />
       <div class="user-info">
         <p class="user-name">{{ user.username }}</p>

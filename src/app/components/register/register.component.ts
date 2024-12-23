@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatFormField, MatLabel,MatError } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MatFormField, MatLabel,MatError } from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input'
 import { NavbarButtonComponent } from "../navbar-button/navbar-button.component";
 
