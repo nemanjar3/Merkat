@@ -18,5 +18,8 @@
     "categories": "Kategorije",
     "publisher": "Objavljeno od",
     "call": "Pozovi",
-    "sendMessage": "Pošalji poruku"
+    "sendMessage": "Pošalji poruku",
+    "tel-num": "Broj telefona",
+    "telNumError": "Unesite validan broj telefona",
+    "username": "Korisničko ime"
 }

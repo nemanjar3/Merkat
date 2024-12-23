@@ -16,5 +16,8 @@
     "categories": "Kategorije",
     "publisher": "Objaveno od",
     "call": "Javete se",
-    "sendMessage": "Isprati poraka"
+    "sendMessage": "Isprati poraka",
+    "tel-num": "Broj telefona",
+    "telNumError": "Vnesete validen broj telefona",
+    "username": "Korisničko ime"
 }

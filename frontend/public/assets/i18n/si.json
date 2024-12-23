@@ -17,5 +17,8 @@
     "categories": "Kategorije",
     "publisher": "Objavil",
     "call": "Pokliči",
-    "sendMessage": "Pošlji sporočilo"
+    "sendMessage": "Pošlji sporočilo",
+    "tel-num": "Telefonska številka",
+    "telNumError": "Vnesite veljavno telefonsko številko",
+    "username": "Uporabniško ime"
 }

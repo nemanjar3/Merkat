@@ -18,5 +18,8 @@
     "categories": "Categories",
     "publisher": "Published by",
     "call": "Call",
-    "sendMessage": "Send message"
+    "sendMessage": "Send message",
+    "tel-num": "Phone number",
+    "telNumError": "Enter a valid phone number",
+    "username": "Username"
 }

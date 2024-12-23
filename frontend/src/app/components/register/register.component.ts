@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatFormField, MatLabel,MatError } from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input'
-import { NavbarButtonComponent } from "../navbar-button/navbar-button.component";
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -19,7 +18,7 @@ import { HttpClient } from '@angular/common/http';
     TranslateModule,
     RouterModule,
     MatInputModule,
-    CommonModule, NavbarButtonComponent],
+    CommonModule],
     templateUrl: './register.component.html',
     styleUrl: './register.component.scss'
 })
