@@ -77,7 +77,7 @@ ul {
 
 ul li a {
     height: wrap-content;
-    width: 72vw;
+    width: 20rem;
     border: 2.5px solid whitesmoke;
     border-radius: 1rem;
     margin: 0.5rem;
@@ -86,6 +86,7 @@ ul li a {
     overflow: hidden;
     color: black;
 }
+
 
 li a:hover {
     opacity: 0.9;
@@ -168,8 +169,8 @@ hr {
 }
 
 .profile-picture {
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     object-fit: cover;
     cursor: pointer;
@@ -240,6 +241,10 @@ form button:hover {
         margin-bottom: 5px; /* Add spacing between stacked buttons */
     }
     ul li a{
-        width: 40vw;
+        width: 20rem;
     }
+    .nav-link{
+        width: 90% !important;
+    }
+    
 }
