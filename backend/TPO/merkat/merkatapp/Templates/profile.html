@@ -1,0 +1,21 @@
+<h1>Welcome, {{ user.user_name }} {{ user.user_surname }}</h1>
+<h2>Your Listings</h2>
+<ul>
+    {% for listing in listings %}
+        <li>{{ listing.title }} - ${{ listing.price }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Add a New Listing</h2>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Title" required>
+    <textarea name="description" placeholder="Description" required></textarea>
+    <input type="number" name="price" placeholder="Price" required>
+    <select name="category">
+        {% for category in categories %}
+            <option value="{{ category.category_id }}">{{ category.category_name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Add Listing</button>
+</form>
