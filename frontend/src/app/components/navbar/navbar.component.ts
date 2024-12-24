@@ -25,7 +25,7 @@ export class NavbarComponent {
   ];
   isNavbarCollapsed = false;
   textLogin = "login"
-  linkLogin = 'login'
+  linkLogin = '/login'
   linkRegister = '/register'
   textRegister = "register"
 
