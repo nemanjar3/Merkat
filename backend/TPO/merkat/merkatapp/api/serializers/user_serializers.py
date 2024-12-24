@@ -4,6 +4,7 @@ from rest_framework import serializers
 from ...models import User, Listing, Store, ListingAttributeValue, CategoryAttributes, SubCategoryAttributes
 from .listing_serializers import ListingSerializer
 from .shared_serializers import ListingAttributeValueSerializer, ListingSerializer
+from django.contrib.auth.hashers import make_password
 
 
 # vrati ako treba posle izbrisi iz shared i importuju dje treba i kako treba
@@ -47,4 +48,17 @@ class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=256)
     password = serializers.CharField(max_length=1024, write_only=True)
 
+class UserUpdateSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(max_length=256, required=False)
 
+    class Meta:
+        model = User
+        fields = ['username', 'password', 'user_name', 'user_surname', 'tel_num', 'profile_image']
+
+    def validate_username(self, value):
+        if User.objects.filter(username=value).exclude(pk=self.instance.pk).exists():
+            raise serializers.ValidationError("This username is already taken.")
+        return value
+
+    def validate_password(self, value):
+        return make_password(value) if value else value
