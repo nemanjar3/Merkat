@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MatFormField, MatLabel,MatError } from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input'
 import { HttpClient } from '@angular/common/http';
-
+import { Router } from '@angular/router';
 @Component({
   standalone: true,
     selector: 'app-register',
@@ -24,8 +24,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  errorMessage: string = "";
 
-  constructor(private fb: FormBuilder,private http: HttpClient) {
+  constructor(private fb: FormBuilder,private http: HttpClient,private router: Router) {
     this.registerForm = this.fb.group({
       user_name: ['', Validators.required],
       user_surname: ['', Validators.required],
@@ -52,11 +53,13 @@ export class RegisterComponent {
           // this.router.navigate(['/login']);
         },
         error: (error: any) => {
-          // Handle error
-          console.error('Error creating user:', error);
+          if (error.error && error.error.error === 'Username already exists') {
+            this.registerForm.get('username')?.setErrors({ usernameExists: true });
+          }
         },
         complete: () => {
-          // Optional: Handle completion (e.g., hide loading indicator)
+          //go to login page
+          this.router.navigate(['/login']); 
           console.log('API call completed');
         }
       };

@@ -21,5 +21,7 @@
     "sendMessage": "Send message",
     "tel-num": "Phone number",
     "telNumError": "Enter a valid phone number",
-    "username": "Username"
+    "username": "Username",
+    "usernameError": "Username is already taken"
+
 }

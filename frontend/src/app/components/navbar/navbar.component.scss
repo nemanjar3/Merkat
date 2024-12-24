@@ -4,15 +4,23 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #f0f0f0;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
+}
+
+.collapsible-menu-container{
+  display: flex;
+  justify-content: right;
+  align-items: center;
 }
 
 /* Logo */
 .logo img {
   max-height: 40px;
 }
-.left-side:hover{
+
+.left-side:hover {
   opacity: 70%;
   cursor: pointer;
 }
@@ -25,98 +33,101 @@
   font-size: 2rem;
   cursor: pointer;
   color: #333;
-  transition: color 0.3s ease; /* Smooth hover effect */
+  transition: color 0.3s ease;
 }
 
 .hamburger-menu:hover {
-  color: #555; /* Change color on hover */
+  color: #555;
 }
 
-/* Collapsible menu (hidden by default for mobile) */
+/* Collapsible menu */
 .collapsible-menu {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background-color: #f0f0f0;
+  background-color: #f8f9fa;
   position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
-  padding: 0 1rem;
-  padding-left: 0;
+  padding: 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 100;
-  overflow: hidden; /* Hide content when collapsed */
-  max-height: 0; /* Initially collapsed */
-  opacity: 0; /* Start invisible */
-  transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease; /* Smooth expand/collapse */
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
 }
 
-/* Show the menu when not collapsed */
 .collapsible-menu.collapsed {
-  display: flex;
-  max-height: fit-content; /* Adjust based on content height */
-  opacity: 1; /* Fade in */
-  padding: 1rem 1rem;
-  padding-left: 0;
-  transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease; /* Smooth expand/collapse */
+  max-height: fit-content;
+  opacity: 1;
+  padding: 1rem;
 }
 
 /* Left buttons */
 .left-buttons {
-
   display: flex;
   flex-direction: column;
-  align-items: center; /* Align to the left */
+  align-items: center;
   justify-content: center;
   gap: 1rem;
-  width: 100%; /* Ensure full width */
+  width: 100%;
 }
 
-/* Right buttons */
+/* Right-side container */
 .right-side {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Align to the right */
+  align-items: center;
   gap: 1rem;
-  width: 100%; /* Ensure full width */
+  width: 100%;
 }
 
 .right-buttons {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Align buttons to the right */
+  align-items: center;
   gap: 1rem;
-  transition: transform 0.3s ease; /* Smooth animation for mobile toggle */
+  transition: transform 0.3s ease;
 }
 
-/* Add hover effects to buttons */
-.left-buttons button, .right-buttons button {
-  transition: transform 0.2s ease, color 0.2s ease;
+/* User menu styles */
+.user-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 0.5rem;
 }
 
-.left-buttons button:hover, .right-buttons button:hover {
-  transform: scale(1.05); /* Slight zoom-in effect */
+
+
+.menu-item {
+  font-size: 0.9rem;
   color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Desktop view styles */
+
+/* Desktop view */
 @media (min-width: 995px) {
   .hamburger-menu {
-    display: none; /* Hide hamburger on larger screens */
+    display: none;
   }
 
   .collapsible-menu {
-    display: flex; /* Always visible on larger screens */
+    display: flex;
     flex-direction: row;
     position: static;
     width: 100%;
     padding: 0;
     box-shadow: none;
-    max-height: none; /* Remove max-height restriction */
-    opacity: 1; /* Ensure full visibility */
+    max-height: none;
+    opacity: 1;
     gap: 1rem;
-    transition: none; /* No transition needed for desktop layout */
+    transition: none;
   }
 
   .left-buttons {
@@ -124,22 +135,23 @@
     margin-right: auto;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start; /* Align left */
+    justify-content: flex-start;
     gap: 1rem;
-    width: auto; /* Remove full-width for desktop */
+    width: auto;
   }
 
   .right-side {
     flex-direction: row;
     align-items: center;
-    justify-content: flex-end; /* Align right */
+    justify-content: flex-end;
     gap: 1rem;
-    width: auto; /* Remove full-width for desktop */
+    width: auto;
   }
 
   .right-buttons {
-    flex-direction: row; /* Align buttons horizontally */
+    flex-direction: row;
     align-items: center;
     gap: 1rem;
   }
 }
+

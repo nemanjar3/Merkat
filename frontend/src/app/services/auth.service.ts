@@ -16,10 +16,6 @@ export class AuthService {
     this.isLoggedIn$.next(!!token);
   }
 
-  login(username: string, password: string) {
-    return this.http.post('http://127.0.0.1:8000/api/users/login', { username, password });
-  }
-
   saveUser(data: any) {
     localStorage.setItem(this.tokenKey, data.tokens.access);
     localStorage.setItem(this.userKey, JSON.stringify(data.username));

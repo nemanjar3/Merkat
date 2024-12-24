@@ -4,7 +4,7 @@
     "stores": "Prodavnice",
     "marketing": "Marketing",
     "help": "Pomoč",
-    "login": "Prijava",
+    "login": "Prijavi se",
     "register": "Registracija",
     "firstName": "Ime",
     "lastName": "Priimek",
@@ -20,5 +20,7 @@
     "sendMessage": "Pošlji sporočilo",
     "tel-num": "Telefonska številka",
     "telNumError": "Vnesite veljavno telefonsko številko",
-    "username": "Uporabniško ime"
+    "username": "Uporabniško ime",
+    "usernameError": "Uporabniško ime je že zasedeno"
+
 }
