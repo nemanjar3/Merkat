@@ -47,6 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # dodato
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

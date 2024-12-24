@@ -21,10 +21,11 @@ class ProfileSerializer(serializers.ModelSerializer):
     listings = ListingSerializer(many=True, source='listing_set')  
     stores = StoreSerializer(many=True, source='store_set')        
     num_listings = serializers.SerializerMethodField()
+    profile_image = serializers.ImageField(use_url=True) # dodato
 
     class Meta:
         model = User
-        fields = ['username', 'user_name', 'user_surname', 'email', 'tel_num', 'listings', 'num_listings', 'stores']
+        fields = ['username', 'user_name', 'user_surname', 'email', 'tel_num', 'listings', 'num_listings', 'stores', 'profile_image'] # dodato
 
     def get_num_listings(self, obj):
         return obj.listing_set.count()
@@ -34,7 +35,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'password', 'user_name', 'user_surname', 'email', 'tel_num', 'store_name']
+        fields = ['username', 'password', 'user_name', 'user_surname', 'email', 'tel_num', 'store_name', 'profile_image'] # dodato
 
     def create(self, validated_data):
         user = User(**validated_data)
