@@ -21,6 +21,8 @@
     "tel-num": "Telefonska številka",
     "telNumError": "Vnesite veljavno telefonsko številko",
     "username": "Uporabniško ime",
-    "usernameError": "Uporabniško ime je že zasedeno"
+    "usernameError": "Uporabniško ime je že zasedeno",
+    "profile": "Moj profil",
+    "logout": "Odjavi se"
 
 }

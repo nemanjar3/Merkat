@@ -22,6 +22,8 @@
     "tel-num": "Phone number",
     "telNumError": "Enter a valid phone number",
     "username": "Username",
-    "usernameError": "Username is already taken"
+    "usernameError": "Username is already taken",   
+    "profile": "My profile",
+    "logout": "Logout"
 
 }

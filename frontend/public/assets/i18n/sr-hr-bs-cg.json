@@ -22,5 +22,7 @@
     "tel-num": "Broj telefona",
     "telNumError": "Unesite validan broj telefona",
     "username": "Korisničko ime",
-    "usernameError": "Korisničko ime je već zauzeto"
+    "usernameError": "Korisničko ime je već zauzeto",
+    "profile": "Moj profil",
+    "logout": "Odjavi se"
 }

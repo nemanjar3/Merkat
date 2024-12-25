@@ -38,14 +38,15 @@ export class NavbarComponent implements OnInit {
   textRegister = "register"
 
   isLoggedIn = false;
-  loggedInUsername = '';
+  loggedInUserId: number | null = null; // Store user ID here
 
   constructor(private authService: AuthService, private router: Router) {}
   ngOnInit() {
     // Subscribe to the `isLoggedIn$` BehaviorSubject to get updates on login status
     this.authService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
-      this.loggedInUsername = status ? this.authService.getUser() : '';
+      this.loggedInUserId = status ? this.authService.getUserId() : null; // Get user ID from AuthService
+      console.log('User ID:', this.loggedInUserId);
     });
   }
 

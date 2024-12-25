@@ -38,7 +38,7 @@ class LoginAPI(APIView):
                     tokens = get_tokens_for_user(user)
                     return Response({
                         "message": "Login successful",
-                        "username": user.username,
+                        "user_id": user.user_id,
                         "tokens": tokens,
                     }, status=status.HTTP_200_OK)
                 else:

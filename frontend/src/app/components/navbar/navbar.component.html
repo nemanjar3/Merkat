@@ -19,8 +19,8 @@
         <app-button [text]="textRegister" [routerLink]="linkRegister" (click)="closeNavbar()"></app-button>
       </div>
       <div class="user-menu right-buttons" *ngIf="isLoggedIn">
-        <app-button class="menu-item" routerLink="/user" (click)="closeNavbar()">My Profile</app-button>
-        <app-button class="menu-item" (click)="logout()">Logout</app-button>
+        <app-button class="menu-item" [routerLink]="['/user', loggedInUserId]" (click)="closeNavbar()">{{"profile" | translate}}</app-button>
+        <app-button class="menu-item" (click)="logout()">{{"logout" | translate}}</app-button>
       </div>
     </div>
   </div>

@@ -18,7 +18,7 @@ export class AuthService {
 
   saveUser(data: any) {
     localStorage.setItem(this.tokenKey, data.tokens.access);
-    localStorage.setItem(this.userKey, JSON.stringify(data.username));
+    localStorage.setItem(this.userKey, JSON.stringify(data));
     this.isLoggedIn$.next(true);
   }
 
@@ -29,6 +29,15 @@ export class AuthService {
   }
 
   getUser() {
-    return JSON.parse(localStorage.getItem(this.userKey) || '{}');
+    const userString = localStorage.getItem(this.userKey);
+    if (userString) {
+      const user: any = JSON.parse(userString); // Parse the user object
+      return user; 
+    }
+    return null;
+  }
+  getUserId(): number | null {
+    const user = this.getUser();
+    return user ? user.user_id : null; // Assuming 'id' is the property for user ID
   }
 }
