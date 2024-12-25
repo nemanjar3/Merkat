@@ -4,32 +4,33 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MatFormField, MatLabel,MatError } from '@angular/material/select';
+import { MatFormField, MatLabel} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input'
-import { NavbarButtonComponent } from "../navbar-button/navbar-button.component";
 import { HttpClient } from '@angular/common/http';
-
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule,
     MatFormField,
     MatLabel,
-    MatError,
     TranslateModule,
     RouterModule,
     MatInputModule,
     CommonModule,
-    NavbarButtonComponent,
     TranslateModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, 
+              private http: HttpClient, 
+              private authService: AuthService,
+              private router: Router) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required]],
       password: ['', Validators.required]
     });
   }
@@ -40,6 +41,7 @@ export class LoginComponent {
       const observer = {
         next: (response: any) => {
           // Handle successful response
+          this.authService.saveUser(response);
           console.log('Logged in:', response);
           // Optionally navigate to login page:
           // this.router.navigate(['/login']);
@@ -50,6 +52,7 @@ export class LoginComponent {
         },
         complete: () => {
           // Optional: Handle completion (e.g., hide loading indicator)
+          this.router.navigate(['/']);
           console.log('API call completed');
         }
       };

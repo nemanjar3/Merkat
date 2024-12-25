@@ -20,5 +20,13 @@
     "call": "Call",
     "sendMessage": "Send message",
     "contact": "Contact us",
-    "about": "About us"
+    "about": "About us",
+    "sendMessage": "Send message",
+    "tel-num": "Phone number",
+    "telNumError": "Enter a valid phone number",
+    "username": "Username",
+    "usernameError": "Username is already taken",   
+    "profile": "My profile",
+    "logout": "Logout"
+
 }

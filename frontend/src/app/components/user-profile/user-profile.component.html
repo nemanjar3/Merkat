@@ -41,7 +41,7 @@
             <div class="profile-picture-container">
               <label for="profilePicture">
                 <img
-                  src="{{ user.slika || 'default-profile.png' }}"
+                  src=""
                   alt="Profile Picture"
                   class="profile-picture"
                   title="Click to upload a new picture"
@@ -55,11 +55,6 @@
                 (change)="onProfilePictureChange($event)"
               />
             </div>
-          
-            <mat-form-field class="form-field" appearance="outline">
-              <mat-label>ID</mat-label>
-              <input matInput type="text" formControlName="id" readonly />
-            </mat-form-field>
           
             <mat-form-field class="form-field" appearance="outline">
               <mat-label>Ime</mat-label>

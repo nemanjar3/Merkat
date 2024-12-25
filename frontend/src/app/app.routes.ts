@@ -13,7 +13,7 @@ import { MarketingComponent } from './components/marketing/marketing.component';
 export const routes: Routes = [
     { path: 'register', component: RegistrationPageComponent },
     { path: '', component: HomepageComponent }, 
-    {path: 'user', component: UserProfileComponent},
+    {path: 'user/:id', component: UserProfileComponent},
     { path: 'login', component: LoginPageComponent },
     { path: 'marketing', component: MarketingComponent },
     { path: ':id', component: OglasDetaljiComponent }
