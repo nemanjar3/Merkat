@@ -7,6 +7,7 @@ import { OglasDetaljiComponent } from './components/oglas-detalji/oglas-detalji.
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
+import { MarketingComponent } from './components/marketing/marketing.component';
 
 
 export const routes: Routes = [
@@ -14,7 +15,8 @@ export const routes: Routes = [
     { path: '', component: HomepageComponent }, 
     {path: 'user', component: UserProfileComponent},
     { path: 'login', component: LoginPageComponent },
-        { path: ':id', component: OglasDetaljiComponent }
+    { path: 'marketing', component: MarketingComponent },
+    { path: ':id', component: OglasDetaljiComponent }
 
 ];
 

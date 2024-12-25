@@ -18,5 +18,7 @@
     "categories": "Categories",
     "publisher": "Published by",
     "call": "Call",
-    "sendMessage": "Send message"
+    "sendMessage": "Send message",
+    "contact": "Contact us",
+    "about": "About us"
 }
