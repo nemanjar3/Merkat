@@ -12,6 +12,12 @@ class User(models.Model):
     store_name = models.CharField(max_length=1024, null=True, blank=True)
     email = models.CharField(max_length=1024)
     created_at = models.DateField(auto_now_add=True)
+    profile_image = models.ImageField(
+        upload_to='profile_images/',
+        null=True,
+        blank=True,
+        default='default_profile.jpg' # dodato
+    )
 
     def save(self, *args, **kwargs):
         if not self.pk or 'pbkdf2_sha256$' not in self.password:
