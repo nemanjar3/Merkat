@@ -2,19 +2,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.hashers import check_password
-from rest_framework_simplejwt.tokens import RefreshToken
 from ..serializers.user_serializers import LoginSerializer
 from merkatapp.models import User
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
-
-def get_tokens_for_user(user):
-    """Generate JWT tokens for a user."""
-    refresh = RefreshToken.for_user(user)
-    return {
-        'refresh': str(refresh),
-        'access': str(refresh.access_token),
-    }
 
 class LoginAPI(APIView):
     @swagger_auto_schema(
@@ -34,13 +25,8 @@ class LoginAPI(APIView):
             password = serializer.validated_data['password']
             try:
                 user = User.objects.get(username=username)
-                if check_password(password, user.password):
-                    tokens = get_tokens_for_user(user)
-                    return Response({
-                        "message": "Login successful",
-                        "user_id": user.user_id,
-                        "tokens": tokens,
-                    }, status=status.HTTP_200_OK)
+                if check_password(password, user.password):  
+                    return Response({"message": "Login successful", "username": user.username}, status=status.HTTP_200_OK)
                 else:
                     return Response({"error": "Invalid password"}, status=status.HTTP_401_UNAUTHORIZED)
             except User.DoesNotExist:
