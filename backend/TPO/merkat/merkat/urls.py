@@ -45,6 +45,9 @@ urlpatterns = [
     # Include listing-related API URLs
     path('api/listings/', include('merkatapp.api.listings.urls')),
 
+    # Include category and attributes related API URLs
+    path('api/category_attributes/', include('merkatapp.api.category_attributes.urls')),
+
     # Swagger
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
