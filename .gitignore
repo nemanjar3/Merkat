@@ -50,3 +50,5 @@
 /backend/TPO/merkat/merkatapp/migrations/__pycache__/0003_categoryattributes_attribute_value_and_more.cpython-312.pyc
 /backend/TPO/merkat/merkatapp/migrations/__pycache__/0004_remove_categoryattributes_attribute_value_and_more.cpython-312.pyc
 /backend/TPO/merkat/merkatapp/migrations/__pycache__/0005_listingattributevalue.cpython-312.pyc
+/backend/TPO/merkat/merkatapp/api/users/__pycache__
+/backend/TPO/merkat/merkat/__pycache__

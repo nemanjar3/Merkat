@@ -1,11 +1,24 @@
 import { Injectable } from '@angular/core';
 
+import { HttpClient } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  getUserByID(userId: string): Observable<any> {
+    return this.http.get<any>(`http://127.0.0.1:8000/api/users/profile/${userId}/`)
+      .pipe(
+        map(user => {
+          console.log('User:', user);
+          return user; 
+        })
+      );
+  }
+
 
   getLoggedUser(){
     return {

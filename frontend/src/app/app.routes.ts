@@ -12,9 +12,9 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 export const routes: Routes = [
     { path: 'register', component: RegistrationPageComponent },
     { path: '', component: HomepageComponent }, 
-    {path: 'user', component: UserProfileComponent},
+    {path: 'user/:id', component: UserProfileComponent},
     { path: 'login', component: LoginPageComponent },
-        { path: ':id', component: OglasDetaljiComponent }
+    { path: ':id', component: OglasDetaljiComponent }
 
 ];
 
