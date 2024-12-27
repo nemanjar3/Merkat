@@ -7,13 +7,13 @@ class ListingAttributeInputSerializer(serializers.Serializer):
     value = serializers.CharField()
 
 class ListingCreateSerializer(serializers.ModelSerializer):
-    category = serializers.CharField()  # Accepts category name instead of ID
-    subcategory = serializers.CharField(required=False, allow_null=True)  # Accepts subcategory name instead of ID
-    attributes = ListingAttributeInputSerializer(many=True, required=False)  # List of attributes and their values
-
+    category = serializers.CharField()  
+    subcategory = serializers.CharField(required=False, allow_null=True)  
+    attributes = ListingAttributeInputSerializer(many=True, required=False)  
+    user_id = serializers.IntegerField()  # dodato da moze user da se poveze za listing iako nije online zbog swaggera
     class Meta:
         model = Listing
-        fields = ['category', 'subcategory', 'title', 'description', 'price', 'location', 'attributes']
+        fields = ['user_id', 'category', 'subcategory', 'title', 'description', 'price', 'location', 'attributes']
 
     def validate_category(self, value):
         try:
