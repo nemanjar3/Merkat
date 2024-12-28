@@ -2,7 +2,7 @@
 from rest_framework import serializers
 # from ...models import User
 from ...models import User, Listing, Store, ListingAttributeValue, CategoryAttributes, SubCategoryAttributes
-from .listing_serializers import ListingSerializer
+from .listing_serializers import ListingCreateSerializer
 from .shared_serializers import ListingAttributeValueSerializer, ListingSerializer
 from django.contrib.auth.hashers import make_password
 
@@ -22,21 +22,23 @@ class ProfileSerializer(serializers.ModelSerializer):
     listings = ListingSerializer(many=True, source='listing_set')  
     stores = StoreSerializer(many=True, source='store_set')        
     num_listings = serializers.SerializerMethodField()
-    profile_image = serializers.ImageField(use_url=True) # dodato
+    profile_image = serializers.ImageField(use_url=True) 
 
     class Meta:
         model = User
-        fields = ['username', 'user_name', 'user_surname', 'email', 'tel_num', 'listings', 'num_listings', 'stores', 'profile_image'] # dodato
+        fields = ['username', 'user_name', 'user_surname', 'email', 'tel_num', 'listings', 'num_listings', 'stores', 'profile_image'] 
 
     def get_num_listings(self, obj):
         return obj.listing_set.count()
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
+    profile_image = serializers.ImageField(required=False)
 
     class Meta:
         model = User
-        fields = ['username', 'password', 'user_name', 'user_surname', 'email', 'tel_num', 'store_name', 'profile_image'] # dodato
+
+        fields = ['username', 'password', 'user_name', 'user_surname', 'email', 'tel_num', 'store_name', 'profile_image'] 
 
     def create(self, validated_data):
         user = User(**validated_data)
@@ -51,6 +53,7 @@ class LoginSerializer(serializers.Serializer):
 class UserUpdateSerializer(serializers.ModelSerializer):
     username = serializers.CharField(max_length=256, required=False)
 
+
     class Meta:
         model = User
         fields = ['username', 'password', 'user_name', 'user_surname', 'tel_num', 'profile_image']
@@ -62,3 +65,5 @@ class UserUpdateSerializer(serializers.ModelSerializer):
 
     def validate_password(self, value):
         return make_password(value) if value else value
+
+
