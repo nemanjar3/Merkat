@@ -87,13 +87,16 @@
             </mat-form-field>
           
             <mat-form-field class="form-field" appearance="outline">
-              <mat-label>Datum Registracije</mat-label>
-              <input matInput type="text" formControlName="datumRegistracije" readonly />
-            </mat-form-field>
-          
-            <mat-form-field class="form-field" appearance="outline">
               <mat-label>Broj telefona</mat-label>
               <input matInput type="text" formControlName="telefon" />
+            </mat-form-field>
+            
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" formControlName="password" required />
+              <mat-error *ngIf="userForm.get('password')?.hasError('required')">
+                Password is required.
+              </mat-error>
             </mat-form-field>
           
             <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">
