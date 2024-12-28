@@ -8,7 +8,6 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { LoginComponent } from './components/login/login.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { MarketingComponent } from './components/marketing/marketing.component';
-import { MessagesComponent } from './components/messages/messages.component';
 
 
 export const routes: Routes = [
@@ -17,7 +16,6 @@ export const routes: Routes = [
     {path: 'user/:id', component: UserProfileComponent},
     { path: 'login', component: LoginPageComponent },
     { path: 'marketing', component: MarketingComponent },
-    { path: 'messages', component: MessagesComponent },
     { path: ':id', component: OglasDetaljiComponent }
 
 ];
