@@ -56,7 +56,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'user_name', 'user_surname', 'tel_num', 'profile_image']
+        fields = ['username', 'email', 'user_name', 'user_surname', 'tel_num', 'profile_image']
 
     def validate_username(self, value):
         if User.objects.filter(username=value).exclude(pk=self.instance.pk).exists():
