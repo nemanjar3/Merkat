@@ -7,6 +7,8 @@ import { NavbarButtonComponent } from '../navbar-button/navbar-button.component'
 import { MatFormField, MatLabel,MatError } from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input'
 import { HttpClient } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-profile',
   standalone: true,
@@ -18,7 +20,8 @@ import { HttpClient } from '@angular/common/http';
             MatLabel, 
             MatError, 
             MatInputModule,
-            ReactiveFormsModule],
+            ReactiveFormsModule,
+            TranslateModule],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss'
 })
@@ -31,7 +34,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   constructor(private userService: UserService, 
               private fb: FormBuilder, 
               private route: ActivatedRoute,
-              private http: HttpClient) { }
+              private http: HttpClient,
+              private router: Router) { }
 
   ngOnInit(): void {
     // Initialize the form with default values
@@ -99,20 +103,23 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       // const updateUrl = `http:/127.0.0.1:8000/api/users/profile/update/${userId}/`;
       const payload = {
         username: this.userForm.value.username,
-        password: this.userForm.value.password,
+        email: this.user.email,
         user_name: this.userForm.value.ime,
         user_surname: this.userForm.value.prezime,
         tel_num: this.userForm.value.telefon,
       };
 
-      this.http.post(`http://127.0.0.1:8000/api/users/profile/update/${this.userId}/`, payload).subscribe({
+      this.http.put(`http://127.0.0.1:8000/api/users/profile/update/${this.userId}/`, payload).subscribe({
         next: (response) => {
           console.log('Profile updated successfully:', response);
-          alert('Profile changes saved successfully!');
+          window.scrollTo(0, 0);
         },
         error: (error) => {
+          if (error.error && error.error.username[0] === 'This username is already taken.') {
+            this.userForm.get('username')?.setErrors({ usernameExists: true });
+          }
+          console.log("Payload: ", payload);
           console.error('Error updating profile:', error);
-          alert('Failed to save profile changes. Please try again.');
         },
       });
     } else {
