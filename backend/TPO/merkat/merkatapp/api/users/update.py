@@ -8,7 +8,7 @@ from drf_yasg.utils import swagger_auto_schema
 
 class UserUpdateAPI(APIView):
     # ako smeta zakomentarisi, ako provjeravas u swagger moras zakomentarisati
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(
         request_body=UserUpdateSerializer,
