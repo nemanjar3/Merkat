@@ -51,6 +51,10 @@ export class LoginComponent {
         },
         error: (error: any) => {
           // Handle error
+          if(error.error && (error.error.error === 'User not found' || error.error.error === 'Invalid password')) {
+            this.toastr.error('Invalid username or password');
+            return
+          }
           console.error('Error logging in:', error);
           this.toastr.error('Error logging in');
         },
