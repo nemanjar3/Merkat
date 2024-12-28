@@ -1,0 +1,43 @@
+.message-container {
+    display: flex;
+    flex-direction: column;
+    height: 300px; /* Прилагодите висину по потреби */
+    width: 30%;
+    margin: 0 auto;
+  }
+  
+  .message-list {
+    flex-grow: 1; /* Омогућава листи порука да заузме преостали простор */
+    overflow-y: auto; /* Додаје скролбар ако је потребно */
+    padding: 10px;
+  }
+  
+  .message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  
+  .input-area {
+    display: flex;
+    padding: 10px;
+  }
+  
+  mat-input[type="text"] {
+    flex-grow: 1;
+    margin-right: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    margin-left: 10px;
+  }

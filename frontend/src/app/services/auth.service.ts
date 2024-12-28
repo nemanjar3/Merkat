@@ -17,6 +17,7 @@ export class AuthService {
   }
 
   saveUser(data: any) {
+    console.log(data.tokens);
     localStorage.setItem(this.tokenKey, data.tokens.access);
     localStorage.setItem(this.userKey, JSON.stringify(data));
     this.isLoggedIn$.next(true);

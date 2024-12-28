@@ -19,10 +19,15 @@
     "publisher": "Objavljeno od",
     "call": "Pozovi",
     "sendMessage": "Pošalji poruku",
+    "contact": "Kontakt",
+    "about": "O nama",
     "tel-num": "Broj telefona",
     "telNumError": "Unesite validan broj telefona",
     "username": "Korisničko ime",
     "usernameError": "Korisničko ime je već zauzeto",
     "profile": "Moj profil",
-    "logout": "Odjavi se"
+    "logout": "Odjavi se",
+    "newMessage": "Nova poruka",
+    "send": "Pošalji",
+    "copyRight": "© 2024 Merkat. Sva prava zadržana"
 }

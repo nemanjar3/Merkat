@@ -19,11 +19,17 @@
     "publisher": "Published by",
     "call": "Call",
     "sendMessage": "Send message",
+    "contact": "Contact us",
+    "about": "About us",
     "tel-num": "Phone number",
     "telNumError": "Enter a valid phone number",
     "username": "Username",
     "usernameError": "Username is already taken",   
     "profile": "My profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "newMessage": "New message",
+    "send": "Send",
+    "copyRight": "© 2024 Merkat. All rights reserved"
+
 
 }
