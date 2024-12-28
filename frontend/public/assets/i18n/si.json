@@ -18,11 +18,17 @@
     "publisher": "Objavil",
     "call": "Pokliči",
     "sendMessage": "Pošlji sporočilo",
+    "contact": "Kontakt",
+    "about": "O nas",
     "tel-num": "Telefonska številka",
     "telNumError": "Vnesite veljavno telefonsko številko",
     "username": "Uporabniško ime",
     "usernameError": "Uporabniško ime je že zasedeno",
     "profile": "Moj profil",
-    "logout": "Odjavi se"
+    "logout": "Odjavi se",
+    "newMessage": "Novo sporočilo",
+    "send": "Pošlji",
+    "copyRight": "© 2024 Merkat. Vse pravice pridržane"
+
 
 }
