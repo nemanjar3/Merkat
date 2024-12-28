@@ -4,41 +4,45 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MatFormField, MatLabel,MatError } from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input'
+import { MatFormField, MatLabel, MatError } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input'
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   standalone: true,
-    selector: 'app-register',
-    imports: [ReactiveFormsModule,
-    MatFormField,
-    MatLabel,
-    MatError,
-    TranslateModule,
-    RouterModule,
-    MatInputModule,
-    CommonModule],
-    templateUrl: './register.component.html',
-    styleUrl: './register.component.scss'
+  selector: 'app-register',
+  imports: [ReactiveFormsModule,
+            MatFormField,
+            MatLabel,
+            MatError,
+            TranslateModule,
+            RouterModule,
+            MatInputModule,
+            CommonModule],
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
   registerForm: FormGroup;
   errorMessage: string = "";
 
-  constructor(private fb: FormBuilder,private http: HttpClient,private router: Router) {
+  constructor(private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+    private toastr: ToastrService) {
     this.registerForm = this.fb.group({
       user_name: ['', Validators.required],
       user_surname: ['', Validators.required],
       username: ['', Validators.required],
       tel_num: [
-        '', 
+        '',
         [Validators.required, Validators.pattern('^[0-9]*$')] // Both validators should be in the same array
       ],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-    
+
   }
 
   onSubmit() {
@@ -56,14 +60,16 @@ export class RegisterComponent {
           if (error.error && error.error.error === 'Username already exists') {
             this.registerForm.get('username')?.setErrors({ usernameExists: true });
           }
+          this.toastr.error('Error creating profile');
         },
         complete: () => {
           //go to login page
-          this.router.navigate(['/login']); 
+          this.toastr.success('Profile created successfully');
+          this.router.navigate(['/login']);
           console.log('API call completed');
         }
       };
-  
+
       this.http.post('http://127.0.0.1:8000/api/users/create/', this.registerForm.value)
         .subscribe(observer);
     }

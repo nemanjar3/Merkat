@@ -9,10 +9,10 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { createTranslateLoader } from './app/translate-http-loader';
 import { HttpClient } from '@angular/common/http';
-import { MatSelectModule,MatFormField, MatLabel,MatError } from '@angular/material/select';
+import { MatSelectModule, MatFormField, MatLabel, MatError } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes } from './app/app.routes';
-
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -21,17 +21,21 @@ import { routes } from './app/app.routes';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(routes), // Додајте ову линију
-    importProvidersFrom(MatButtonModule,
-                        MatSelectModule,
-                        BrowserAnimationsModule
-                      ),
+    provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
-    importProvidersFrom( // Додајте importProvidersFrom
-      TranslateModule.forRoot({ 
+    importProvidersFrom(
+      MatButtonModule,
+      MatSelectModule,
+      BrowserAnimationsModule, // Required for animations
+      ToastrModule.forRoot({ // Configure Toastr globally
+        timeOut: 3000,
+        positionClass: 'toast-top-right',
+        preventDuplicates: true,
+      }),
+      TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
-          useFactory: (createTranslateLoader), 
+          useFactory: (createTranslateLoader),
           deps: [HttpClient]
         }
       })

@@ -38,3 +38,12 @@ $Merkat-theme: mat.define-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.toast-top-center {
+  position: fixed;
+  top: 20%; /* Position toast dynamically */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050;
+}

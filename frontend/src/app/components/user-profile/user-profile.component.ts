@@ -4,24 +4,24 @@ import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } 
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { NavbarButtonComponent } from '../navbar-button/navbar-button.component';
-import { MatFormField, MatLabel,MatError } from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input'
+import { MatFormField, MatLabel, MatError } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input'
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
-import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-user-profile',
   standalone: true,
-  imports: [FormsModule, 
-            CommonModule, 
-            RouterModule, 
-            NavbarButtonComponent, 
-            MatFormField, 
-            MatLabel, 
-            MatError, 
-            MatInputModule,
-            ReactiveFormsModule,
-            TranslateModule],
+  imports: [FormsModule,
+    CommonModule,
+    RouterModule,
+    NavbarButtonComponent,
+    MatFormField,
+    MatLabel,
+    MatError,
+    MatInputModule,
+    ReactiveFormsModule,
+    TranslateModule],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss'
 })
@@ -31,11 +31,11 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   userForm!: FormGroup;
   userId!: string;
 
-  constructor(private userService: UserService, 
-              private fb: FormBuilder, 
-              private route: ActivatedRoute,
-              private http: HttpClient,
-              private router: Router) { }
+  constructor(private userService: UserService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     // Initialize the form with default values
@@ -46,7 +46,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       email: [{ value: '', disabled: false }, [Validators.required, Validators.email]],
       telefon: [{ value: '', disabled: false }, [Validators.required]],
     });
-  
+
     // Fetch user data from your service or local storage
     this.route.paramMap.subscribe({
       next: (params) => {
@@ -55,7 +55,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
           this.userService.getUserByID(this.userId).subscribe({
             next: (user) => {
               this.user = user;
-  
+
               // Update the form values with the fetched user data
               this.userForm.patchValue({
                 ime: this.user.user_name,
@@ -84,12 +84,12 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       },
     });
   }
-  
+
   onProfilePictureChange(event: Event): void {
     // const input = event.target as HTMLInputElement;
     // if (input?.files?.length) {
     //   const file = input.files[0];
-  
+
     //   // Convert file to a preview URL or upload it to the server
     //   const reader = new FileReader();
     //   reader.onload = () => {
@@ -111,6 +111,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 
       this.http.put(`http://127.0.0.1:8000/api/users/profile/update/${this.userId}/`, payload).subscribe({
         next: (response) => {
+          this.toastr.success('Profile updated successfully');
           console.log('Profile updated successfully:', response);
           window.scrollTo(0, 0);
         },
@@ -120,10 +121,11 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
           }
           console.log("Payload: ", payload);
           console.error('Error updating profile:', error);
+          this.toastr.error('Error updating profile');
         },
       });
     } else {
-      alert('Please fill out the form correctly before submitting.');
+      this.toastr.error('Please fill out all required fields');
     }
   }
 
