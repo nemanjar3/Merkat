@@ -13,18 +13,10 @@ body {
   flex-direction: column; /* Stack items vertically by default */
   align-items: center; /* Align items to the left */
   padding: 15px;
-  background-color: #f1f1f1;
+  // background-color: #f1f1f1;
   border-bottom: 1px solid #ddd;
   margin-bottom: 15px;
 }
-hr{
-  background-color: #f1f1f1;
-  width: 97%;
-  size: 3px;
-  color: purple;
-  margin: 0 auto;
-}
-
 
 /* Back button styling */
 .back-button {

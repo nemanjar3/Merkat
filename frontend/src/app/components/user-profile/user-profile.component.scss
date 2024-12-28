@@ -13,6 +13,26 @@ ul li {
     padding: 0 !important;
 }
 
+.addListingButton{
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.noListingContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.addButton button{
+    border: none;
+    cursor: pointer;
+}
+
 .user-profile {
     // max-width: 600px;
 

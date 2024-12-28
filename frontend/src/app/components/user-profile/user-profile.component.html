@@ -10,6 +10,11 @@
     </ul>
 
     <div *ngIf="activeTab === 'ads'">
+      <div class="addListingButton">
+        <a routerLink="/add-listing" class="addButton">
+          <button mat-raised-button color="primary" class="mat-mdc-raised-button">Dodaj oglas</button>
+        </a>
+      </div>
         <ul>
             <li *ngFor="let oglas of user.oglasi">
                 <a>
@@ -31,8 +36,10 @@
                 </a>
             </li>
         </ul>
-        <div *ngIf="!(user.oglasi && user.oglasi.length)">
+        <div *ngIf="!(user.oglasi && user.oglasi.length)" class="noListingContainer">
+           <p style="margin: auto;">
             Nemate aktivnih oglasa!
+           </p>
         </div>
     </div>
 
