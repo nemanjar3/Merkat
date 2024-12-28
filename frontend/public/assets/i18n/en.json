@@ -26,6 +26,10 @@
     "username": "Username",
     "usernameError": "Username is already taken",   
     "profile": "My profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "newMessage": "New message",
+    "send": "Send",
+    "copyRight": "© 2024 Merkat. All rights reserved"
+
 
 }

@@ -24,6 +24,10 @@
     "username": "Korisničko ime",
     "usernameError": "Korisničko ime je već zauzeto",
     "profile": "Moj profil",
-    "logout": "Odjavi se"
+    "logout": "Odjavi se",
+    "newMessage": "Nova poraka",
+    "send": "Prati",
+    "copyRight": "© 2024 Merkat. Site prava se zadržani"
+
 
 }
