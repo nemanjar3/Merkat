@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -30,7 +31,8 @@ export class LoginComponent {
               private http: HttpClient, 
               private authService: AuthService,
               private router: Router,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private translateService: TranslateService) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', Validators.required]
@@ -45,14 +47,18 @@ export class LoginComponent {
           // Handle successful response
           this.authService.saveUser(response);
           console.log('Logged in:', response);
-          this.toastr.success('Logged in successfully');
+          this.translateService.get('logInSuccess').subscribe(
+            (translation: string) => this.toastr.success(translation)
+          );
           // Optionally navigate to login page:
           // this.router.navigate(['/login']);
         },
         error: (error: any) => {
           // Handle error
           if(error.error && (error.error.error === 'User not found' || error.error.error === 'Invalid password')) {
-            this.toastr.error('Invalid username or password');
+            this.translateService.get('invalidUsernameOrPassword').subscribe(
+              (translation: string) => this.toastr.error(translation)
+            );
             return
           }
           console.error('Error logging in:', error);

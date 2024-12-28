@@ -2,11 +2,17 @@
   <mat-form-field class="form-field" appearance="outline">
     <mat-label>{{ "username" | translate }}</mat-label>
     <input matInput type="text" formControlName="username" required>
+    <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
+      {{ "fieldRequired" | translate }}
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field class="form-field" appearance="outline">
     <mat-label>{{ "password" | translate }}</mat-label>
     <input matInput type="password" formControlName="password" required>
+    <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+      {{ "fieldRequired" | translate }}
+    </mat-error>
   </mat-form-field>
 
   <button class="submit-button" mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">

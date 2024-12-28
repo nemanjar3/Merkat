@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input'
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   standalone: true,
   selector: 'app-register',
@@ -30,7 +31,8 @@ export class RegisterComponent {
   constructor(private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private translateService: TranslateService) {
     this.registerForm = this.fb.group({
       user_name: ['', Validators.required],
       user_surname: ['', Validators.required],
@@ -48,13 +50,9 @@ export class RegisterComponent {
   onSubmit() {
     console.log('Form submitted:', this.registerForm.value);
     if (this.registerForm.valid) {
-      // Call the API using HttpClient
       const observer = {
         next: (response: any) => {
-          // Handle successful response
           console.log('User created successfully:', response);
-          // Optionally navigate to login page:
-          // this.router.navigate(['/login']);
         },
         error: (error: any) => {
           if (error.error && error.error.error === 'Username already exists') {
@@ -63,8 +61,9 @@ export class RegisterComponent {
           this.toastr.error('Error creating profile');
         },
         complete: () => {
-          //go to login page
-          this.toastr.success('Profile created successfully');
+          this.translateService.get('registerSuccess').subscribe(
+            (translation: string) => this.toastr.success(translation)
+          );
           this.router.navigate(['/login']);
           console.log('API call completed');
         }

@@ -2,17 +2,17 @@
 
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link" [class.active]="activeTab === 'ads'" (click)="activeTab = 'ads'">Moji oglasi</a>
+            <a class="nav-link" [class.active]="activeTab === 'ads'" (click)="activeTab = 'ads'">{{"myListings" | translate}}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" [class.active]="activeTab === 'profile'" (click)="activeTab = 'profile'">Profil</a>
+            <a class="nav-link" [class.active]="activeTab === 'profile'" (click)="activeTab = 'profile'">{{"profile" | translate}}</a>
         </li>
     </ul>
 
     <div *ngIf="activeTab === 'ads'">
       <div class="addListingButton">
         <a routerLink="/add-listing" class="addButton">
-          <button mat-raised-button color="primary" class="mat-mdc-raised-button">Dodaj oglas</button>
+          <button mat-raised-button color="primary" class="mat-mdc-raised-button">{{"addListing" | translate}}</button>
         </a>
       </div>
         <ul>
@@ -38,7 +38,7 @@
         </ul>
         <div *ngIf="!(user.oglasi && user.oglasi.length)" class="noListingContainer">
            <p style="margin: auto;">
-            Nemate aktivnih oglasa!
+            {{"noListings" | translate}}
            </p>
         </div>
     </div>
@@ -101,7 +101,7 @@
             </mat-form-field>
           
             <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">
-              Sačuvaj promjene
+              {{ "saveChanges" | translate }}
             </button>
           </form>
     </div>

@@ -28,7 +28,16 @@
     "logout": "Logout",
     "newMessage": "New message",
     "send": "Send",
-    "copyRight": "© 2024 Merkat. All rights reserved"
+    "copyRight": "© 2024 Merkat. All rights reserved",
+    "fieldRequired": "This field is required",
+    "myListings": "My listings",
+    "profil": "Profile",
+    "addListing": "Add listing",
+    "noListings": "You have no active listings!",
+    "saveChanges": "Save changes",
 
-
+    "invalidUsernameOrPassword": "Invalid username or password",
+    "logInSuccess": "Logged in successfully",
+    "registerSuccess": "Profile created successfully",
+    "updateSuccess": "Profile updated successfully"
 }

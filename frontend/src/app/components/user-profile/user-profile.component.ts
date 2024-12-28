@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input'
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-user-profile',
   standalone: true,
@@ -35,7 +36,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private http: HttpClient,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private translateService: TranslateService) { }
 
   ngOnInit(): void {
     // Initialize the form with default values
@@ -111,7 +113,9 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 
       this.http.put(`http://127.0.0.1:8000/api/users/profile/update/${this.userId}/`, payload).subscribe({
         next: (response) => {
-          this.toastr.success('Profile updated successfully');
+          this.translateService.get('updateSuccess').subscribe(
+            (translation: string) => this.toastr.success(translation)
+          );
           console.log('Profile updated successfully:', response);
           window.scrollTo(0, 0);
         },

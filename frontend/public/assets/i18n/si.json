@@ -27,7 +27,14 @@
     "logout": "Odjavi se",
     "newMessage": "Novo sporočilo",
     "send": "Pošlji",
-    "copyRight": "© 2024 Merkat. Vse pravice pridržane"
+    "copyRight": "© 2024 Merkat. Vse pravice pridržane",
+    "fieldRequired": "To polje je obvezno",
 
+    "myListings": "Moji oglasi",
+    "profil": "Profil",
+    "addListing": "Dodaj oglas",
+    "noListings": "Nimate aktivnih oglasov!",
+    "saveChanges": "Shrani spremembe"
+    
 
 }
