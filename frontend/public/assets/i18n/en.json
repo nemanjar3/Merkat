@@ -19,6 +19,8 @@
     "publisher": "Published by",
     "call": "Call",
     "sendMessage": "Send message",
+    "contact": "Contact us",
+    "about": "About us",
     "tel-num": "Phone number",
     "telNumError": "Enter a valid phone number",
     "username": "Username",
