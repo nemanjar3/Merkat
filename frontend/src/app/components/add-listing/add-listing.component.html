@@ -1,45 +1,54 @@
-<div class="add-listing">
-    <h2>Add New Listing</h2>
-    <form formGroup="addListingForm" (ngSubmit)="submitForm()">
-        <label for="title">Title</label>
-        <input formControlName="title" id="title" placeholder="Listing Title" />
+<div class="create-listing">
+    <h1>Create Listing</h1>
+    <form formGroup="listingForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input id="title" type="text" formControlName="title" placeholder="Enter listing title" />
+        </div>
 
-        <label for="description">Description</label>
-        <textarea formControlName="description" id="description" placeholder="Listing Description"></textarea>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" formControlName="description" placeholder="Enter listing description"></textarea>
+        </div>
 
-        <label for="price">Price</label>
-        <input formControlName="price" id="price" placeholder="Price" type="number" />
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input id="price" type="number" formControlName="price" placeholder="Enter price" />
+        </div>
 
-        <label for="location">Location</label>
-        <input formControlName="location" id="location" placeholder="Location" />
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input id="location" type="text" formControlName="location" placeholder="Enter location (optional)" />
+        </div>
 
-        <div formArrayName="categories">
-            <div *ngFor="let categoryGroup of categoriesArray.controls; let i = index" formGroupName="i">
-                <label for="category-{{ i }}">Category</label>
-                <select id="category-{{ i }}" formControlName="category" (change)="onCategoryChange(i, $event)">
-                    <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-                </select>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" formControlName="category" (change)="onCategoryChange($event)">
+                <option value="">Select a category</option>
+                <option *ngFor="let cat of categories" [value]="cat.name">
+                  {{ cat.name }}
+                </option>
+              </select>
+              
+        </div>
 
-                <label for="subcategory-{{ i }}">Subcategory</label>
-                <select id="subcategory-{{ i }}" formControlName="subcategory"
-                    (change)="onSubcategoryChange(i, $event)">
-                    <option *ngFor="let subcategory of subcategories[categoryGroup.get('category')?.value] || []"
-                        [value]="subcategory">
-                        {{ subcategory }}
-                    </option>
-                </select>
+        <div class="form-group" *ngIf="subcategories.length > 0">
+            <label for="subcategory">Subcategory</label>
+            <select id="subcategory" formControlName="subcategory">
+                <option value="">Select a subcategory</option>
+                <option *ngFor="let sub of subcategories" [value]="sub">
+                    {{ sub }}
+                </option>
+            </select>
+        </div>
 
-
-                <div formArrayName="attributes">
-                    <div *ngFor="let attrGroup of categoryGroup.get('attributes')['controls']; let j = index"
-                        formGroupName="j">
-                        <label>{{ attrGroup.get('attribute_name')?.value }}</label>
-                        <input formControlName="value" placeholder="Enter value" />
-                    </div>
-                </div>
+        <div formArrayName="attributes" class="attributes">
+            <div *ngFor="let attr of attributes.controls; let i = index" formGroupName="i">
+                <label>{{ attr.get('attribute_name')?.value }}</label>
+                <input type="text" formControlName="value" placeholder="Enter value" />
             </div>
         </div>
-        <button type="button" (click)="addCategory()">Add Category</button>
-        <button type="submit">Submit Listing</button>
+
+        <button type="submit" [disabled]="listingForm.invalid">Create Listing</button>
     </form>
 </div>

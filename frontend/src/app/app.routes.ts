@@ -5,10 +5,10 @@ import { RouterModule } from '@angular/router';
 import { HomepageComponent } from './components/home-page/home-page.component';
 import { OglasDetaljiComponent } from './components/oglas-detalji/oglas-detalji.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { LoginComponent } from './components/login/login.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { MarketingComponent } from './components/marketing/marketing.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { AddListingComponent } from './components/add-listing/add-listing.component';
 
 
 export const routes: Routes = [
@@ -18,6 +18,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginPageComponent },
     { path: 'marketing', component: MarketingComponent },
     { path: 'messages', component: MessagesComponent },
+    {path: 'add-listing', component: AddListingComponent},
     { path: ':id', component: OglasDetaljiComponent }
 
 ];

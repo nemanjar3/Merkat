@@ -6,20 +6,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ListingService {
-  private apiUrl = 'http://127.0.0.1:8000/api/listings';
+  private apiUrl = 'http://127.0.0.1:8000/api';
 
   constructor(private http: HttpClient) {}
 
   createListing(payload: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/create`, payload);
+    return this.http.post(`${this.apiUrl}/listing/create/`, payload);
   }
 
   getCategories(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/categories`);
+    return this.http.get(`${this.apiUrl}/category_attributes/list-all/`);
   }
 
   getSubcategories(category: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/categories/${category}/subcategories`);
+    return this.http.get(`${this.apiUrl}/category_attributes/subcategories/`, { params: { category } });
   }
 
   getAttributes(type: 'category' | 'subcategory', name: string): Observable<any> {
