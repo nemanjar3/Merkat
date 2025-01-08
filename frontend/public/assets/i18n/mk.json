@@ -32,5 +32,9 @@
     "profil": "Profil",
     "addListing": "Dodaj oglas",
     "noListings": "Nemate aktivnih oglasa!",
-    "saveChanges": "Zachuvaj promeni"
+    "saveChanges": "Zachuvaj promeni",
+    "invalidUsernameOrPassword": "Nevalidno korisničko ime ili lozinka",
+    "logInSuccess": "Uspešno ste se prijavili",
+    "registerSuccess": "Profil je uspešno kreiran",
+    "updateSuccess": "Profil je uspešno ažuriran"
 }
