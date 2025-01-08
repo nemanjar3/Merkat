@@ -1,0 +1,45 @@
+<div class="add-listing">
+    <h2>Add New Listing</h2>
+    <form formGroup="addListingForm" (ngSubmit)="submitForm()">
+        <label for="title">Title</label>
+        <input formControlName="title" id="title" placeholder="Listing Title" />
+
+        <label for="description">Description</label>
+        <textarea formControlName="description" id="description" placeholder="Listing Description"></textarea>
+
+        <label for="price">Price</label>
+        <input formControlName="price" id="price" placeholder="Price" type="number" />
+
+        <label for="location">Location</label>
+        <input formControlName="location" id="location" placeholder="Location" />
+
+        <div formArrayName="categories">
+            <div *ngFor="let categoryGroup of categoriesArray.controls; let i = index" formGroupName="i">
+                <label for="category-{{ i }}">Category</label>
+                <select id="category-{{ i }}" formControlName="category" (change)="onCategoryChange(i, $event)">
+                    <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                </select>
+
+                <label for="subcategory-{{ i }}">Subcategory</label>
+                <select id="subcategory-{{ i }}" formControlName="subcategory"
+                    (change)="onSubcategoryChange(i, $event)">
+                    <option *ngFor="let subcategory of subcategories[categoryGroup.get('category')?.value] || []"
+                        [value]="subcategory">
+                        {{ subcategory }}
+                    </option>
+                </select>
+
+
+                <div formArrayName="attributes">
+                    <div *ngFor="let attrGroup of categoryGroup.get('attributes')['controls']; let j = index"
+                        formGroupName="j">
+                        <label>{{ attrGroup.get('attribute_name')?.value }}</label>
+                        <input formControlName="value" placeholder="Enter value" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" (click)="addCategory()">Add Category</button>
+        <button type="submit">Submit Listing</button>
+    </form>
+</div>
