@@ -105,6 +105,7 @@ def profile(request):
 
 
 
-
+def lobby(request):
+    return render(request, 'lobby.html')
 
 
