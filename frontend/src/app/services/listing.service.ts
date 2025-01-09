@@ -11,7 +11,7 @@ export class ListingService {
   constructor(private http: HttpClient) {}
 
   createListing(payload: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/listing/create/`, payload);
+    return this.http.post(`${this.apiUrl}/listings/create/`, payload);
   }
 
   getCategories(): Observable<any> {

@@ -1,54 +1,58 @@
 <div class="create-listing">
     <h1>Create Listing</h1>
-    <form formGroup="listingForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input id="title" type="text" formControlName="title" placeholder="Enter listing title" />
+    <form [formGroup]="listingForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput id="title" type="text" formControlName="title" placeholder="Enter listing title" />
+        <mat-error *ngIf="listingForm.get('title')?.hasError('required')">Title is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput id="description" formControlName="description" placeholder="Enter listing description"></textarea>
+        <mat-error *ngIf="listingForm.get('description')?.hasError('required')">Description is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Price</mat-label>
+        <input matInput id="price" type="number" formControlName="price" placeholder="Enter price" />
+        <mat-error *ngIf="listingForm.get('price')?.hasError('required')">Price is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Location</mat-label>
+        <input matInput id="location" type="text" formControlName="location" placeholder="Enter location (optional)" />
+        <mat-error *ngIf="listingForm.get('location')?.hasError('maxlength')">Location is too long</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select id="category" formControlName="category" (selectionChange)="onCategoryChange($event)">
+          <mat-option value="">Select a category</mat-option>
+          <mat-option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="listingForm.get('category')?.hasError('required')">Category is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-field" appearance="outline" *ngIf="subcategories.length > 0">
+        <mat-label>Subcategory</mat-label>
+        <mat-select id="subcategory" formControlName="subcategory" (selectionChange)="onSubCategoryChange($event)">
+          <mat-option value="">Select a subcategory</mat-option>
+          <mat-option *ngFor="let sub of subcategories" [value]="sub">{{ sub }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <div formArrayName="attributes" class="attributes">
+        <div *ngFor="let attr of attributes.controls; let i = index" [formGroupName]="i">
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>{{ attr.get('attribute_name')?.value }}</mat-label>
+            <input matInput type="text" formControlName="value" placeholder="Enter value" />
+            <mat-error *ngIf="attr.get('value')?.hasError('required')">Value is required</mat-error>
+          </mat-form-field>
         </div>
-
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" formControlName="description" placeholder="Enter listing description"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="price">Price</label>
-            <input id="price" type="number" formControlName="price" placeholder="Enter price" />
-        </div>
-
-        <div class="form-group">
-            <label for="location">Location</label>
-            <input id="location" type="text" formControlName="location" placeholder="Enter location (optional)" />
-        </div>
-
-        <div class="form-group">
-            <label for="category">Category</label>
-            <select id="category" formControlName="category" (change)="onCategoryChange($event)">
-                <option value="">Select a category</option>
-                <option *ngFor="let cat of categories" [value]="cat.name">
-                  {{ cat.name }}
-                </option>
-              </select>
-              
-        </div>
-
-        <div class="form-group" *ngIf="subcategories.length > 0">
-            <label for="subcategory">Subcategory</label>
-            <select id="subcategory" formControlName="subcategory">
-                <option value="">Select a subcategory</option>
-                <option *ngFor="let sub of subcategories" [value]="sub">
-                    {{ sub }}
-                </option>
-            </select>
-        </div>
-
-        <div formArrayName="attributes" class="attributes">
-            <div *ngFor="let attr of attributes.controls; let i = index" formGroupName="i">
-                <label>{{ attr.get('attribute_name')?.value }}</label>
-                <input type="text" formControlName="value" placeholder="Enter value" />
-            </div>
-        </div>
-
-        <button type="submit" [disabled]="listingForm.invalid">Create Listing</button>
+      </div>
+  
+      <button mat-raised-button color="primary" type="submit" [disabled]="listingForm.invalid">Create Listing</button>
     </form>
-</div>
+  </div>
+  
