@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-profile',
   standalone: true,
@@ -37,7 +38,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private toastr: ToastrService,
-    private translateService: TranslateService) { }
+    private translateService: TranslateService,
+    private router: Router) { }
 
   ngOnInit(): void {
     // Initialize the form with default values
@@ -136,9 +138,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     window.scrollTo(0, 0);
   }
+  updateListing(oglas: any): void {
+    this.router.navigate(['/listing', oglas.listing_id]);
+  }
 
-  // Method to save user changes
-  // saveChanges() {
-  //   // Send updated user data to your backend
-  // }
 }

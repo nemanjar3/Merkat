@@ -48,7 +48,7 @@ export class AddListingComponent implements OnInit {
       price: ['', [Validators.required]],
       location: [''],
       category: ['', Validators.required],
-      subcategory: [''],
+      subcategory: ['',Validators.required],
       attributes: this.fb.array([])
     });
   }

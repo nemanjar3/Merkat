@@ -8,7 +8,8 @@ import { AuthService } from '../../services/auth.service';
 @Component({
     standalone: true,
     selector: 'app-homepage',
-    imports: [CommonModule],
+    imports: [CommonModule,
+              NavbarButtonComponent],
     templateUrl: './home-page.component.html',
     styleUrl: './home-page.component.scss'
 })

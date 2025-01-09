@@ -14,7 +14,7 @@
       </mat-form-field>
   
       <mat-form-field class="form-field" appearance="outline">
-        <mat-label>{{"price" | translate}}</mat-label>
+        <mat-label>{{"price" | translate}} (EUR)</mat-label>
         <input matInput id="price" type="number" formControlName="price" />
         <mat-error *ngIf="listingForm.get('price')?.hasError('required')">{{"priceError" | translate}}</mat-error>
       </mat-form-field>

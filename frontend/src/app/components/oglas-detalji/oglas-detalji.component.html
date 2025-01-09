@@ -1,39 +1,44 @@
 <div style="background-color: #f1f1f1;">
-  </div>
-  <div class="oglas-header">
-    <app-button class="back-button" [routerLink]="['/']">{{ "back" | translate }}</app-button>
-    <h1 class="oglas-name">{{ oglas.naziv }}</h1>
-  </div>
-  
-  <div class="oglas-detalji">
-    <img class="oglas-image" [src]="oglas.slika" alt="{{ oglas.naziv }}" />
-  
-    <h2 class="oglas-title">{{ "description" | translate }}</h2>
-    <p class="oglas-description">{{ oglas.opis }}</p>
-  
-    <p class="oglas-price">
-      <strong>{{"price" | translate}}:</strong> {{ oglas.cijena }}
-    </p>
-  
-    <p class="oglas-categories">
-      <strong>{{"categories" | translate}}: </strong>
-      <span class="oglas-category" *ngFor="let kategorija of oglas.kategorije">
-        <app-button [text]="kategorija"></app-button>
-      </span>
-    </p>
-  
-    <!-- User info card -->
-    <strong>{{"publisher" | translate}}: </strong>
-    <div class="user-card" >
-      <img class="user-image" [src]="user.slika" alt="{{ user.username }}" />
-      <div class="user-info">
-        <p class="user-name">{{ user.username }}</p>
-        <div class="user-actions">
-          <app-button class="user-action-button" >{{"call" | translate}}</app-button>
-          <app-button class="user-action-button" routerLink="/messages">{{"sendMessage" | translate}}</app-button>
+</div>
+<div class="oglas-header">
+  <app-button class="back-button" [routerLink]="['/']">{{ "back" | translate }}</app-button>
+  <h1 class="oglas-name">{{ oglas.title }}</h1>
+</div>
 
-        </div>
+<div class="oglas-detalji">
+  <img class="oglas-image" src="assets/images/oglasi/oglas1.jpg" alt="{{ oglas.title }}" />
+
+  <h2 class="oglas-title">{{ "description" | translate }}</h2>
+  <p class="oglas-description">{{ oglas.description }}</p>
+
+  <p class="oglas-price">
+    <strong>{{"price" | translate}}:</strong> {{ oglas.cijena }}
+  </p>
+
+  <p class="oglas-categories">
+    <strong>{{"categories" | translate}}: </strong>
+    <!-- <span class="oglas-category" *ngFor="let kategorija of oglas.kategorije">
+      <app-button [text]="kategorija"></app-button>
+    </span> -->
+    <span class="oglas-category">
+      <app-button [text]="oglas.category.category_name"></app-button>
+    </span>
+    <span class="oglas-category">
+      <app-button [text]="oglas.subcategory.subcategory_name"></app-button>
+    </span>
+  </p>
+
+  <!-- User info card -->
+  <strong>{{"publisher" | translate}}: </strong>
+  <div class="user-card">
+    <img class="user-image" [src]="user.slika" alt="{{ user.username }}" />
+    <div class="user-info">
+      <p class="user-name">{{ user.username }}</p>
+      <div class="user-actions">
+        <app-button class="user-action-button">{{"call" | translate}}</app-button>
+        <app-button class="user-action-button" routerLink="/messages">{{"sendMessage" | translate}}</app-button>
+
       </div>
     </div>
   </div>
-  
+</div>

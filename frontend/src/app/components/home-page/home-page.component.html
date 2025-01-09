@@ -9,13 +9,19 @@
                    {{oglas.title}}
                 </div>
                 <hr>
-                <!-- <div class="kategorije">
-                    <span *ngFor="let kategorija of oglas.kategorije">
+                <div class="kategorije">
+                    <!-- <span *ngFor="let kategorija of oglas.kategorije">
                         <app-button [text]="kategorija"></app-button>
+                    </span> -->
+                    <span>
+                        <app-button [text]="oglas.category.category_name"></app-button>
                     </span>
-                </div> -->
+                    <span>
+                        <app-button [text]="oglas.subcategory.subcategory_name"></app-button>
+                    </span>
+                </div>
                 <div class="cijena">
-                    {{oglas.price}}
+                    {{oglas.price}} EUR
                 </div>
             </div>
         </a>

@@ -1,5 +1,5 @@
 
-import { Component, OnInit, AfterViewInit} from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OglasService } from '../../services/oglas.service';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,8 @@ import { UserService } from '../../services/user-service.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { User } from '../../shared/models/User';
+import { ListingService } from '../../services/listing.service';
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-oglas-detalji',
   standalone: true,
@@ -17,17 +19,38 @@ import { User } from '../../shared/models/User';
 })
 export class OglasDetaljiComponent implements OnInit, AfterViewInit {
   oglas: any;
-  user!: User;
-  constructor(private oglasService: OglasService, private route: ActivatedRoute, private userService: UserService) {}
+  user!: any;
+  constructor(private oglasService: OglasService,
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private listingService: ListingService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const oglasId = params.get('id');
-      
-      this.oglas = this.oglasService.getByID(Number(oglasId));
+
+      if (oglasId) {
+        this.listingService.getListingById(oglasId).subscribe((data: any) => {
+          this.oglas = data;
+
+          // Fetch user details after this.oglas is populated
+          if (this.oglas?.user) {
+            this.userService.getUserByID(this.oglas.user).subscribe(
+              (user) => {
+                this.user = user;
+              },
+              (error) => {
+                console.error('Error fetching user:', error);
+              }
+            );
+          }
+        });
+      } else {
+        console.error('Oglas ID not found in URL.');
+      }
     });
-    this.user = this.userService.getLoggedUser();
   }
+
   ngAfterViewInit() {
     window.scrollTo(0, 0);
   }

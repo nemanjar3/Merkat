@@ -1,6 +1,6 @@
 
 <div class="update-listing">
-    <h1>Create Listing</h1>
+    <h1>Update Listing</h1>
     <form [formGroup]="listingForm" (ngSubmit)="onSubmit()">
       <mat-form-field class="form-field" appearance="outline">
         <mat-label>Title</mat-label>
@@ -21,7 +21,7 @@
       </mat-form-field>
   
       <mat-form-field class="form-field" appearance="outline">
-        <mat-label>Location</mat-label>
+        <mat-label>Location</mat-label> 
         <input matInput id="location" type="text" formControlName="location" placeholder="Enter location (optional)" />
         <mat-error *ngIf="listingForm.get('location')?.hasError('maxlength')">Location is too long</mat-error>
       </mat-form-field>
@@ -55,5 +55,6 @@
   
       <button mat-raised-button color="primary" type="submit" [disabled]="listingForm.invalid">Update Listing</button>
     </form>
+    <button mat-raised-button color="primary" class="deleteButton"  (click)="deleteListing()" [disabled]="listingForm.invalid">Delete Listing</button>
   </div>
   

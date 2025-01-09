@@ -17,7 +17,7 @@
       </div>
         <ul>
             <li *ngFor="let oglas of user.listings">
-                <a>
+                <a (click)="updateListing(oglas)">
                     <img src="assets/images/oglasi/oglas1.jpg" alt="Oglas slika" />
                     <div class="content">
                         <div class="naziv">
