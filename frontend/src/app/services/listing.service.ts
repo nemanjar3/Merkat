@@ -28,7 +28,7 @@ export class ListingService {
       headers: headers,
     });
   }
-  
+   
 
   updateListing(listingId: string, payload: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/listings/update/${listingId}/`, payload);
