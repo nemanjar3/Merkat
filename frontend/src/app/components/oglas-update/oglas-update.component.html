@@ -1,0 +1,59 @@
+
+<div class="update-listing">
+    <h1>Create Listing</h1>
+    <form [formGroup]="listingForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput id="title" type="text" formControlName="title" placeholder="Enter listing title" />
+        <mat-error *ngIf="listingForm.get('title')?.hasError('required')">Title is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput id="description" formControlName="description" placeholder="Enter listing description"></textarea>
+        <mat-error *ngIf="listingForm.get('description')?.hasError('required')">Description is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Price</mat-label>
+        <input matInput id="price" type="number" formControlName="price" placeholder="Enter price" />
+        <mat-error *ngIf="listingForm.get('price')?.hasError('required')">Price is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Location</mat-label>
+        <input matInput id="location" type="text" formControlName="location" placeholder="Enter location (optional)" />
+        <mat-error *ngIf="listingForm.get('location')?.hasError('maxlength')">Location is too long</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select id="category" formControlName="category" (selectionChange)="onCategoryChange($event)">
+          <mat-option value="">Select a category</mat-option>
+          <mat-option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="listingForm.get('category')?.hasError('required')">Category is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-field" appearance="outline" *ngIf="subcategories.length > 0">
+        <mat-label>Subcategory</mat-label>
+        <mat-select id="subcategory" formControlName="subcategory" (selectionChange)="onSubCategoryChange($event)">
+          <mat-option value="">Select a subcategory</mat-option>
+          <mat-option *ngFor="let sub of subcategories" [value]="sub">{{ sub }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <div formArrayName="attributes" class="attributes">
+        <div *ngFor="let attr of attributes.controls; let i = index" [formGroupName]="i">
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>{{ attr.get('attribute_name')?.value }}</mat-label>
+            <input matInput type="text" formControlName="value" placeholder="Enter value" />
+            <mat-error *ngIf="attr.get('value')?.hasError('required')">Value is required</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <button mat-raised-button color="primary" type="submit" [disabled]="listingForm.invalid">Update Listing</button>
+    </form>
+  </div>
+  

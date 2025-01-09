@@ -7,6 +7,10 @@ import { MatFormField, MatLabel, MatSelect, MatOption, MatSelectChange } from '@
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ListingService } from '../../services/listing.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
@@ -20,34 +24,23 @@ import { ListingService } from '../../services/listing.service';
     MatInputModule,
     MatSelect,
     MatOption,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ]
 })
 export class AddListingComponent implements OnInit {
   listingForm: FormGroup;
   categories: any[] = [];
-  // categories = [
-  //   {
-  //     name: 'Housing',
-  //     attributes: ['General Attribute 1', 'General Attribute 2'],
-  //     subcategories: [
-  //       { name: 'House', attributes: ['Lot Size', 'Number of Floors'] },
-  //       { name: 'Flat', attributes: ['Floor Level', 'Number of Rooms'] }
-  //     ]
-  //   },
-  //   {
-  //     name: 'Electronics',
-  //     attributes: ['General Attribute 1', 'General Attribute 2'],
-  //     subcategories: [
-  //       { name: 'Phone', attributes: ['Brand', 'Battery Life'] },
-  //       { name: 'Laptop', attributes: ['Processor', 'RAM'] }
-  //     ]
-  //   }
-  // ];
+
   subcategories: string[] = [];
   selectedAttributes: string[] = [];
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private listingService: ListingService) {
+  constructor(private fb: FormBuilder, 
+              private authService: AuthService, 
+              private listingService: ListingService,
+              private toastr: ToastrService,
+              private router: Router,
+              private translateService: TranslateService) {
     this.listingForm = this.fb.group({
       user_id: [this.authService.getUserId()],
       title: ['', [Validators.required]],
@@ -73,15 +66,11 @@ export class AddListingComponent implements OnInit {
               attributes: subcategory.attributes.map((attr: any) => attr.attribute_name)
             }))
           }));
-  
-          console.log('Transformed Categories:', this.categories); // Log for debugging
-        },
+   },
         error: (error) => {
           console.error('Error fetching categories:', error);
-          // Handle error, e.g., display an error message to the user
         },
         complete: () => {
-          console.log('Category fetching complete');
         }
       });
   }
@@ -132,9 +121,6 @@ export class AddListingComponent implements OnInit {
     });
   }
 
-  showData(): void {
-    console.log(this.listingForm.value);
-  }
 
   onSubmit(): void {
     if (this.listingForm.valid) {
@@ -151,6 +137,10 @@ export class AddListingComponent implements OnInit {
           },
           complete: () => {
             console.log('Listing creation complete');
+            this.translateService.get('createListingSuccess').subscribe(
+              (translation: string) => this.toastr.success(translation)
+            );
+            this.router.navigate(['/user', this.authService.getUserId()]);
           }
         });
     } else {

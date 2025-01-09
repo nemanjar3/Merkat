@@ -3,19 +3,19 @@
 <ul>
     <li *ngFor="let oglas of oglasi">
         <a (click)="prikaziDetalje(oglas)">
-            <img src="{{oglas.slika}}" alt="">
+            <img src="assets/images/oglasi/oglas1.jpg" alt="">
             <div class="content">
                 <div class="naziv">
-                   {{oglas.naziv}}
+                   {{oglas.title}}
                 </div>
                 <hr>
-                <div class="kategorije">
+                <!-- <div class="kategorije">
                     <span *ngFor="let kategorija of oglas.kategorije">
                         <app-button [text]="kategorija"></app-button>
                     </span>
-                </div>
+                </div> -->
                 <div class="cijena">
-                    {{oglas.cijena}}
+                    {{oglas.price}}
                 </div>
             </div>
         </a>

@@ -18,11 +18,16 @@ export class ListingService {
     return this.http.get(`${this.apiUrl}/category_attributes/list-all/`);
   }
 
-  getSubcategories(category: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/category_attributes/subcategories/`, { params: { category } });
+  deleteListing(listingId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/listings/delete/${listingId}`);
   }
 
-  getAttributes(type: 'category' | 'subcategory', name: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${type}/${name}/attributes`);
+  updateListing(listingId: string, payload: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/listings/update/${listingId}`, payload);
   }
+
+  getAllListings(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/listings/`);
+  }
+
 }

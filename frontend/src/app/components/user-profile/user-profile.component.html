@@ -16,27 +16,27 @@
         </a>
       </div>
         <ul>
-            <li *ngFor="let oglas of user.oglasi">
+            <li *ngFor="let oglas of user.listings">
                 <a>
-                    <img src="{{ oglas.slika }}" alt="Oglas slika" />
+                    <img src="assets/images/oglasi/oglas1.jpg" alt="Oglas slika" />
                     <div class="content">
                         <div class="naziv">
-                            {{ oglas.naziv }}
+                            {{ oglas.title }}
                         </div>
                         <hr />
-                        <div class="kategorije">
+                        <!-- <div class="kategorije">
                             <span *ngFor="let kategorija of oglas.kategorije">
                                 <app-button [text]="kategorija"></app-button>
                             </span>
-                        </div>
+                        </div> -->
                         <div class="cijena">
-                            {{ oglas.cijena }}
+                            {{ oglas.price }} EUR
                         </div>
                     </div>
                 </a>
             </li>
         </ul>
-        <div *ngIf="!(user.oglasi && user.oglasi.length)" class="noListingContainer">
+        <div *ngIf="!(user.listings && user.listings.length)" class="noListingContainer">
            <p style="margin: auto;">
             {{"noListings" | translate}}
            </p>

@@ -4,8 +4,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MatFormField, MatLabel} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input'
+import { MatFormField, MatLabel } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input'
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -27,12 +27,12 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  constructor(private fb: FormBuilder, 
-              private http: HttpClient, 
-              private authService: AuthService,
-              private router: Router,
-              private toastr: ToastrService,
-              private translateService: TranslateService) {
+  constructor(private fb: FormBuilder,
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService,
+    private translateService: TranslateService) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', Validators.required]
@@ -55,7 +55,7 @@ export class LoginComponent {
         },
         error: (error: any) => {
           // Handle error
-          if(error.error && (error.error.error === 'User not found' || error.error.error === 'Invalid password')) {
+          if (error.error && (error.error.error === 'User not found' || error.error.error === 'Invalid password')) {
             this.translateService.get('invalidUsernameOrPassword').subscribe(
               (translation: string) => this.toastr.error(translation)
             );
