@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ListingService } from '../../services/listing.service';
-import { AuthService } from '../../services/auth.service';
 import { NavbarButtonComponent } from '../navbar-button/navbar-button.component';
 import { CommonModule } from '@angular/common';
+
 @Component({
   standalone: true,
   selector: 'app-homepage',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
-  imports: [NavbarButtonComponent,
-    CommonModule]
+  imports: [NavbarButtonComponent, CommonModule],
 })
 export class HomepageComponent implements OnInit {
   oglasi: any[] = [];
@@ -19,54 +18,49 @@ export class HomepageComponent implements OnInit {
   subcategories: any[] = [];
   selectedCategories: string[] = [];
   selectedSubcategories: string[] = [];
+  categoryData: any[] = []; // Store the entire category data from the API
 
-  constructor(
-    private listingService: ListingService,
-    private router: Router,
-    private authService: AuthService
-  ) { }
+  constructor(private listingService: ListingService, private router: Router) {}
 
   ngOnInit() {
     this.listingService.getAllListings().subscribe((data) => {
       this.oglasi = data;
-      this.filteredListings = data; // Initialize filtered listings
-      console.log("Filtered listings", this.filteredListings);
-      console.log("Listings", this.oglasi);
+      this.filteredListings = data;
     });
 
-    this.listingService.getCategories().subscribe((data) => {
-      console.log("Data", data);
-      this.listingService.getCategories().subscribe((data: any[]) => {
-        this.categories = data.map((item) => item.category); // Extract categories
-        this.subcategories = data.flatMap((item) => item.subcategories); // Extract and flatten subcategories
-  
-        console.log('Categories:', this.categories);
-        console.log('Subcategories:', this.subcategories);
-      });
-
-      console.log("Categories", this.categories);
-      console.log("Subcategories", this.subcategories);
+    this.listingService.getCategories().subscribe((data: any[]) => {
+      this.categoryData = data; // Store raw data for further filtering
+      this.categories = data.map((item) => item.category); // Extract categories
     });
-
   }
 
   toggleCategoryFilter(category: string) {
-    this.toggleFilter(this.selectedCategories, category);
+    const index = this.selectedCategories.indexOf(category);
+    if (index > -1) {
+      this.selectedCategories.splice(index, 1);
+    } else {
+      this.selectedCategories.push(category);
+    }
+    this.updateSubcategories();
     this.applyFilters();
   }
 
   toggleSubcategoryFilter(subcategory: string) {
-    this.toggleFilter(this.selectedSubcategories, subcategory);
+    const index = this.selectedSubcategories.indexOf(subcategory);
+    if (index > -1) {
+      this.selectedSubcategories.splice(index, 1);
+    } else {
+      this.selectedSubcategories.push(subcategory);
+    }
     this.applyFilters();
   }
 
-  toggleFilter(filterArray: string[], value: string) {
-    const index = filterArray.indexOf(value);
-    if (index > -1) {
-      filterArray.splice(index, 1);
-    } else {
-      filterArray.push(value);
-    }
+  updateSubcategories() {
+    const relevantSubcategories = this.categoryData
+      .filter((item) => this.selectedCategories.includes(item.category.category_name))
+      .flatMap((item) => item.subcategories || []);
+
+    this.subcategories = Array.from(new Set(relevantSubcategories.map((sub) => sub.subcategory_name)));
   }
 
   applyFilters() {
@@ -74,6 +68,7 @@ export class HomepageComponent implements OnInit {
       const matchesCategory =
         this.selectedCategories.length === 0 ||
         this.selectedCategories.includes(oglas.category.category_name);
+
       const matchesSubcategory =
         this.selectedSubcategories.length === 0 ||
         this.selectedSubcategories.includes(oglas.subcategory.subcategory_name);
@@ -85,6 +80,7 @@ export class HomepageComponent implements OnInit {
   resetFilters() {
     this.selectedCategories = [];
     this.selectedSubcategories = [];
+    this.subcategories = [];
     this.filteredListings = [...this.oglasi];
   }
 
