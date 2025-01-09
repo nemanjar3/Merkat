@@ -68,7 +68,7 @@ INSTALLED_APPS = [
 
 import os
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/media/profile_images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # dodato
 
 MIDDLEWARE = [

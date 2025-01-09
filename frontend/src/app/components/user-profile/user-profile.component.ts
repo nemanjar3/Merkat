@@ -38,6 +38,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       email: [{ value: '', disabled: false }, [Validators.required, Validators.email]],
       datumRegistracije: [{ value: '', disabled: true }],
       telefon: [{ value: '', disabled: false }, [Validators.required]],
+      slika: [{ value: '', disabled: false }, [Validators.required]],
     });
   
     // Fetch user data from your service or local storage
@@ -57,6 +58,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
                 email: this.user.email,
                 datumRegistracije: '2024-12-23',
                 telefon: this.user.tel_num,
+                slika: this.user.profile_image,
               });
             },
             error: (error) => {
