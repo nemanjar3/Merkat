@@ -3,7 +3,7 @@ from rest_framework import serializers
 # from ...models import User
 from ...models import User, Listing, Store, ListingAttributeValue, CategoryAttributes, SubCategoryAttributes
 # from .listing_serializers import ListingSerializer
-from ...models import Listing, Category, SubCategory
+from ...models import Listing, Category, SubCategory, Image
 
 
 class ListingAttributeValueSerializer(serializers.ModelSerializer):
@@ -43,11 +43,20 @@ class ListingSerializer(serializers.ModelSerializer):
     category = CategorySerializerNew()  
     subcategory = SubCategorySerializerNew() 
     attributes = ListingAttributeValueSerializer(many=True, source='attribute_values')  
+    images = serializers.SerializerMethodField()  
+
 
     class Meta:
         model = Listing
         fields = [
             'listing_id', 'category', 'subcategory', 'attributes', 'user', 'title',  # dodaocu usera jos nekaga
             'description', 'price', 'posted_date', 'updated_date', 
-            'status', 'location'
+            'status', 'location', 'images'
         ]
+
+    def get_images(self, obj):
+        request = self.context.get('request') 
+        images = obj.images.all()  
+        if request:  
+            return [request.build_absolute_uri(image.image.url) for image in images]
+        return [image.image.url for image in images]

@@ -74,13 +74,25 @@ class Listing(models.Model):
     def __str__(self):
         return self.title
 
-class Image(models.Model):
+"""class Image(models.Model):
     image_id = models.AutoField(primary_key=True)
     listing = models.ForeignKey(Listing, on_delete=models.RESTRICT)
     image_url = models.CharField(max_length=1024)
 
     def __str__(self):
-        return self.image_url
+        return self.image_url"""
+class Image(models.Model):
+    image_id = models.AutoField(primary_key=True)
+    listing = models.ForeignKey(Listing, on_delete=models.RESTRICT, related_name='images')
+    image = models.ImageField(
+        upload_to='listings_images/', 
+        null=True,
+        blank=True,
+        default='media/listings_images/default_listing.jpg',
+    )
+
+    def __str__(self):
+        return f"Image {self.image_id} for Listing {self.listing.title}"
 
 class Store(models.Model):
     store_id = models.AutoField(primary_key=True)

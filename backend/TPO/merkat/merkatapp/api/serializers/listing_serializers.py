@@ -1,19 +1,31 @@
 from rest_framework import serializers
-from merkatapp.models import Listing, Category, SubCategory, ListingAttributeValue, CategoryAttributes, SubCategoryAttributes
+from merkatapp.models import Listing, Category, SubCategory, ListingAttributeValue, CategoryAttributes, SubCategoryAttributes, Image
 
 
 class ListingAttributeInputSerializer(serializers.Serializer):
     attribute_name = serializers.CharField()
     value = serializers.CharField()
 
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = ['image']
+
 class ListingCreateSerializer(serializers.ModelSerializer):
     category = serializers.CharField()  
     subcategory = serializers.CharField(required=False, allow_null=True)  
-    attributes = ListingAttributeInputSerializer(many=True, required=False)  
-    user_id = serializers.IntegerField()  # dodato da moze user da se poveze za listing iako nije online zbog swaggera
+    attributes = ListingAttributeInputSerializer(many=True, required=False) 
+    user_id = serializers.IntegerField()  
+    images = serializers.ListField(
+        child=serializers.ImageField(),
+        required=False,
+        allow_empty=True,
+        write_only=True
+    )  
+
     class Meta:
         model = Listing
-        fields = ['user_id', 'category', 'subcategory', 'title', 'description', 'price', 'location', 'attributes']
+        fields = ['user_id', 'category', 'subcategory', 'title', 'description', 'price', 'location', 'attributes', 'images']
 
     def validate_category(self, value):
         try:
@@ -33,7 +45,6 @@ class ListingCreateSerializer(serializers.ModelSerializer):
         if not value:
             return []
 
-        # Validate each attribute
         for attr in value:
             if 'attribute_name' not in attr or 'value' not in attr:
                 raise serializers.ValidationError("Each attribute must have 'attribute_name' and 'value'.")
@@ -41,18 +52,16 @@ class ListingCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         attributes_data = validated_data.pop('attributes', [])
+        images_data = validated_data.pop('images', [])  
         category = validated_data.pop('category')
         subcategory = validated_data.pop('subcategory', None)
 
-        # Create the listing
         listing = Listing.objects.create(category=category, subcategory=subcategory, **validated_data)
 
-        # Process attributes and subattributes
         for attr_data in attributes_data:
             attribute_name = attr_data['attribute_name']
             value = attr_data['value']
 
-            # Check if the attribute is a category or subcategory attribute
             category_attr = CategoryAttributes.objects.filter(category=category, attribute_name=attribute_name).first()
             subcategory_attr = SubCategoryAttributes.objects.filter(subcategory=subcategory, attribute_name=attribute_name).first()
 
@@ -62,16 +71,24 @@ class ListingCreateSerializer(serializers.ModelSerializer):
                 ListingAttributeValue.objects.create(listing=listing, subcategory_attribute=subcategory_attr, value=value)
             else:
                 raise serializers.ValidationError(f"Attribute '{attribute_name}' does not exist for the given category or subcategory.")
+            
+        # pokemon, biram tebe  
+        if not images_data:
+            default_image_path = 'media/listings_images/pokemon.jpg'
+            Image.objects.create(listing=listing, image=default_image_path)
+        # cuvaj sikeeeeee
+        for image in images_data:
+            Image.objects.create(listing=listing, image=image)
 
         return listing
 
 
 class ListingDeleteSerializer(serializers.Serializer):
-  listing_id = serializers.IntegerField()
+    listing_id = serializers.IntegerField()
 
-  def validate_listing_id(self, value):
-    try:
-      listing = Listing.objects.get(pk=value)
-    except Listing.DoesNotExist:
-      raise serializers.ValidationError(f"Listing with ID {value} does not exist.")
-    return value
+    def validate_listing_id(self, value):
+        try:
+            listing = Listing.objects.get(pk=value)
+        except Listing.DoesNotExist:
+            raise serializers.ValidationError(f"Listing with ID {value} does not exist.")
+        return value
