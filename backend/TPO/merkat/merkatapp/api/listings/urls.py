@@ -4,6 +4,7 @@ from .update import ListingUpdateAPI
 from .delete import ListingDeleteAPI
 from .list_all import ListingListAPI
 from .get_listing import GetListingByIdAPI
+from .delete_listing_image import DeleteListingImageView
 
 
 urlpatterns = [
@@ -12,4 +13,5 @@ urlpatterns = [
     path('', ListingListAPI.as_view(), name='listing-list'),
     path('update/<int:listing_id>/', ListingUpdateAPI.as_view(), name='listing-update'),
     path('<int:listing_id>/', GetListingByIdAPI.as_view(), name='get-listing-by-id'),
+    path('delete-listing-image/', DeleteListingImageView.as_view(), name='delete-listing-image'),
 ]
