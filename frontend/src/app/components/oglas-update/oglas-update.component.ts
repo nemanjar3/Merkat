@@ -29,6 +29,8 @@ export class OglasUpdateComponent implements OnInit {
   subcategories: string[] = [];
   selectedAttributes: string[] = [];
   listingId!: string | '';
+  images: File[] = [];
+  imagePreviews: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -83,7 +85,7 @@ export class OglasUpdateComponent implements OnInit {
       next: (data: any) => {
         // Populate form fields
         this.listingForm.patchValue({
-          user_id: data.user_id,
+          user_id: data.user,
           title: data.title,
           description: data.description,
           price: data.price,
@@ -99,14 +101,32 @@ export class OglasUpdateComponent implements OnInit {
         if (data.subcategory && data.subcategory.subcategory_name) {
           this.onSubCategoryChange({ value: data.subcategory.subcategory_name });
         }
-
+        
+        console.log("Listing attributes fetched:");
+        console.log(data.attributes);
         // Populate attributes if available
         if (data.attributes) {
           this.updateAttributesFormArray(data.attributes.map((attr: any) => attr.attribute_name));
           data.attributes.forEach((attr: any, index: number) => {
-            this.attributes.at(index).patchValue(attr);
+            this.attributes.at(index).patchValue({
+              attribute_name: attr.attribute_name,
+              value: attr.value
+            });
           });
         }
+
+
+        // Load existing images into the preview array
+        if (data.images && Array.isArray(data.images)) {
+          this.imagePreviews = data.images.map((imgUrl: string) => {
+            // Add base URL to image URL if it's not already a full URL
+            if (!imgUrl.startsWith('http://') && !imgUrl.startsWith('https://')) {
+              imgUrl = `http://127.0.0.1:8000/${imgUrl}`;
+            }
+            return imgUrl;
+          });
+        }
+
       },
       error: (err: any) => console.error('Error fetching listing data:', err)
     });
@@ -150,9 +170,36 @@ export class OglasUpdateComponent implements OnInit {
       );
     });
   }
+  onImageChange(event: Event): void {
+    const files = (event.target as HTMLInputElement).files;
+    if (files && this.images.length + files.length + this.imagePreviews.length <= 5) {
+      Array.from(files).forEach((file) => {
+        this.images.push(file);
+        const reader = new FileReader();
+        reader.onload = () => this.imagePreviews.push(reader.result as string);
+        reader.readAsDataURL(file);
+      });
+    } else {
+      this.toastr.error('You can upload a maximum of 5 images.');
+    }
+  }
+
+
+  removeImage(index: number): void {
+    if (index < this.imagePreviews.length) {
+      // Remove existing image
+      this.imagePreviews.splice(index, 1);
+    } else {
+      // Remove newly added image
+      const adjustedIndex = index - this.imagePreviews.length;
+      this.images.splice(adjustedIndex, 1);
+    }
+  }
+
+
 
   deleteListing(): void {
-  
+
     if (this.listingId) {
       this.listingService.deleteListing(this.listingId).subscribe({
         next: () => {
@@ -173,20 +220,42 @@ export class OglasUpdateComponent implements OnInit {
 
   onSubmit(): void {
     if (this.listingForm.valid) {
-      const formData = this.listingForm.value;
-      this.listingService.updateListing(this.listingId, formData).subscribe({
-        next: () => {
-          this.toastr.success('Listing updated successfully');
-          const userId = this.authService.getUserId();
-          this.router.navigate(['/user',userId]); // Navigate to the listing page
-        },
-        error: (err) => {
-          console.error('Error updating listing:', err);
-          this.toastr.error('Failed to update listing');
+      const formData = new FormData();
+      Object.entries(this.listingForm.value).forEach(([key, value]) => {
+        if (key === 'attributes') {
+          formData.append(key, JSON.stringify(value));
+        } else if (key !== 'images') {
+          formData.append(key, value as string);
         }
       });
+
+      // Add existing image URLs
+      formData.append('existingImages', JSON.stringify(this.imagePreviews));
+
+      // Add new images
+      this.images.forEach((image) => {
+        formData.append('images', image);
+      });
+
+      console.log("Form submitted:");
+      formData.forEach((value, key) => {
+        console.log(key, value);
+      });
+
+      // this.listingService.updateListing(this.listingId, formData).subscribe({
+      //   next: () => {
+      //     this.toastr.success('Listing updated successfully');
+      //     const userId = this.authService.getUserId();
+      //     this.router.navigate(['/user', userId]);
+      //   },
+      //   error: (err) => {
+      //     console.error('Error updating listing:', err);
+      //     this.toastr.error('Failed to update listing');
+      //   }
+      // });
     } else {
       console.error('Form is invalid');
     }
   }
+
 }

@@ -137,7 +137,6 @@ export class AddListingComponent implements OnInit {
         }
       });
 
-      const imagesArray: File[] = [];
 
       // Add each file to the array
       this.images.forEach((image) => {

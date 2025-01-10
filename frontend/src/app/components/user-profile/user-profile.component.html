@@ -18,7 +18,7 @@
         <ul>
             <li *ngFor="let oglas of user.listings">
                 <a (click)="updateListing(oglas)">
-                    <img src="http://127.0.0.1:8000/{{oglas.images}}" alt="Oglas slika" />
+                    <img src="http://127.0.0.1:8000/{{oglas.images[0]}}" alt="Oglas slika" />
                     <div class="content">
                         <div class="naziv">
                             {{ oglas.title }}

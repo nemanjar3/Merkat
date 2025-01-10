@@ -71,3 +71,39 @@ button:disabled {
         font-size: 0.9rem;
     }
 }
+.update-listing {
+    max-width: 600px;
+    margin: auto;
+  
+    .images-section {
+      margin: 20px 0;
+  
+      .image-preview-container {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+  
+        .image-preview {
+          position: relative;
+          img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+          }
+          button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
