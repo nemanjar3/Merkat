@@ -1,4 +1,3 @@
-// Add Listing Component
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
@@ -31,16 +30,19 @@ import { TranslateModule } from '@ngx-translate/core';
 export class AddListingComponent implements OnInit {
   listingForm: FormGroup;
   categories: any[] = [];
-
   subcategories: string[] = [];
   selectedAttributes: string[] = [];
+  images: File[] = [];
+  imagePreviews: string[] = [];
 
-  constructor(private fb: FormBuilder, 
-              private authService: AuthService, 
-              private listingService: ListingService,
-              private toastr: ToastrService,
-              private router: Router,
-              private translateService: TranslateService) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private listingService: ListingService,
+    private toastr: ToastrService,
+    private router: Router,
+    private translateService: TranslateService
+  ) {
     this.listingForm = this.fb.group({
       user_id: [this.authService.getUserId()],
       title: ['', [Validators.required]],
@@ -48,103 +50,114 @@ export class AddListingComponent implements OnInit {
       price: ['', [Validators.required]],
       location: [''],
       category: ['', Validators.required],
-      subcategory: ['',Validators.required],
-      attributes: this.fb.array([])
+      subcategory: ['', Validators.required],
+      attributes: this.fb.array([]),
     });
   }
 
   ngOnInit(): void {
-    this.listingService.getCategories()
-      .subscribe({
-        next: (categories: any[]) => {
-          // Transform the categories data to the expected structure
-          this.categories = categories.map(category => ({
-            name: category.category.category_name,
-            attributes: category.attributes.map((attr: any) => attr.attribute_name),
-            subcategories: category.subcategories.map((subcategory: any) => ({
-              name: subcategory.subcategory_name,
-              attributes: subcategory.attributes.map((attr: any) => attr.attribute_name)
-            }))
-          }));
-   },
-        error: (error) => {
-          console.error('Error fetching categories:', error);
-        },
-        complete: () => {
-        }
-      });
+    this.listingService.getCategories().subscribe({
+      next: (categories: any[]) => {
+        this.categories = categories.map((category) => ({
+          name: category.category.category_name,
+          attributes: category.attributes.map((attr: any) => attr.attribute_name),
+          subcategories: category.subcategories.map((subcategory: any) => ({
+            name: subcategory.subcategory_name,
+            attributes: subcategory.attributes.map((attr: any) => attr.attribute_name),
+          })),
+        }));
+      },
+      error: (error) => {
+        console.error('Error fetching categories:', error);
+      },
+    });
   }
-  
 
   get attributes(): FormArray {
     return this.listingForm.get('attributes') as FormArray;
   }
 
   onCategoryChange(event: MatSelectChange): void {
-    this.subcategories = []; // Clear subcategories on category change
-    this.selectedAttributes = []; // Clear attributes on category change
-    this.attributes.clear(); // Clear existing attribute form controls
-    this.listingForm.get('subcategory')?.setValue(''); // Clear subcategory selection
-
-    const categoryName = event.value;
-    const category = this.categories.find(cat => cat.name === categoryName);
+    const category = this.categories.find((cat) => cat.name === event.value);
     this.subcategories = category ? category.subcategories.map((sub: any) => sub.name) : [];
     this.selectedAttributes = category ? category.attributes : [];
     this.updateAttributesFormArray(this.selectedAttributes);
   }
 
   onSubCategoryChange(event: MatSelectChange): void {
-    this.selectedAttributes = []; // Clear attributes on subcategory change
-
-    const subcategoryName = event.value;
-    const selectedCategory = this.categories.find(cat =>
-      cat.subcategories.some((sub: any) => sub.name === subcategoryName)
+    const selectedCategory = this.categories.find((cat) =>
+      cat.subcategories.some((sub: any) => sub.name === event.value)
     );
-    const selectedSubcategory = selectedCategory?.subcategories.find((sub: any) => sub.name === subcategoryName);
-
+    const selectedSubcategory = selectedCategory?.subcategories.find((sub: any) => sub.name === event.value);
     const parentAttributes = selectedCategory?.attributes || [];
     const subcategoryAttributes = selectedSubcategory?.attributes || [];
     this.selectedAttributes = [...new Set([...parentAttributes, ...subcategoryAttributes])];
-
     this.updateAttributesFormArray(this.selectedAttributes);
   }
 
   private updateAttributesFormArray(attributes: string[]): void {
     this.attributes.clear();
-    attributes.forEach(attr => {
+    attributes.forEach((attr) => {
       this.attributes.push(
         this.fb.group({
           attribute_name: [attr, Validators.required],
-          value: ['', Validators.required]
+          value: ['', Validators.required],
         })
       );
     });
   }
 
+  onImageChange(event: Event): void {
+    const files = (event.target as HTMLInputElement).files;
+    if (files && this.images.length + files.length <= 5) {
+      Array.from(files).forEach((file) => {
+        this.images.push(file);
+        const reader = new FileReader();
+        reader.onload = () => this.imagePreviews.push(reader.result as string);
+        reader.readAsDataURL(file);
+      });
+    } else {
+      this.toastr.error('You can upload a maximum of 5 images.');
+    }
+  }
+
+  removeImage(index: number): void {
+    this.images.splice(index, 1);
+    this.imagePreviews.splice(index, 1);
+  }
 
   onSubmit(): void {
     if (this.listingForm.valid) {
-      const formData = this.listingForm.value;
-      this.listingService.createListing(formData)
-        .subscribe({
-          next: (response) => {
-            console.log('Listing created successfully:', response);
-            // Handle success, e.g., display a success message to the user
-          },
-          error: (error) => {
-            console.error('Error creating listing:', error);
-            // Handle error, e.g., display an error message to the user
-          },
-          complete: () => {
-            console.log('Listing creation complete');
-            this.translateService.get('createListingSuccess').subscribe(
-              (translation: string) => this.toastr.success(translation)
-            );
-            this.router.navigate(['/user', this.authService.getUserId()]);
-          }
-        });
-    } else {
-      console.error('Form is invalid');
+      const formData = new FormData();
+      Object.entries(this.listingForm.value).forEach(([key, value]) => {
+        if (key === 'attributes') {
+          formData.append(key, JSON.stringify(value));
+        } else if (key !== 'images') {
+          formData.append(key, value as string);
+        }
+      });
+
+      const imagesArray: File[] = [];
+
+      // Add each file to the array
+      this.images.forEach((image) => {
+        formData.append('images', image); // Append all files under 'images'
+      });
+
+      console.log("Form submitted:");
+      formData.forEach((value, key) => {
+        console.log(key, value);
+      });
+
+      this.listingService.createListing(formData).subscribe({
+        next: () => {
+          this.toastr.success('Listing created successfully');
+          this.router.navigate(['/user', this.authService.getUserId()]);
+        },
+        error: (error) => {
+          console.error('Error creating listing:', error);
+        },
+      });
     }
   }
 }

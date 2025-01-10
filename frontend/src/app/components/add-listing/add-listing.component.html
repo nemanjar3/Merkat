@@ -51,6 +51,18 @@
           </mat-form-field>
         </div>
       </div>
+
+      <div class="images-section">
+        <h2>Upload Images</h2>
+        <div class="image-preview-container">
+          <div class="image-preview" *ngFor="let preview of imagePreviews; let i = index">
+            <img [src]="preview" alt="Image preview" />
+            <button type="button" (click)="removeImage(i)">Remove</button>
+          </div>
+        </div>
+        <input type="file" accept="image/*" multiple (change)="onImageChange($event)" />
+        <p *ngIf="images.length === 5">Maximum of 5 images uploaded</p>
+      </div>
   
       <button mat-raised-button color="primary" type="submit" [disabled]="listingForm.invalid">{{"createListing" | translate}}</button>
     </form>

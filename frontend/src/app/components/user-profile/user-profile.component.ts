@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { NavbarButtonComponent } from '../navbar-button/navbar-button.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -24,6 +25,7 @@ import { Router } from '@angular/router';
     MatInputModule,
     ReactiveFormsModule,
     TranslateModule,
+    NavbarButtonComponent
   ],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss',

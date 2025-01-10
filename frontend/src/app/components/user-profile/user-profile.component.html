@@ -18,17 +18,16 @@
         <ul>
             <li *ngFor="let oglas of user.listings">
                 <a (click)="updateListing(oglas)">
-                    <img src="assets/images/oglasi/oglas1.jpg" alt="Oglas slika" />
+                    <img src="http://127.0.0.1:8000/{{oglas.images}}" alt="Oglas slika" />
                     <div class="content">
                         <div class="naziv">
                             {{ oglas.title }}
                         </div>
                         <hr />
-                        <!-- <div class="kategorije">
-                            <span *ngFor="let kategorija of oglas.kategorije">
-                                <app-button [text]="kategorija"></app-button>
-                            </span>
-                        </div> -->
+                        <div class="kategorije">
+                          <span><app-button [text]="oglas.category.category_name"></app-button></span>
+                          <span><app-button [text]="oglas.subcategory.subcategory_name"></app-button></span>
+                        </div>
                         <div class="cijena">
                             {{ oglas.price }} EUR
                         </div>
