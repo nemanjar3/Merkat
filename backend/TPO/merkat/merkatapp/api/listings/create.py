@@ -14,7 +14,9 @@ class ListingCreateAPI(APIView):
         responses={
             201: "Listing created successfully.",
             400: "Bad Request",
-        }
+        },
+        request_content_type="multipart/form-data",
+        exclude_fields=['images']
     )
     def post(self, request, *args, **kwargs):
         serializer = ListingCreateSerializer(data=request.data)

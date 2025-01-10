@@ -26,9 +26,15 @@ class ListingAttributeValueInline(admin.TabularInline):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
+class ImageInline(admin.TabularInline):
+    model = Image
+    extra = 1  
+    fields = ('image',)  
+    verbose_name_plural = "Images"
+
 class ListingAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'subcategory', 'price', 'user', 'posted_date')
-    inlines = [ListingAttributeValueInline]
+    inlines = [ListingAttributeValueInline, ImageInline] 
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "subcategory":
