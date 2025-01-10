@@ -31,7 +31,7 @@
   <!-- User info card -->
   <strong>{{"publisher" | translate}}: </strong>
   <div class="user-card">
-    <img class="user-image" [src]="user.slika" alt="{{ user.username }}" />
+    <img class="user-image" src="http://127.0.0.1:8000/{{user.profile_image}}" alt="{{ user.username }}" />
     <div class="user-info">
       <p class="user-name">{{ user.username }}</p>
       <div class="user-actions">
