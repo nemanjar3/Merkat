@@ -1,21 +1,52 @@
-<div class="message-container">
-  <div class="message-list">
-    <div *ngFor="let message of messages" class="message">
-      <div class="message-header">
-        <span class="sender">{{ message.sender }}</span>
-        <span class="timestamp">{{ message.timestamp | date:'shortTime' }}</span>
-      </div>
-      <div class="message-content">
-        {{ message.content }}
-      </div>
+<div class="container">
+  <div class="chat-wrapper">
+    <div class="user-list">
+      <mat-card>
+        <mat-list>
+          <mat-list-item *ngFor="let user of users" (click)="selectUser(user.id)" [class.selected]="user.id === selectedUserId">
+            <div class="user-item">
+              <strong class="mb-1">{{ user.name }}</strong>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
     </div>
-  </div>
 
-  <div class="input-area">
-    <mat-form-field class="input-area"> 
-      <mat-label>{{"newMessage" | translate}}</mat-label>
-      <input matInput type="text" [(ngModel)]="newMessage">
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="sendMessage()">{{"send" | translate}}</button>
+    <div class="chat-area">
+      <mat-card *ngIf="selectedUserId">
+        <mat-card-header>
+          <mat-card-title>
+            Chat with {{ getUserById(selectedUserId)?.name || 'Unknown User' }}
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="chat-messages">
+          <div *ngFor="let message of messages" class="message">
+            <div [class.sent]="message.senderUsername === 'You'" [class.received]="message.senderUsername !== 'You'"> 
+              <div class="message-bubble">
+                {{ message.message }} 
+              </div>
+              <span class="timestamp">{{ message.timestamp | date:'shortTime' }}</span> 
+            </div>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions class="input-area">
+          <form [formGroup]="form" (ngSubmit)="sendMessage()"> 
+            <mat-form-field class="message-input" appearance="outline">
+              <mat-label>Write a message</mat-label>
+              <input matInput formControlName="message"> 
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">Send</button> 
+          </form>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card *ngIf="!selectedUserId">
+        <mat-card-content>
+          <p>Please select a user to start chatting.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </div>

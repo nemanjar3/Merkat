@@ -13,6 +13,7 @@ import { MatSelectModule, MatFormField, MatLabel, MatError } from '@angular/mate
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes } from './app/app.routes';
 import { ToastrModule } from 'ngx-toastr';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -26,7 +27,8 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(
       MatButtonModule,
       MatSelectModule,
-      BrowserAnimationsModule, // Required for animations
+      BrowserAnimationsModule,
+      MatCardModule, // Required for animations
       ToastrModule.forRoot({ // Configure Toastr globally
         timeOut: 3000,
         positionClass: 'toast-top-right',
