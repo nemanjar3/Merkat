@@ -124,11 +124,10 @@ class ChatRoom(models.Model):
 
 class Message(models.Model):
 
-    id = models.AutoField(primary_key=True)
-    chat_room = models.ForeignKey(ChatRoom, on_delete=models.CASCADE, related_name='messages')
-    sender = models.ForeignKey('User', on_delete=models.CASCADE, related_name='sent_messages')
-    content = models.TextField()
-    timestamp = models.DateTimeField(default=now)
+    sender = models.ForeignKey('User', on_delete=models.CASCADE, null=True, blank=True)
+    message = models.TextField(null=True, blank=True)
+    thread_name = models.CharField(null=True, blank=True, max_length=200)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Message from {self.sender.username} at {self.timestamp}"

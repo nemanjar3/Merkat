@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+</head>
+<body>
+    <h1>Chat Room</h1>
+    
+    <!-- User input for messages -->
+    <input type="text" id="message-input" placeholder="Type a message">
+    <button id="send-button">Send</button>
+    
+    <!-- Display received messages -->
+    <div id="messages"></div>
+
+    <script>
+
+
+        const websocketProtocol = window.location.protocol === "https:" ? "wss" : "ws";
+        const wsEndpoint = `${websocketProtocol}://${window.location.host}/ws/socket-server/{{room_name}}/`;
+        const socket = new WebSocket(wsEndpoint);
+
+        // const roomName = "2"; 
+        // const socket = new WebSocket(`ws://localhost:8000/ws/socket-server/2/`);
+
+        socket.onopen = function (e) {
+            console.log("WebSocket connection established.");
+            socket.send(JSON.stringify({ 'message': 'Hello, Server!' })); 
+        };
+
+        socket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+            console.log("Message received: ", data.message);
+            document.getElementById("messages").innerHTML += `<p>${data.message}</p>`;
+        };
+
+        socket.onclose = function (e) {
+            console.log("WebSocket connection closed.");
+        };
+
+        socket.onerror = function (e) {
+            console.error("WebSocket error: ", e);
+        };
+
+        document.querySelector("#send-button").addEventListener("click", () => {
+            const message = document.querySelector("#message-input").value;
+            socket.send(JSON.stringify({ message: message }));
+        });
+    </script>
+</body>
+</html>
