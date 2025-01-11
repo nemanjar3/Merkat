@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -37,8 +37,8 @@ export class OglasUpdateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private listingService: ListingService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    @Inject(ListingService) private listingService: ListingService
   ) {
     this.listingForm = this.fb.group({
       user_id: [this.authService.getUserId()],

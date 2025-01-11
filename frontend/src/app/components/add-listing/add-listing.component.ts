@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -38,7 +38,7 @@ export class AddListingComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private listingService: ListingService,
+    @Inject(ListingService) private listingService: ListingService,
     private toastr: ToastrService,
     private router: Router,
     private translateService: TranslateService
@@ -131,6 +131,8 @@ export class AddListingComponent implements OnInit {
       const formData = new FormData();
       Object.entries(this.listingForm.value).forEach(([key, value]) => {
         if (key === 'attributes') {
+          console.log("Attributes:");
+          console.log(key, value);
           formData.append(key, JSON.stringify(value));
         } else if (key !== 'images') {
           formData.append(key, value as string);

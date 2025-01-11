@@ -5,7 +5,7 @@ from rest_framework.permissions import AllowAny
 from drf_yasg.utils import swagger_auto_schema
 from ..serializers.listing_serializers import ListingCreateSerializer
 from merkatapp.models import User
-
+import json
 class ListingCreateAPI(APIView):
     permission_classes = [AllowAny]  # maybe late isAuthenticated
 
@@ -19,6 +19,24 @@ class ListingCreateAPI(APIView):
         exclude_fields=['images']
     )
     def post(self, request, *args, **kwargs):
+
+        print("Request data:", request.data)
+
+        # Parse the 'attributes' field if it exists
+        if 'attributes' in request.data:
+            try:
+                # Convert the string representation of JSON into a Python object
+                request.data['attributes'] = json.loads(request.data['attributes'])
+                
+                print("--------------------------------\n")
+                print("Request data AFTER parsing:", request.data)
+                print("--------------------------------\n")
+            except (json.JSONDecodeError, IndexError) as e:
+                return Response({"error": f"Invalid JSON in attributes: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        print("--------------------------------\n")
+        print("Request data AFTER if:", request.data)
+
         serializer = ListingCreateSerializer(data=request.data)
         if serializer.is_valid():
             user_id = serializer.validated_data.pop('user_id', None)
