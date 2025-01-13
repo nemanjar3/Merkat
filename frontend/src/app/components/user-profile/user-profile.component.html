@@ -48,7 +48,7 @@
             <div class="profile-picture-container">
               <label for="profilePicture">
                 <img
-                  src=""
+                  [src]="user?.profile_image || 'http://127.0.0.1:8000/media/profile_images/default_profile.jpg'"
                   alt="Profile Picture"
                   class="profile-picture"
                   title="Click to upload a new picture"

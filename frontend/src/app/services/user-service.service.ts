@@ -13,11 +13,15 @@ export class UserService {
     return this.http.get<any>(`http://127.0.0.1:8000/api/users/profile/${userId}/`)
       .pipe(
         map(user => {
+          if (user.profile_image) {
+            user.profile_image = `http://127.0.0.1:8000${user.profile_image}`;
+          }
           console.log('User:', user);
-          return user; 
+          return user;
         })
       );
   }
+  
 
 
   getLoggedUser(){

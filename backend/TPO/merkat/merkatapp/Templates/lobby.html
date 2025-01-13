@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby</title>
+</head>
+<body>
+
+    <h1>Lets chat!!!</h1>
+
+    <form id="id-form">
+        <label for="user-id">Enter User ID:</label>
+        <input type="text" id="user-id" name="user-id" required>
+        <button type="submit">Connect</button>
+    </form>
+
+    <form id="message-form" style="display:none;">
+        <label for="message">Message:</label>
+        <input type="text" id="message-input" name="message" required>
+        <button type="submit" id="send-message-button">Send</button>
+    </form>
+
+    <div id="messages"></div>
+
+    <script type="text/javascript">
+        let socket;
+
+        document.getElementById('id-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let userId = document.getElementById('user-id').value;
+            let url = `ws://${window.location.host}/ws/chat/${userId}/`;
+            socket = new WebSocket(url);
+
+            socket.onopen = function(e) {
+                console.log("WebSocket connection established");
+                document.getElementById('message-form').style.display = 'block';
+            };
+
+            socket.onmessage = function(e) {
+                let data = JSON.parse(e.data);
+                console.log("Message received:", data);
+                // Handle the received message and update the UI accordingly
+                if(data.type === 'chat'){
+                    let message = document.getElementById('messages')
+
+                    messages.insertAdjacentHTML('beforeend', `<div>
+                                            <p>${data.message}</p>
+                                        </div>`)
+                }
+            };
+
+            socket.onclose = function(e) {
+                console.log("WebSocket connection closed");
+            };
+
+            socket.onerror = function(e) {
+                console.log("WebSocket error:", e);
+            };
+        });
+
+        function sendMessage(message) {
+            socket.send(JSON.stringify({
+                'message': message,
+                'senderUsername': document.getElementById('user-id').value
+            }));
+        }
+
+        document.getElementById('message-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let message = document.getElementById('message-input').value;
+            sendMessage(message);
+            document.getElementById('message-form').reset();
+        });
+    </script>
+
+</body>
+
+</html>

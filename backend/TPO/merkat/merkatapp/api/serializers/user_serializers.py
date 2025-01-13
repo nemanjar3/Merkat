@@ -31,6 +31,12 @@ class ProfileSerializer(serializers.ModelSerializer):
     def get_num_listings(self, obj):
         return obj.listing_set.count()
 
+    def get_profile_image(self, obj):
+        request = self.context.get('request')
+        if obj.profile_image:
+            return request.build_absolute_uri(obj.profile_image.url)
+        return None
+
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     profile_image = serializers.ImageField(required=False)

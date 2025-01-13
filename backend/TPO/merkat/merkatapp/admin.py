@@ -3,8 +3,8 @@ from django.urls import reverse
 from django.utils.html import format_html
 from .models import (
     User, Category, Listing, SubCategory, Image, Store, 
-    SellerInStore, Message, CategoryAttributes, SubCategoryAttributes, 
-    ListingAttributeValue,
+    SellerInStore, CategoryAttributes, SubCategoryAttributes, 
+    ListingAttributeValue, Message, ChatRoom
 )
 
 
@@ -43,6 +43,12 @@ class ListingAdmin(admin.ModelAdmin):
         
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
+class ChatRoomAdmin(admin.ModelAdmin):
+    list_display = ('id', 'created_at', 'get_participants')  
+
+    def get_participants(self, obj):
+        return ", ".join([str(user) for user in obj.participants.all()])
+    get_participants.short_description = 'Participants'
 
 # Register your models
 admin.site.register(User)
@@ -55,4 +61,4 @@ admin.site.register(SellerInStore)
 admin.site.register(Message)
 admin.site.register(CategoryAttributes)
 admin.site.register(SubCategoryAttributes)
-
+admin.site.register(ChatRoom, ChatRoomAdmin)

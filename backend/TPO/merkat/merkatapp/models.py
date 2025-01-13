@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password
+from django.utils.timezone import now
 
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
@@ -114,16 +115,37 @@ class SellerInStore(models.Model):
     def __str__(self):
         return f"{self.user.username} in {self.store.store_name}"
 
-class Message(models.Model):
-    message_id = models.AutoField(primary_key=True)
-    sender = models.ForeignKey(User, related_name="sent_messages", on_delete=models.RESTRICT)
-    receiver = models.ForeignKey(User, related_name="received_messages", on_delete=models.RESTRICT)
-    content = models.TextField()
-    sent_at = models.DateField()
-    status = models.CharField(max_length=1024, null=True, blank=True)
+class ChatRoom(models.Model):
+
+    id = models.AutoField(primary_key=True)
+    participants = models.ManyToManyField('User', related_name='chat_rooms')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def create_room(user1, user2):
+
+        room = ChatRoom.objects.filter(participants=user1).filter(participants=user2).first()
+        if not room:
+            room = ChatRoom.objects.create()
+            room.participants.add(user1, user2)
+        return room
 
     def __str__(self):
-        return f"Message {self.message_id} from {self.sender.username} to {self.receiver.username}"
+        participant_usernames = ", ".join([user.username for user in self.participants.all()])
+        return f"ChatRoom ({participant_usernames})"
+
+
+class Message(models.Model):
+
+    sender = models.ForeignKey('User', on_delete=models.CASCADE, null=True, blank=True)
+    message = models.TextField(null=True, blank=True)
+    thread_name = models.CharField(null=True, blank=True, max_length=200)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Message from {self.sender.username} at {self.timestamp}"
+
+    class Meta:
+        ordering = ['timestamp']
 
 class ListingAttributeValue(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name='attribute_values')

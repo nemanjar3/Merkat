@@ -47,6 +47,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       username: [{ value: '', disabled: false }, [Validators.required]],
       email: [{ value: '', disabled: false }, [Validators.required, Validators.email]],
       telefon: [{ value: '', disabled: false }, [Validators.required]],
+      slika: [{ value: '', disabled: false }, [Validators.required]],
     });
 
     // Fetch user data from your service or local storage
@@ -65,6 +66,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
                 username: this.user.username,
                 email: this.user.email,
                 telefon: this.user.tel_num,
+                slika: this.user.profile_image,
               });
             },
             error: (error) => {
