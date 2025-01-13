@@ -22,7 +22,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     listings = ListingSerializer(many=True, source='listing_set')  
     stores = StoreSerializer(many=True, source='store_set')        
     num_listings = serializers.SerializerMethodField()
-    profile_image = serializers.ImageField(use_url=True) 
+    #profile_image = serializers.ImageField(use_url=True) 
 
     class Meta:
         model = User
@@ -30,13 +30,13 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     def get_num_listings(self, obj):
         return obj.listing_set.count()
-
-    def get_profile_image(self, obj):
-        request = self.context.get('request')
-        if obj.profile_image:
-            return request.build_absolute_uri(obj.profile_image.url)
-        return None
-
+    
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        if instance.profile_image:
+            representation['profile_image'] = f"/media/profile_images/{instance.profile_image.name.split('/')[-1]}"
+        return representation
+    
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     profile_image = serializers.ImageField(required=False)
