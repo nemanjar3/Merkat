@@ -234,47 +234,62 @@ export class OglasUpdateComponent implements OnInit {
 
   onSubmit(): void {
     if (this.listingForm.valid) {
-      const formData = new FormData();
-      Object.entries(this.listingForm.value).forEach(([key, value]) => {
-        if (key === 'attributes') {
-          formData.append(key, JSON.stringify(value));
-        } else if (key !== 'images') {
-          formData.append(key, value as string);
-        }
-      });
-
-      // Call deleteImage for each image in imagesToDelete
-      this.imagesToDelete.forEach((imageUrl) => {
-        this.listingService.deleteImage(imageUrl).subscribe({
-          next: () => console.log(`Image at URL ${imageUrl} successfully deleted.`),
-          error: (err) => console.error(`Failed to delete image at URL ${imageUrl}:`, err),
+      const listingData = {
+        ...this.listingForm.value,
+        attributes: this.attributes.value,
+      };
+  
+      // Delete images marked for removal
+      if (this.imagesToDelete.length > 0) {
+        this.imagesToDelete.forEach((imageUrl) => {
+          this.listingService.deleteImage(imageUrl).subscribe({
+            next: () => console.log(`Image at URL ${imageUrl} successfully deleted.`),
+            error: (err) => console.error(`Failed to delete image at URL ${imageUrl}:`, err),
+          });
         });
-      });
+      }
 
-      // Add new images
-      this.images.forEach((image) => {
-        formData.append('images', image);
-      });
-
-      console.log("Form submitted:");
-      formData.forEach((value, key) => {
-        console.log(key, value);
-      });
-
-      //console log images that are submitted
-      console.log("Images submitted:");
-      console.log(formData.get('images'));
-
-      this.listingService.updateListing(this.listingId, formData).subscribe({
-        next: () => {
-          this.toastr.success('Listing updated successfully');
-          const userId = this.authService.getUserId();
-          this.router.navigate(['/user', userId]);
+      //console log the listing data
+      console.log("Listing data:");
+      console.log(listingData);
+  
+      // Update listing data
+      this.listingService.createListingNoImages(listingData).subscribe({
+        next: (response) => {
+          const listingId = response.listing_id; // Adjust based on API response structure
+          console.log('Listing updated (created using createListingNoImages):', response);
+  
+          // Delete images marked for removal
+          if (this.imagesToDelete.length > 0) {
+            this.imagesToDelete.forEach((imageUrl) => {
+              this.listingService.deleteImage(imageUrl).subscribe({
+                next: () => console.log(`Image at URL ${imageUrl} successfully deleted.`),
+                error: (err) => console.error(`Failed to delete image at URL ${imageUrl}:`, err),
+              });
+            });
+          }
+  
+          // Add new images
+          if (this.images.length > 0) {
+            this.listingService.addListingImages(listingId, this.images).subscribe({
+              next: () => {
+                this.toastr.success('Listing updated successfully');
+                this.router.navigate(['/user', this.authService.getUserId()]);
+              },
+              error: (err) => {
+                console.error('Error uploading images:', err);
+                this.toastr.error('Failed to upload images');
+              },
+            });
+          } else {
+            this.toastr.success('Listing updated successfully');
+            this.router.navigate(['/user', this.authService.getUserId()]);
+          }
         },
         error: (err) => {
           console.error('Error updating listing:', err);
           this.toastr.error('Failed to update listing');
-        }
+        },
       });
     } else {
       console.error('Form is invalid');

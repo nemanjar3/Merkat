@@ -24,8 +24,8 @@ import { TranslateModule } from '@ngx-translate/core';
     MatSelect,
     MatOption,
     ReactiveFormsModule,
-    TranslateModule
-  ]
+    TranslateModule,
+  ],
 })
 export class AddListingComponent implements OnInit {
   listingForm: FormGroup;
@@ -76,27 +76,6 @@ export class AddListingComponent implements OnInit {
     return this.listingForm.get('attributes') as FormArray;
   }
 
-  onCategoryChange(event: any): void {
-    const category = this.categories.find((cat) => cat.name === event.value);
-    this.subcategories = category ? category.subcategories.map((sub: any) => sub.name) : [];
-    this.selectedAttributes = category ? category.attributes : [];
-    this.updateAttributesFormArray(this.selectedAttributes);
-  }
-
-  onSubCategoryChange(event: any): void {
-    //clear the subcategory
-    const selectedCategory = this.categories.find((cat) =>
-      cat.subcategories.some((sub: any) => sub.name === event.value)
-    );
-    const selectedSubcategory = selectedCategory?.subcategories.find((sub: any) => sub.name === event.value);
-    const parentAttributes = selectedCategory?.attributes || [];
-    const subcategoryAttributes = selectedSubcategory?.attributes || [];
-    this.selectedAttributes = [...new Set([...parentAttributes, ...subcategoryAttributes])];
-    this.updateAttributesFormArray(this.selectedAttributes);
-    console.log("Selected subcategory: ", selectedSubcategory)
-    console.log("Selected Attributes: ", this.selectedAttributes);
-  }
-
   private updateAttributesFormArray(attributes: string[]): void {
     this.attributes.clear();
     attributes.forEach((attr) => {
@@ -122,6 +101,26 @@ export class AddListingComponent implements OnInit {
       this.toastr.error('You can upload a maximum of 5 images.');
     }
   }
+  onCategoryChange(event: any): void {
+    const category = this.categories.find((cat) => cat.name === event.value);
+    this.subcategories = category ? category.subcategories.map((sub: any) => sub.name) : [];
+    this.selectedAttributes = category ? category.attributes : [];
+    this.updateAttributesFormArray(this.selectedAttributes);
+  }
+  
+  onSubCategoryChange(event: any): void {
+    //clear the subcategory
+    const selectedCategory = this.categories.find((cat) =>
+      cat.subcategories.some((sub: any) => sub.name === event.value)
+    );
+    const selectedSubcategory = selectedCategory?.subcategories.find((sub: any) => sub.name === event.value);
+    const parentAttributes = selectedCategory?.attributes || [];
+    const subcategoryAttributes = selectedSubcategory?.attributes || [];
+    this.selectedAttributes = [...new Set([...parentAttributes, ...subcategoryAttributes])];
+    this.updateAttributesFormArray(this.selectedAttributes);
+    console.log("Selected subcategory: ", selectedSubcategory)
+    console.log("Selected Attributes: ", this.selectedAttributes);
+  }
 
   removeImage(index: number): void {
     this.images.splice(index, 1);
@@ -130,19 +129,29 @@ export class AddListingComponent implements OnInit {
 
   onSubmit(): void {
     if (this.listingForm.valid) {
-      const formData = new FormData();
+      const listingData = {
+        ...this.listingForm.value,
+        attributes: this.attributes.value,
+      };
 
-      console.log("Listing Form: ", this.listingForm.value);
-
-      formData.append('data', JSON.stringify(this.listingForm.value));
-      this.images.forEach((image) => {
-        formData.append('images', image);
-      });
-
-      this.listingService.createListing(formData).subscribe({
-        next: () => {
-          this.toastr.success('Listing created successfully');
-          this.router.navigate(['/user', this.authService.getUserId()]);
+      this.listingService.createListingNoImages(listingData).subscribe({
+        next: (response) => {
+          const listingId = response.listing_id; // Adjust based on API response structure
+          console.log('Listing created:', response);
+          if (this.images.length > 0) {
+            this.listingService.addListingImages(listingId, this.images).subscribe({
+              next: () => {
+                this.toastr.success('Listing created successfully');
+                this.router.navigate(['/user', this.authService.getUserId()]);
+              },
+              error: (error) => {
+                console.error('Error uploading images:', error);
+              },
+            });
+          } else {
+            this.toastr.success('Listing created successfully');
+            this.router.navigate(['/user', this.authService.getUserId()]);
+          }
         },
         error: (error) => {
           console.error('Error creating listing:', error);
@@ -151,3 +160,4 @@ export class AddListingComponent implements OnInit {
     }
   }
 }
+

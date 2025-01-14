@@ -14,6 +14,20 @@ export class ListingService {
     return this.http.post(`${this.apiUrl}/listings/create/`, payload);
   }
 
+  createListingNoImages(payload: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/listings/create-text/`, payload);
+  }
+  addListingImages(listingId: string, images: File[]): Observable<any> {
+    const formData = new FormData();
+
+    formData.append('listing_id', listingId); // Include listingId in the payload
+    images.forEach((image) => {
+      formData.append('images', image);
+    });
+
+    return this.http.post(`${this.apiUrl}/listings/add-images/`, formData);
+  }
+
   getCategories(): Observable<any> {
     return this.http.get(`${this.apiUrl}/category_attributes/list-all/`);
   }
