@@ -40,8 +40,7 @@ export class AddListingComponent implements OnInit {
     private authService: AuthService,
     @Inject(ListingService) private listingService: ListingService,
     private toastr: ToastrService,
-    private router: Router,
-    private translateService: TranslateService
+    private router: Router
   ) {
     this.listingForm = this.fb.group({
       user_id: [this.authService.getUserId()],
@@ -77,14 +76,14 @@ export class AddListingComponent implements OnInit {
     return this.listingForm.get('attributes') as FormArray;
   }
 
-  onCategoryChange(event: MatSelectChange): void {
+  onCategoryChange(event: any): void {
     const category = this.categories.find((cat) => cat.name === event.value);
     this.subcategories = category ? category.subcategories.map((sub: any) => sub.name) : [];
     this.selectedAttributes = category ? category.attributes : [];
     this.updateAttributesFormArray(this.selectedAttributes);
   }
 
-  onSubCategoryChange(event: MatSelectChange): void {
+  onSubCategoryChange(event: any): void {
     const selectedCategory = this.categories.find((cat) =>
       cat.subcategories.some((sub: any) => sub.name === event.value)
     );
@@ -129,25 +128,9 @@ export class AddListingComponent implements OnInit {
   onSubmit(): void {
     if (this.listingForm.valid) {
       const formData = new FormData();
-      Object.entries(this.listingForm.value).forEach(([key, value]) => {
-        if (key === 'attributes') {
-          console.log("Attributes:");
-          console.log(key, value);
-          formData.append(key, JSON.stringify(value));
-        } else if (key !== 'images') {
-          formData.append(key, value as string);
-        }
-      });
-
-
-      // Add each file to the array
+      formData.append('data', JSON.stringify(this.listingForm.value));
       this.images.forEach((image) => {
-        formData.append('images', image); // Append all files under 'images'
-      });
-
-      console.log("Form submitted:");
-      formData.forEach((value, key) => {
-        console.log(key, value);
+        formData.append('images', image);
       });
 
       this.listingService.createListing(formData).subscribe({

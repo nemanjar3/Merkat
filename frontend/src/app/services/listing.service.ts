@@ -42,4 +42,8 @@ export class ListingService {
     return this.http.get(`${this.apiUrl}/listings/${listingId}/`);
   }
 
+  deleteImage(imageUrl: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/listings/delete-listing-image/`, { image_url: imageUrl });
+  }
+
 }
