@@ -1,15 +1,15 @@
 <div class="homepage-container">
     <div class="filter-panel">
-      <h3>Filter by:</h3>
+      <h3>{{"filterby" | translate}}:</h3>
   
       <div class="filter-section">
-        <h4>Categories</h4>
+        <h4>{{"category" | translate}}</h4>
         <ul>
           <li *ngFor="let category of categories">
             <label>
               <input
                 type="checkbox"
-                [value]="category.category_name"
+                [value]="category.category_name | translate"
                 (change)="toggleCategoryFilter(category.category_name)"
               />
               {{ category.category_name }}
@@ -19,13 +19,13 @@
       </div>
   
       <div class="filter-section" *ngIf="subcategories.length > 0">
-        <h4>Subcategories</h4>
+        <h4>{{"subcategory" | translate}}</h4>
         <ul>
           <li *ngFor="let subcategory of subcategories">
             <label>
               <input
                 type="checkbox"
-                [value]="subcategory"
+                [value]="subcategory | translate"
                 (change)="toggleSubcategoryFilter(subcategory)"
               />
               {{ subcategory}}
@@ -33,8 +33,8 @@
           </li>
         </ul>
       </div>
-   
-      <button (click)="resetFilters()" class="reset-button">Reset Filters</button>
+  
+      <button (click)="resetFilters()" class="reset-button">{{"resetfilter" | translate}}</button>
     </div>
   
     <div class="listings-container">
@@ -46,10 +46,10 @@
               <div class="naziv">{{ oglas.title }}</div>
               <hr>
               <div class="kategorije">
-                <span><app-button [text]="oglas.category.category_name"></app-button></span>
-                <span><app-button [text]="oglas.subcategory.subcategory_name"></app-button></span>
+                <span><app-button [text]="oglas.category.category_name | translate"></app-button></span>
+                <span><app-button [text]="oglas.subcategory.subcategory_name | translate"></app-button></span>
               </div>
-              <div class="cijena">{{ oglas.price }} EUR</div>
+              <div class="cijena">{{ oglas.price }} €</div>
             </div>
           </a>
         </li>

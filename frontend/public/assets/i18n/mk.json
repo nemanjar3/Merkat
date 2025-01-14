@@ -53,6 +53,17 @@
     "subcategory": "Podkategorija",
     "selectSubcategory": "Izaberite podkategoriju",
     "valueRequired": "Ovo polje je obavezno",
-    "createListingSuccess": "Oglas je uspešno kreiran"
+    "createListingSuccess": "Oglas je uspešno kreiran",
+    "filterby": "Filtrirajte spored",
+    "resetfilter": "Resetirajte go filterot",
+    "titleRequired": "Naslov e zadolžitelen",
+    "uploadImages": "Prikačete sliki",
+    "maxImages": "Može da se prikačat najmnogu 5 sliki!",
+    "chooseImages": "Izberete sliki",
+    "deleteListing": "Izbrišite go oglasot"
+
+
+
+
 
 }
