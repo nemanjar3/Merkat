@@ -34,7 +34,7 @@ def create_profile(request):
     return render(request, 'create_profile.html', {'profile_form': profile_form, 'listing_form': listing_form})
 
 def success(request):
-    return render(request, '../../../frontend/src/index.html')
+    return render(request, 'templates/success.html')
 
 
 # NOTE: From this point on are LOGIN and SIGNIN and PROFILE SHOW
