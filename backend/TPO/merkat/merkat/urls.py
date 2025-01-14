@@ -37,7 +37,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('merkatapp.urls')),
+    # path('', include('merkatapp.urls')),
 
     # Include user-related API URLs
     path('api/users/', include('merkatapp.api.users.urls')),

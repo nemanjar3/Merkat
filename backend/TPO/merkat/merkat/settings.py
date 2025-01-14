@@ -27,9 +27,15 @@ SECRET_KEY = 'django-insecure-%sy#0indo9o7+&p0#v0p_n60p_47lhin+a%+*!sg-#l4n+i=ll
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 CORS_ORIGIN_ALLOW_ALL = True  # Allow all origins (for development)
+
+CSRF_ALLOWED_ORIGINS = ["https://merkat.onrender.com"]
+CORS_ORIGINS_WHITELIST = ["https://merkat.onrender.com"]
+CSRF_TRUSTED_ORIGINS = ["https://merkat.onrender.com"]
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 
 SIMPLE_JWT = {
@@ -76,7 +82,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

@@ -3,14 +3,16 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
 from ..serializers.listing_serializers import ListingCreateSerializer
+from ..serializers.listing_serializers import ListingUpdateTextSerializer
 from merkatapp.models import Listing
+from ..serializers.listing_serializers import ListingAttributeValue
 
 class ListingUpdateAPI(APIView):
     # U produkciji bi ovo trebalo staviti! Za sad zbog testiranja neka bude komentirano
     # permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(
-        request_body=ListingCreateSerializer,
+        request_body=ListingUpdateTextSerializer,
         responses={
             200: "Listing updated successfully.",
             400: "Bad Request",
@@ -27,8 +29,11 @@ class ListingUpdateAPI(APIView):
         # if listing.user != request.user:
         #     return Response({"error": "You do not have permission to update this listing."}, status=403)
 
-        serializer = ListingCreateSerializer(listing, data=request.data, partial=True)
+        #serializer = ListingCreateSerializer(listing, data=request.data, partial=True)
+        serializer = ListingUpdateTextSerializer(listing, data=request.data, partial=True)
+
         if serializer.is_valid():
+            ListingAttributeValue.objects.filter(listing=listing).delete()
             serializer.save()
             return Response({"message": "Listing updated successfully."})
         return Response(serializer.errors, status=400)

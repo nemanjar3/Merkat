@@ -1,31 +1,69 @@
+/* Footer Section */
 footer {
-    background-color: #bfd9d2;
-    color: #76b8a6;
-    padding: 2rem 0;
-    margin-top: auto; /* Помера footer на дно */
-  }
-  
+  background-color: #bfd9d2;
+  color: #76b8a6;
+  padding: 3rem 0;
+  margin-top: auto; /* Pushes footer to the bottom */
+  border-top: 2px solid #76b8a6;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Container inside the footer */
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Links Section */
+.links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 2rem;
+}
+
+.links a {
+  color: #76b8a6;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover Effect on Links */
+.links a:hover {
+  color: #4a6b63; /* Darker shade on hover */
+  transform: translateY(-2px); /* Subtle lift effect */
+  cursor: pointer;
+}
+
+/* Add a little styling to the footer text */
+footer p {
+  font-size: 1rem;
+  color: #4a6b63; /* Darker text color for contrast */
+  text-align: center;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .container {
-    display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    max-width: 960px;
-    margin: 0 auto;
   }
-  
+
   .links ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 1rem;
+    justify-content: center;
+    gap: 1.5rem;
   }
-  
+
   .links a {
-    color: #76b8a6;
-    text-decoration: none;
+    font-size: 1rem;
   }
-  a {
-    pointer-events: auto;
-    cursor: pointer;
-  }
+}

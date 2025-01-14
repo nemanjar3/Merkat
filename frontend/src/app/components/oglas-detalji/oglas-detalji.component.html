@@ -6,8 +6,22 @@
 </div>
 
 <div class="oglas-detalji">
-  <img class="oglas-image" src="assets/images/oglasi/oglas1.jpg" alt="{{ oglas.title }}" />
-
+  <div class="slideshow-container" *ngIf="oglas.images && oglas.images.length > 0">
+    <div
+      class="slide"
+      *ngFor="let img of oglas.images; let i = index"
+      [class.active]="i === currentSlide"
+    >
+      <img src="http://127.0.0.1:8000{{img}}" [alt]="'Image ' + i" />
+    </div>
+  
+    <!-- Navigation buttons -->
+    <a *ngIf="oglas.images.length > 1" class="prev" (click)="previousSlide()">&#10094;</a>
+    <a *ngIf="oglas.images.length > 1" class="next" (click)="nextSlide()">&#10095;</a>
+  
+  </div>
+  
+  
   <h2 class="oglas-title">{{ "description" | translate }}</h2>
   <p class="oglas-description">{{ oglas.description }}</p>
 
@@ -17,9 +31,6 @@
 
   <p class="oglas-categories">
     <strong>{{"categories" | translate}}: </strong>
-    <!-- <span class="oglas-category" *ngFor="let kategorija of oglas.kategorije">
-      <app-button [text]="kategorija"></app-button>
-    </span> -->
     <span class="oglas-category">
       <app-button [text]="oglas.category.category_name"></app-button>
     </span>
@@ -27,6 +38,15 @@
       <app-button [text]="oglas.subcategory.subcategory_name"></app-button>
     </span>
   </p>
+
+  <div class="oglas-attributes">
+    <h2>{{ "attributes" | translate }}</h2>
+    <div *ngFor="let attribute of oglas.attributes" class="attribute-item">
+      <span class="attribute-name">{{ attribute.attribute_name }}:</span>
+      <span class="attribute-value">{{ attribute.value }}</span>
+    </div>
+  </div>
+  
 
   <!-- User info card -->
   <strong>{{"publisher" | translate}}: </strong>
