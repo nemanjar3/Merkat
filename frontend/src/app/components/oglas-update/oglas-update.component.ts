@@ -254,24 +254,13 @@ export class OglasUpdateComponent implements OnInit {
       console.log(listingData);
   
       // Update listing data
-      this.listingService.createListingNoImages(listingData).subscribe({
-        next: (response) => {
-          const listingId = response.listing_id; // Adjust based on API response structure
-          console.log('Listing updated (created using createListingNoImages):', response);
-  
-          // Delete images marked for removal
-          if (this.imagesToDelete.length > 0) {
-            this.imagesToDelete.forEach((imageUrl) => {
-              this.listingService.deleteImage(imageUrl).subscribe({
-                next: () => console.log(`Image at URL ${imageUrl} successfully deleted.`),
-                error: (err) => console.error(`Failed to delete image at URL ${imageUrl}:`, err),
-              });
-            });
-          }
+      this.listingService.updateListing(this.listingId, listingData).subscribe({
+        next: () => {
+          console.log('Listing updated successfully');
   
           // Add new images
           if (this.images.length > 0) {
-            this.listingService.addListingImages(listingId, this.images).subscribe({
+            this.listingService.addListingImages(this.listingId, this.images).subscribe({
               next: () => {
                 this.toastr.success('Listing updated successfully');
                 this.router.navigate(['/user', this.authService.getUserId()]);
@@ -295,5 +284,6 @@ export class OglasUpdateComponent implements OnInit {
       console.error('Form is invalid');
     }
   }
+  
 
 }
