@@ -74,7 +74,7 @@ class ListingCreateSerializer(serializers.ModelSerializer):
             
         # pokemon, biram tebe  
         if not images_data:
-            default_image_path = 'media/listings_images/pokemon.jpg'
+            default_image_path = 'listings_images/default_listing.jpg'
             Image.objects.create(listing=listing, image=default_image_path)
         # cuvaj sikeeeeee
         for image in images_data:

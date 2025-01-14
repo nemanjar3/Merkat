@@ -1,4 +1,19 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+
+
+  <!-- <input type="file" > -->
+
+  <div class="profile-picture-container">
+    <label for="profilePicture">
+      <img [src]="profileImagePreview" alt="Profile Picture" class="profile-picture"
+        title="Click to upload a new picture" />
+    </label>
+    <input type="file" id="profilePicture" class="profile-picture-input" accept="image/*"
+      (change)="onImageChange($event)" />
+  </div>
+
+
+
   <mat-form-field class="form-field" appearance="outline">
     <mat-label>{{ "firstName" | translate }}</mat-label>
     <input matInput type="text" formControlName="user_name" required>

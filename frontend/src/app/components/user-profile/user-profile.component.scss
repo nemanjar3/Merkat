@@ -97,7 +97,7 @@ ul {
 
 ul li a {
     height: wrap-content;
-    width: 20rem;
+    width: 18rem;
     border: 2.5px solid whitesmoke;
     border-radius: 1rem;
     margin: 0.5rem;
@@ -178,6 +178,8 @@ hr {
     border-radius: 0.72rem;
     margin: 0.2rem;
     white-space: nowrap;
+    width: fit-content;
+    padding: 10px;
 }
 
 /* Profile Picture Styling */
@@ -261,10 +263,22 @@ form button:hover {
         margin-bottom: 5px; /* Add spacing between stacked buttons */
     }
     ul li a{
-        width: 20rem;
+        width: 18rem;
     }
     .nav-link{
         width: 90% !important;
     }
     
+}
+
+/* Styling for ad images */
+ul li a img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensures images maintain aspect ratio while covering the area */
+    max-width: 17rem; /* Ensures image fits within the card size */
+    max-height: 12rem; /* Sets a fixed height for the images */
+    border-radius: 1rem; /* Rounded corners to match card styling */
+    margin: auto;
+    margin-top: 6px;
 }

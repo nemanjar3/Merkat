@@ -192,3 +192,148 @@ body {
 
 
 
+// Slideshow styling
+.slideshow-container {
+  position: relative;
+  max-width: 600px; /* Set your desired width */
+  height: 25rem; /* Set your desired height */
+  margin: auto;
+  overflow: hidden;
+  border-radius: 16px; /* Optional: round corners for the slideshow container */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional: shadow for depth */
+  transition: box-shadow 0.3s ease; /* Smooth transition for box-shadow */
+}
+
+.slide {
+  display: none; /* Hide all slides by default */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.5s ease-in-out; /* Smooth fade transition */
+}
+
+.slide.active {
+  display: block; /* Show the active slide */
+  opacity: 1; /* Full visibility */
+}
+
+.slide:not(.active) {
+  opacity: 0; /* Fade out inactive slides */
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image fills the container */
+  border-radius: 16px;
+  transition: transform 0.5s ease; /* Smooth zoom effect */
+}
+
+.slide img:hover {
+  transform: scale(1.05); /* Zoom in on hover */
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 16px;
+  font-size: 216px; /* Larger arrows */
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px; /* Increase size of arrows */
+  width: 25px; /* Increase size of arrows */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Darken background on hover */
+  // transform: scale(1.02); /* Slightly enlarge the arrows */
+}
+
+.prev:active, .next:active {
+  transform: scale(0.9); /* Slightly shrink the arrows when clicked */
+}
+
+.prev, .next {
+  font-size: 30px; /* Larger size for better visibility */
+}
+
+/* Optional: Add a fade effect on the container */
+.slideshow-container:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+}
+
+
+/* Attributes Section */
+.oglas-attributes {
+  padding: 15px;
+  background-color: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.oglas-attributes h2 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.attribute-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.attribute-item:last-child {
+  border-bottom: none; /* Remove border for last item */
+}
+
+.attribute-name {
+  font-weight: bold;
+  color: #555;
+}
+
+.attribute-value {
+  color: #777;
+  font-style: italic;
+}
+
+/* Responsive styling */
+@media (min-width: 768px) {
+  .oglas-attributes {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  .oglas-attributes h2 {
+    font-size: 1.5rem;
+  }
+
+  .attribute-name {
+    font-size: 1.1rem;
+  }
+
+  .attribute-value {
+    font-size: 1.1rem;
+  }
+}
