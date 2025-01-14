@@ -31,6 +31,8 @@ export class OglasUpdateComponent implements OnInit {
   listingId!: string | '';
   images: File[] = [];
   imagePreviews: string[] = [];
+  imagesToDelete: string[] = [];
+  fetchedImages: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -121,7 +123,8 @@ export class OglasUpdateComponent implements OnInit {
           this.imagePreviews = data.images.map((imgUrl: string) => {
             // Add base URL to image URL if it's not already a full URL
             if (!imgUrl.startsWith('http://') && !imgUrl.startsWith('https://')) {
-              imgUrl = `http://127.0.0.1:8000/${imgUrl}`;
+              imgUrl = `http://127.0.0.1:8000${imgUrl}`;
+              this.fetchedImages.push(imgUrl);
             }
             return imgUrl;
           });
@@ -174,7 +177,10 @@ export class OglasUpdateComponent implements OnInit {
     const files = (event.target as HTMLInputElement).files;
     if (files && this.images.length + files.length + this.imagePreviews.length <= 5) {
       Array.from(files).forEach((file) => {
-        this.images.push(file);
+        //check if the image is fetched from the server
+        if (!this.fetchedImages.includes(file.name)) {
+          this.images.push(file);
+        }
         const reader = new FileReader();
         reader.onload = () => this.imagePreviews.push(reader.result as string);
         reader.readAsDataURL(file);
@@ -187,17 +193,16 @@ export class OglasUpdateComponent implements OnInit {
 
   removeImage(index: number): void {
     if (index < this.imagePreviews.length) {
-      // Remove existing image and call deleteImage
-      const imageUrl = this.imagePreviews[index];
+      // Remove existing image and add its relative URL to the imagesToDelete list
+      const imageUrl = this.imagePreviews[index].replace(/^http:\/\/127\.0\.0\.1:8000\//, '');
+      //check if the image is fetched from the server
+      if (this.fetchedImages.includes(this.imagePreviews[index])) {
+        this.imagesToDelete.push(imageUrl);
+        //remove the image from fetchedImages
+        const fetchedIndex = this.fetchedImages.indexOf(this.imagePreviews[index]);
+        this.fetchedImages.splice(fetchedIndex, 1);
+      }
       this.imagePreviews.splice(index, 1);
-      this.listingService.deleteImage(imageUrl).subscribe({
-        next: () => {
-          console.log(`Image at URL ${imageUrl} successfully deleted.`);
-        },
-        error: (err) => {
-          console.error(`Failed to delete image at URL ${imageUrl}:`, err);
-        },
-      });
     } else {
       // Remove newly added image
       const adjustedIndex = index - this.imagePreviews.length;
@@ -238,8 +243,13 @@ export class OglasUpdateComponent implements OnInit {
         }
       });
 
-      // Add existing image URLs
-      formData.append('existingImages', JSON.stringify(this.imagePreviews));
+      // Call deleteImage for each image in imagesToDelete
+      this.imagesToDelete.forEach((imageUrl) => {
+        this.listingService.deleteImage(imageUrl).subscribe({
+          next: () => console.log(`Image at URL ${imageUrl} successfully deleted.`),
+          error: (err) => console.error(`Failed to delete image at URL ${imageUrl}:`, err),
+        });
+      });
 
       // Add new images
       this.images.forEach((image) => {
@@ -251,17 +261,21 @@ export class OglasUpdateComponent implements OnInit {
         console.log(key, value);
       });
 
-      // this.listingService.updateListing(this.listingId, formData).subscribe({
-      //   next: () => {
-      //     this.toastr.success('Listing updated successfully');
-      //     const userId = this.authService.getUserId();
-      //     this.router.navigate(['/user', userId]);
-      //   },
-      //   error: (err) => {
-      //     console.error('Error updating listing:', err);
-      //     this.toastr.error('Failed to update listing');
-      //   }
-      // });
+      //console log images that are submitted
+      console.log("Images submitted:");
+      console.log(formData.get('images'));
+
+      this.listingService.updateListing(this.listingId, formData).subscribe({
+        next: () => {
+          this.toastr.success('Listing updated successfully');
+          const userId = this.authService.getUserId();
+          this.router.navigate(['/user', userId]);
+        },
+        error: (err) => {
+          console.error('Error updating listing:', err);
+          this.toastr.error('Failed to update listing');
+        }
+      });
     } else {
       console.error('Form is invalid');
     }
