@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['*']
 
 CORS_ORIGIN_ALLOW_ALL = True  # Allow all origins (for development)
 
+CSRF_ALLOWED_ORIGINS = ["https://merkat.onrender.com/"]
+CORS_ORIGINS_WHITELIST = ["https://merkat.onrender.com/"]
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
