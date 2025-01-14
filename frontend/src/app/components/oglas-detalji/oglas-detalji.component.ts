@@ -19,6 +19,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class OglasDetaljiComponent implements OnInit, AfterViewInit {
   oglas: any;
+  currentSlide = 0;
   user!: any;
   constructor(private oglasService: OglasService,
     private route: ActivatedRoute,
@@ -28,11 +29,11 @@ export class OglasDetaljiComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const oglasId = params.get('id');
-
+      
       if (oglasId) {
         this.listingService.getListingById(oglasId).subscribe((data: any) => {
           this.oglas = data;
-
+          console.log('Oglas:', this.oglas);
           // Fetch user details after this.oglas is populated
           if (this.oglas?.user) {
             this.userService.getUserByID(this.oglas.user).subscribe(
@@ -49,6 +50,18 @@ export class OglasDetaljiComponent implements OnInit, AfterViewInit {
         console.error('Oglas ID not found in URL.');
       }
     });
+  }
+  nextSlide(): void {
+    if (this.oglas.images.length > 1) {
+      this.currentSlide = (this.currentSlide + 1) % this.oglas.images.length;
+    }
+  }
+
+  previousSlide(): void {
+    if (this.oglas.images.length > 1) {
+      this.currentSlide =
+        (this.currentSlide - 1 + this.oglas.images.length) % this.oglas.images.length;
+    }
   }
 
   ngAfterViewInit() {

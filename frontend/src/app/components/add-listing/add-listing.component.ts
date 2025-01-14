@@ -84,6 +84,7 @@ export class AddListingComponent implements OnInit {
   }
 
   onSubCategoryChange(event: any): void {
+    //clear the subcategory
     const selectedCategory = this.categories.find((cat) =>
       cat.subcategories.some((sub: any) => sub.name === event.value)
     );
@@ -92,6 +93,8 @@ export class AddListingComponent implements OnInit {
     const subcategoryAttributes = selectedSubcategory?.attributes || [];
     this.selectedAttributes = [...new Set([...parentAttributes, ...subcategoryAttributes])];
     this.updateAttributesFormArray(this.selectedAttributes);
+    console.log("Selected subcategory: ", selectedSubcategory)
+    console.log("Selected Attributes: ", this.selectedAttributes);
   }
 
   private updateAttributesFormArray(attributes: string[]): void {
@@ -128,6 +131,9 @@ export class AddListingComponent implements OnInit {
   onSubmit(): void {
     if (this.listingForm.valid) {
       const formData = new FormData();
+
+      console.log("Listing Form: ", this.listingForm.value);
+
       formData.append('data', JSON.stringify(this.listingForm.value));
       this.images.forEach((image) => {
         formData.append('images', image);
