@@ -1,10 +1,10 @@
 /* Footer Section */
 footer {
-  background-color: #bfd9d2;
-  color: #76b8a6;
-  padding: 3rem 0;
+  background-color: #47beff82;
+  color: #4c80c8;
+  padding: 0.5rem 0; /* Reduced padding */
   margin-top: auto; /* Pushes footer to the bottom */
-  border-top: 2px solid #76b8a6;
+  // border-top: 2px solid #4fb8ec;
   font-family: 'Arial', sans-serif;
 }
 
@@ -28,7 +28,7 @@ footer {
 }
 
 .links a {
-  color: #76b8a6;
+  color: #4c80c8;
   text-decoration: none;
   font-size: 1.1rem;
   font-weight: 500;
@@ -45,7 +45,7 @@ footer {
 /* Add a little styling to the footer text */
 footer p {
   font-size: 1rem;
-  color: #4a6b63; /* Darker text color for contrast */
+  color: #37799f; /* Darker text color for contrast */
   text-align: center;
   margin-top: 1rem;
   font-style: italic;

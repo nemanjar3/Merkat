@@ -10,6 +10,7 @@ import { MarketingComponent } from './components/marketing/marketing.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { AddListingComponent } from './components/add-listing/add-listing.component';
 import { OglasUpdateComponent } from './components/oglas-update/oglas-update.component';
+import { AboutComponent } from './components/about/about.component';
 
 
 export const routes: Routes = [
@@ -20,6 +21,8 @@ export const routes: Routes = [
     { path: 'marketing', component: MarketingComponent },
     { path: 'messages', component: MessagesComponent },
     { path: 'add-listing', component: AddListingComponent },
+    { path: 'about', component: AboutComponent },
+
     { path: 'listing/:id', component: OglasUpdateComponent },
     { path: ':id', component: OglasDetaljiComponent },
     { path: '**', redirectTo: '', pathMatch: 'full' },
