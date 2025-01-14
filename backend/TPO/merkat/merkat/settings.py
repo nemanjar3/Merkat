@@ -34,6 +34,8 @@ CORS_ORIGIN_ALLOW_ALL = True  # Allow all origins (for development)
 CSRF_ALLOWED_ORIGINS = ["https://merkat.onrender.com"]
 CORS_ORIGINS_WHITELIST = ["https://merkat.onrender.com"]
 CSRF_TRUSTED_ORIGINS = ["https://merkat.onrender.com"]
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 
 SIMPLE_JWT = {
