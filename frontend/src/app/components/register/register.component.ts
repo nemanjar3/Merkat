@@ -27,6 +27,9 @@ import { TranslateService } from '@ngx-translate/core';
 export class RegisterComponent {
   registerForm: FormGroup;
   errorMessage: string = "";
+  profile_image: File | null = null;
+  profileImagePreview: string = "http://127.0.0.1:8000/media/profile_images/default_profile.jpg";
+
 
   constructor(private fb: FormBuilder,
     private http: HttpClient,
@@ -47,12 +50,49 @@ export class RegisterComponent {
 
   }
 
+  onImageChange(event: any): void {
+    const input = event.target as HTMLInputElement;
+    if (input?.files?.length) {
+      const file = input.files[0];
+      this.profile_image = file;
+
+      // Create a preview URL for the selected image
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.profileImagePreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  
+
   onSubmit() {
-    console.log('Form submitted:', this.registerForm.value);
     if (this.registerForm.valid) {
+      // Create a FormData object
+      const formData = new FormData();
+  
+      // Append form fields to FormData
+      Object.keys(this.registerForm.value).forEach(key => {
+        formData.append(key, this.registerForm.value[key]);
+      });
+  
+      // Append the profile image if it exists
+      if (this.profile_image) {
+        formData.append('profile_image', this.profile_image);
+      }
+      console.log("Form submitted:");
+      formData.forEach((value, key) => {
+        console.log(key, value);
+      });
+  
+      // HTTP request observer
       const observer = {
         next: (response: any) => {
           console.log('User created successfully:', response);
+          this.translateService.get('registerSuccess').subscribe(
+            (translation: string) => this.toastr.success(translation)
+          );
+          this.router.navigate(['/login']);
         },
         error: (error: any) => {
           if (error.error && error.error.error === 'Username already exists') {
@@ -60,17 +100,15 @@ export class RegisterComponent {
           }
           this.toastr.error('Error creating profile');
         },
-        complete: () => {
-          this.translateService.get('registerSuccess').subscribe(
-            (translation: string) => this.toastr.success(translation)
-          );
-          this.router.navigate(['/login']);
-          console.log('API call completed');
-        }
+        complete: () => console.log('API call completed')
       };
-
-      this.http.post('http://127.0.0.1:8000/api/users/create/', this.registerForm.value)
+  
+      // Make the HTTP POST request
+      this.http.post('http://127.0.0.1:8000/api/users/create/', formData)
         .subscribe(observer);
+    } else {
+      this.toastr.error('Please fill in all required fields');
     }
   }
+  
 }

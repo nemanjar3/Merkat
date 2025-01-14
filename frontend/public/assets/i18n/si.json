@@ -38,7 +38,24 @@
     "invalidUsernameOrPassword": "Neveljavno uporabniško ime ali geslo",
     "logInSuccess": "Uspešno ste se prijavili",
     "registerSuccess": "Profil je uspešno ustvarjen",
-    "updateSuccess": "Profil je uspešno posodobljen"
+    "updateSuccess": "Profil je uspešno posodobljen",
+
+    
+    "createListing": "Ustvari oglas",
+    "title": "Naslov",
+    "titleError": "Vnesite naslov",
+    "descriptionError": "Vnesite opis",
+    "priceError": "Vnesite ceno",
+    "location": "Lokacija",
+    "locationLengthError": "Lokacija ima preveč znakov",
+    "category": "Kategorija",
+    "selectCategory": "Izberite kategorijo",
+    "categoryError": "Morate izbrati kategorijo",
+    "subcategory": "Podkategorija",
+    "selectSubcategory": "Izberite podkategorijo",
+    "valueRequired": "To polje je obvezno",
+    "createListingSuccess": "Oglas je uspešno ustvarjen"
+
     
 
 }

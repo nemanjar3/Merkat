@@ -30,14 +30,31 @@
     "send": "Send",
     "copyRight": "© 2024 Merkat. All rights reserved",
     "fieldRequired": "This field is required",
+
     "myListings": "My listings",
     "profil": "Profile",
     "addListing": "Add listing",
     "noListings": "You have no active listings!",
     "saveChanges": "Save changes",
-
     "invalidUsernameOrPassword": "Invalid username or password",
     "logInSuccess": "Logged in successfully",
     "registerSuccess": "Profile created successfully",
-    "updateSuccess": "Profile updated successfully"
+    "updateSuccess": "Profile updated successfully",
+
+    
+    "createListing": "Create listing",
+    "title": "Title",
+    "titleError": "Enter title",
+    "descriptionError": "Enter description",
+    "priceError": "Enter price",
+    "location": "Location",
+    "locationLengthError": "Location has too many characters",
+    "category": "Category",
+    "selectCategory": "Select category",
+    "categoryError": "You must select a category",
+    "subcategory": "Subcategory",
+    "selectSubcategory": "Select subcategory",
+    "valueRequired": "This field is required",
+    "createListingSuccess": "Listing created successfully"
+
 }

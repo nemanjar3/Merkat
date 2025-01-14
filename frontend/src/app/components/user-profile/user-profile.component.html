@@ -16,27 +16,26 @@
         </a>
       </div>
         <ul>
-            <li *ngFor="let oglas of user.oglasi">
-                <a>
-                    <img src="{{ oglas.slika }}" alt="Oglas slika" />
+            <li *ngFor="let oglas of user.listings">
+                <a (click)="updateListing(oglas)">
+                    <img src="http://127.0.0.1:8000/{{oglas.images[0]}}" alt="Oglas slika" />
                     <div class="content">
                         <div class="naziv">
-                            {{ oglas.naziv }}
+                            {{ oglas.title }}
                         </div>
                         <hr />
                         <div class="kategorije">
-                            <span *ngFor="let kategorija of oglas.kategorije">
-                                <app-button [text]="kategorija"></app-button>
-                            </span>
+                          <span><app-button [text]="oglas.category.category_name"></app-button></span>
+                          <span><app-button [text]="oglas.subcategory.subcategory_name"></app-button></span>
                         </div>
                         <div class="cijena">
-                            {{ oglas.cijena }}
+                            {{ oglas.price }} EUR
                         </div>
                     </div>
                 </a>
             </li>
         </ul>
-        <div *ngIf="!(user.oglasi && user.oglasi.length)" class="noListingContainer">
+        <div *ngIf="!(user.listings && user.listings.length)" class="noListingContainer">
            <p style="margin: auto;">
             {{"noListings" | translate}}
            </p>
@@ -48,7 +47,7 @@
             <div class="profile-picture-container">
               <label for="profilePicture">
                 <img
-                  [src]="user?.profile_image || 'http://127.0.0.1:8000/media/profile_images/default_profile.jpg'"
+                  [src]="profileImagePreview"
                   alt="Profile Picture"
                   class="profile-picture"
                   title="Click to upload a new picture"

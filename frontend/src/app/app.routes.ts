@@ -5,25 +5,28 @@ import { RouterModule } from '@angular/router';
 import { HomepageComponent } from './components/home-page/home-page.component';
 import { OglasDetaljiComponent } from './components/oglas-detalji/oglas-detalji.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { LoginComponent } from './components/login/login.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { MarketingComponent } from './components/marketing/marketing.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { AddListingComponent } from './components/add-listing/add-listing.component';
+import { OglasUpdateComponent } from './components/oglas-update/oglas-update.component';
 
 
 export const routes: Routes = [
     { path: 'register', component: RegistrationPageComponent },
-    { path: '', component: HomepageComponent }, 
-    {path: 'user/:id', component: UserProfileComponent},
+    { path: '', component: HomepageComponent },
+    { path: 'user/:id', component: UserProfileComponent },
     { path: 'login', component: LoginPageComponent },
     { path: 'marketing', component: MarketingComponent },
     { path: 'messages', component: MessagesComponent },
-    { path: ':id', component: OglasDetaljiComponent }
-
+    { path: 'add-listing', component: AddListingComponent },
+    { path: 'listing/:id', component: OglasUpdateComponent },
+    { path: ':id', component: OglasDetaljiComponent },
+    { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
-    })
-    export class AppRoutingModule {}
+})
+export class AppRoutingModule { }

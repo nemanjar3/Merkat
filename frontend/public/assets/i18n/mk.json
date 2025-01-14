@@ -28,6 +28,7 @@
     "send": "Prati",
     "copyRight": "© 2024 Merkat. Site prava se zadržani",
     "fieldRequired": "Ova polje e obavezno",
+
     "myListings": "Moji oglasi",
     "profil": "Profil",
     "addListing": "Dodaj oglas",
@@ -36,5 +37,22 @@
     "invalidUsernameOrPassword": "Nevalidno korisničko ime ili lozinka",
     "logInSuccess": "Uspešno ste se prijavili",
     "registerSuccess": "Profil je uspešno kreiran",
-    "updateSuccess": "Profil je uspešno ažuriran"
+    "updateSuccess": "Profil je uspešno ažuriran",
+
+    
+    "createListing": "Kreiraj oglas",
+    "title": "Naslov",
+    "titleError": "Vnesete naslov",
+    "descriptionError": "Vnesete opis",
+    "priceError": "Vnesete cena",
+    "location": "Lokacija",
+    "locationLengthError": "Lokacija ima previše karaktera",
+    "category": "Kategorija",
+    "selectCategory": "Izaberite kategoriju",
+    "categoryError": "Morate odabrati kategoriju",
+    "subcategory": "Podkategorija",
+    "selectSubcategory": "Izaberite podkategoriju",
+    "valueRequired": "Ovo polje je obavezno",
+    "createListingSuccess": "Oglas je uspešno kreiran"
+
 }

@@ -1,4 +1,4 @@
-ul{
+ul {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,9 +7,9 @@ ul{
     padding: 0;
 }
 
-ul li a{
+ul li a {
     height: wrap-content;
-    width: 20rem;
+    width: fit-content;
     // padding-bottom: 2rem;
     border: 2.5px solid whitesmoke;
     border-radius: 1rem;
@@ -19,10 +19,12 @@ ul li a{
     overflow: hidden;
     color: black;
 }
-li a:hover{
+
+li a:hover {
     opacity: 0.9;
     cursor: pointer;
 }
+
 .content {
     position: relative; // Ensure the content div is positioned relatively
     margin: 0.5rem;
@@ -31,14 +33,17 @@ li a:hover{
     align-items: center; // Center horizontally
     justify-content: center; // Center vertically
 }
-hr{
+
+hr {
     width: 100%;
 }
+
 .cijena {
     align-self: flex-end;
     text-align: right;
     margin: 0.5rem;
 }
+
 .naziv {
     height: 2.45em; // Adjust height to fit two lines of text
     overflow: hidden;
@@ -51,34 +56,133 @@ hr{
     text-align: center; // Center text horizontally
 
 }
+
 .kategorije {
-    display: grid;
-    height: 4rem; // Adjust height to fit two rows of text
-    grid-template-columns: repeat(3, 1fr); // Display 3 items per row
-    gap: 0.1rem; // Adjust gap between items
-    overflow-x: hidden;
-    overflow-y: auto; // Make the div scrollable if it overflows
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-items: flex-start;
+    text-align: left;
 }
+
 .kategorije span {
-    
     white-space: nowrap;
     padding: 0;
     margin: 0;
-    width: 100px;
+    width: 100%;
+    /* Make each span fill the full width */
+    text-align: center;
+    /* Center text within each span */
 }
-.content ::ng-deep app-button{
-    width: 80%;
+
+.content ::ng-deep app-button {
+    width: 100%;
     height: 100%;
 }
-.content ::ng-deep app-button button span{
+
+.content ::ng-deep app-button button span {
     font-size: 0.8rem;
     height: fit-content !important;
 }
-.content ::ng-deep app-button button{
+
+.content ::ng-deep app-button button {
     height: 1.5rem !important;
-    width: 95px;
+    width: fit-content !important;
     background-color: #FFF;
     border-radius: 0.72rem;
     margin: 0.2rem;
     white-space: nowrap;
+}
+
+.homepage-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.filter-panel {
+    width: 20%;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-panel h3 {
+    margin-bottom: 1rem;
+}
+
+.filter-section {
+    margin-bottom: 1.5rem;
+}
+
+.filter-section h4 {
+    margin-bottom: 0.5rem;
+}
+
+.filter-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.filter-section li {
+    margin-bottom: 0.5rem;
+}
+
+.reset-button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.reset-button:hover {
+    background-color: #0056b3;
+}
+
+.listings-container {
+    flex-grow: 1;
+}
+
+.listings-container ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+}
+
+.listings-container li {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.listings-container img {
+    width: 100%;
+    height: auto;
+}
+
+.content {
+    padding: 1rem;
+}
+
+.naziv {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.kategorije {
+    margin-top: 0.5rem;
+}
+
+.cijena {
+    margin-top: 0.5rem;
+    font-weight: bold;
+    color: #007bff;
 }

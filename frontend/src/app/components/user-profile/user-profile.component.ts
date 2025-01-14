@@ -3,44 +3,52 @@ import { UserService } from '../../services/user-service.service';
 import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { NavbarButtonComponent } from '../navbar-button/navbar-button.component';
 import { MatFormField, MatLabel, MatError } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input'
+import { MatInputModule } from '@angular/material/input';
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+import { NavbarButtonComponent } from '../navbar-button/navbar-button.component';
+
 @Component({
   selector: 'app-user-profile',
   standalone: true,
-  imports: [FormsModule,
+  imports: [
+    FormsModule,
     CommonModule,
     RouterModule,
-    NavbarButtonComponent,
     MatFormField,
     MatLabel,
     MatError,
     MatInputModule,
     ReactiveFormsModule,
-    TranslateModule],
+    TranslateModule,
+    NavbarButtonComponent
+  ],
   templateUrl: './user-profile.component.html',
-  styleUrl: './user-profile.component.scss'
+  styleUrl: './user-profile.component.scss',
 })
 export class UserProfileComponent implements OnInit, AfterViewInit {
   user: any;
   activeTab: 'ads' | 'profile' = 'profile';
   userForm!: FormGroup;
   userId!: string;
+  profile_image: File | null = null;
+  profileImagePreview: string = '';
 
-  constructor(private userService: UserService,
+  constructor(
+    private userService: UserService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private http: HttpClient,
     private toastr: ToastrService,
-    private translateService: TranslateService) { }
+    private translateService: TranslateService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    // Initialize the form with default values
     this.userForm = this.fb.group({
       ime: [{ value: '', disabled: false }, [Validators.required]],
       prezime: [{ value: '', disabled: false }, [Validators.required]],
@@ -50,7 +58,6 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       slika: [{ value: '', disabled: false }, [Validators.required]],
     });
 
-    // Fetch user data from your service or local storage
     this.route.paramMap.subscribe({
       next: (params) => {
         this.userId = params.get('id') || '';
@@ -58,8 +65,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
           this.userService.getUserByID(this.userId).subscribe({
             next: (user) => {
               this.user = user;
+              this.profileImagePreview = `http://127.0.0.1:8000/${user.profile_image}`;
 
-              // Update the form values with the fetched user data
               this.userForm.patchValue({
                 ime: this.user.user_name,
                 prezime: this.user.user_surname,
@@ -71,61 +78,49 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
             },
             error: (error) => {
               console.error('Error fetching user details:', error);
-              // Handle the error in the component (e.g., display an error message)
-            },
-            complete: () => {
-              console.log('User fetch API call completed');
             },
           });
         }
-      },
-      error: (error) => {
-        console.error('Error retrieving route parameters:', error);
-        // Handle errors in accessing route parameters
-      },
-      complete: () => {
-        console.log('Route parameter subscription completed');
       },
     });
   }
 
   onProfilePictureChange(event: Event): void {
-    // const input = event.target as HTMLInputElement;
-    // if (input?.files?.length) {
-    //   const file = input.files[0];
+    const input = event.target as HTMLInputElement;
+    if (input?.files?.length) {
+      const file = input.files[0];
+      this.profile_image = file;
 
-    //   // Convert file to a preview URL or upload it to the server
-    //   const reader = new FileReader();
-    //   reader.onload = () => {
-    //     this.user.slika = reader.result as string; // Update user profile picture
-    //   };
-    //   reader.readAsDataURL(file);
-    // }
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.profileImagePreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
   }
+
   onSubmit(): void {
     if (this.userForm.valid) {
-      // const updateUrl = `http:/127.0.0.1:8000/api/users/profile/update/${userId}/`;
-      const payload = {
-        username: this.userForm.value.username,
-        email: this.user.email,
-        user_name: this.userForm.value.ime,
-        user_surname: this.userForm.value.prezime,
-        tel_num: this.userForm.value.telefon,
-      };
+      const formData = new FormData();
+      formData.append('username', this.userForm.value.username);
+      formData.append('email', this.userForm.value.email);
+      formData.append('user_name', this.userForm.value.ime);
+      formData.append('user_surname', this.userForm.value.prezime);
+      formData.append('tel_num', this.userForm.value.telefon);
 
-      this.http.put(`http://127.0.0.1:8000/api/users/profile/update/${this.userId}/`, payload).subscribe({
+      if (this.profile_image) {
+        formData.append('profile_image', this.profile_image);
+      }
+
+      this.http.put(`http://127.0.0.1:8000/api/users/profile/update/${this.userId}/`, formData).subscribe({
         next: (response) => {
-          this.translateService.get('updateSuccess').subscribe(
-            (translation: string) => this.toastr.success(translation)
-          );
+          this.translateService.get('updateSuccess').subscribe((translation: string) => this.toastr.success(translation));
           console.log('Profile updated successfully:', response);
-          window.scrollTo(0, 0);
         },
         error: (error) => {
           if (error.error && error.error.username[0] === 'This username is already taken.') {
             this.userForm.get('username')?.setErrors({ usernameExists: true });
           }
-          console.log("Payload: ", payload);
           console.error('Error updating profile:', error);
           this.toastr.error('Error updating profile');
         },
@@ -139,8 +134,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     window.scrollTo(0, 0);
   }
 
-  // Method to save user changes
-  // saveChanges() {
-  //   // Send updated user data to your backend
-  // }
+  updateListing(oglas: any): void {
+    this.router.navigate(['/listing', oglas.listing_id]);
+  }
 }

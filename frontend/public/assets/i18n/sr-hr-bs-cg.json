@@ -39,5 +39,20 @@
     "invalidUsernameOrPassword": "Neispravno korisničko ime ili lozinka",
     "logInSuccess": "Uspešno ste se prijavili",
     "registerSuccess": "Profil je uspešno kreiran",
-    "updateSuccess": "Profil je uspešno ažuriran"
+    "updateSuccess": "Profil je uspešno ažuriran",
+
+    "createListing": "Kreiraj oglas",
+    "title": "Naslov",
+    "titleError": "Unesite naslov",
+    "descriptionError": "Unesite opis",
+    "priceError": "Unesite cenu",
+    "location": "Lokacija",
+    "locationLengthError": "Lokacija ima previše karaktera",
+    "category": "Kategorija",
+    "selectCategory": "Izaberite kategoriju",
+    "categoryError": "Morate odabrati kategoriju",
+    "subcategory": "Podkategorija",
+    "selectSubcategory": "Izaberite podkategoriju",
+    "valueRequired": "Ovo polje je obavezno",
+    "createListingSuccess": "Oglas je uspešno kreiran"
 }
