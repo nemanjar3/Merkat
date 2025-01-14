@@ -33,7 +33,7 @@
           </li>
         </ul>
       </div>
-  
+   
       <button (click)="resetFilters()" class="reset-button">Reset Filters</button>
     </div>
   
@@ -41,7 +41,7 @@
       <ul>
         <li *ngFor="let oglas of filteredListings">
           <a (click)="prikaziDetalje(oglas)">
-            <img src="http://127.0.0.1:8000/{{oglas.images[0]}}" alt="">
+            <img src="{{apiUrl}}{{oglas.images[0]}}" alt="">
             <div class="content">
               <div class="naziv">{{ oglas.title }}</div>
               <hr>

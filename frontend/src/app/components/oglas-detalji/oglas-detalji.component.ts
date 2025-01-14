@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { User } from '../../shared/models/User';
 import { ListingService } from '../../services/listing.service';
 import { AuthService } from '../../services/auth.service';
+import { environment } from '../../../environments/environment';
+
 @Component({
   selector: 'app-oglas-detalji',
   standalone: true,
@@ -21,6 +23,8 @@ export class OglasDetaljiComponent implements OnInit, AfterViewInit {
   oglas: any;
   currentSlide = 0;
   user!: any;
+  apiUrl = environment.apiUrl;
+
   constructor(private oglasService: OglasService,
     private route: ActivatedRoute,
     private userService: UserService,

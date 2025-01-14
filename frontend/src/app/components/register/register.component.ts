@@ -10,17 +10,19 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from '../../../environments/environment';
+
 @Component({
   standalone: true,
   selector: 'app-register',
   imports: [ReactiveFormsModule,
-            MatFormField,
-            MatLabel,
-            MatError,
-            TranslateModule,
-            RouterModule,
-            MatInputModule,
-            CommonModule],
+    MatFormField,
+    MatLabel,
+    MatError,
+    TranslateModule,
+    RouterModule,
+    MatInputModule,
+    CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -28,7 +30,8 @@ export class RegisterComponent {
   registerForm: FormGroup;
   errorMessage: string = "";
   profile_image: File | null = null;
-  profileImagePreview: string = "http://127.0.0.1:8000/media/profile_images/default_profile.jpg";
+  apiUrl = environment.apiUrl;
+  profileImagePreview: string = "${this.apiUrl}/media/profile_images/default_profile.jpg";
 
 
   constructor(private fb: FormBuilder,
@@ -64,18 +67,18 @@ export class RegisterComponent {
       reader.readAsDataURL(file);
     }
   }
-  
+
 
   onSubmit() {
     if (this.registerForm.valid) {
       // Create a FormData object
       const formData = new FormData();
-  
+
       // Append form fields to FormData
       Object.keys(this.registerForm.value).forEach(key => {
         formData.append(key, this.registerForm.value[key]);
       });
-  
+
       // Append the profile image if it exists
       if (this.profile_image) {
         formData.append('profile_image', this.profile_image);
@@ -84,7 +87,7 @@ export class RegisterComponent {
       formData.forEach((value, key) => {
         console.log(key, value);
       });
-  
+
       // HTTP request observer
       const observer = {
         next: (response: any) => {
@@ -102,13 +105,13 @@ export class RegisterComponent {
         },
         complete: () => console.log('API call completed')
       };
-  
+
       // Make the HTTP POST request
-      this.http.post('http://127.0.0.1:8000/api/users/create/', formData)
+      this.http.post(`${this.apiUrl}/api/users/create/`, formData)
         .subscribe(observer);
     } else {
       this.toastr.error('Please fill in all required fields');
     }
   }
-  
+
 }

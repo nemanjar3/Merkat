@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ListingService } from '../../services/listing.service';
 import { NavbarButtonComponent } from '../navbar-button/navbar-button.component';
 import { CommonModule } from '@angular/common';
-
+import { environment } from '../../../environments/environment';
 @Component({
   standalone: true,
   selector: 'app-homepage',
@@ -19,6 +19,7 @@ export class HomepageComponent implements OnInit {
   selectedCategories: string[] = [];
   selectedSubcategories: string[] = [];
   categoryData: any[] = []; // Store the entire category data from the API
+  apiUrl = environment.apiUrl;
 
   constructor(private listingService: ListingService, private router: Router) {}
 

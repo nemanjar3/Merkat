@@ -12,9 +12,9 @@
       *ngFor="let img of oglas.images; let i = index"
       [class.active]="i === currentSlide"
     >
-      <img src="http://127.0.0.1:8000{{img}}" [alt]="'Image ' + i" />
+      <img src="{{apiUrl}}{{img}}" [alt]="'Image ' + i" />
     </div>
-  
+   
     <!-- Navigation buttons -->
     <a *ngIf="oglas.images.length > 1" class="prev" (click)="previousSlide()">&#10094;</a>
     <a *ngIf="oglas.images.length > 1" class="next" (click)="nextSlide()">&#10095;</a>
@@ -51,7 +51,7 @@
   <!-- User info card -->
   <strong>{{"publisher" | translate}}: </strong>
   <div class="user-card">
-    <img class="user-image" src="http://127.0.0.1:8000{{user.profile_image}}" alt="{{ user.username }}" />
+    <img class="user-image" src="{{apiUrl}}{{user.profile_image}}" alt="{{ user.username }}" />
     <div class="user-info">
       <p class="user-name">{{ user.username }}</p>
       <div class="user-actions">

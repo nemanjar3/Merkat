@@ -11,6 +11,8 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from '../../../environments/environment';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -27,6 +29,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  apiUrl = environment.apiUrl;
+
   constructor(private fb: FormBuilder,
     private http: HttpClient,
     private authService: AuthService,
@@ -70,8 +74,8 @@ export class LoginComponent {
           console.log('API call completed');
         }
       };
-
-      this.http.post('http://127.0.0.1:8000/api/users/login/', this.loginForm.value)
+ 
+      this.http.post(`${this.apiUrl}/api/users/login/`, this.loginForm.value)
         .subscribe(observer);
     }
   }

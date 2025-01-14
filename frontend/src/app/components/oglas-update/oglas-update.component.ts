@@ -8,6 +8,7 @@ import { MatFormField, MatLabel, MatSelect, MatOption } from '@angular/material/
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 @Component({
   standalone: true,
@@ -33,6 +34,7 @@ export class OglasUpdateComponent implements OnInit {
   imagePreviews: string[] = [];
   imagesToDelete: string[] = [];
   fetchedImages: string[] = [];
+  apiUrl = environment.apiUrl;
 
   constructor(
     private fb: FormBuilder,
@@ -117,13 +119,13 @@ export class OglasUpdateComponent implements OnInit {
           });
         }
 
-
+ 
         // Load existing images into the preview array
         if (data.images && Array.isArray(data.images)) {
           this.imagePreviews = data.images.map((imgUrl: string) => {
             // Add base URL to image URL if it's not already a full URL
             if (!imgUrl.startsWith('http://') && !imgUrl.startsWith('https://')) {
-              imgUrl = `http://127.0.0.1:8000${imgUrl}`;
+              imgUrl = `${this.apiUrl}${imgUrl}`;
               this.fetchedImages.push(imgUrl);
             }
             return imgUrl;
@@ -194,7 +196,8 @@ export class OglasUpdateComponent implements OnInit {
   removeImage(index: number): void {
     if (index < this.imagePreviews.length) {
       // Remove existing image and add its relative URL to the imagesToDelete list
-      const imageUrl = this.imagePreviews[index].replace(/^http:\/\/127\.0\.0\.1:8000\//, '');
+      // const imageUrl = this.imagePreviews[index].replace(/^http:\/\/127\.0\.0\.1:8000\//, '');
+      const imageUrl = this.imagePreviews[index].replace(/^.*?\/media\//, '/media/');
       //check if the image is fetched from the server
       if (this.fetchedImages.includes(this.imagePreviews[index])) {
         this.imagesToDelete.push(imageUrl);
