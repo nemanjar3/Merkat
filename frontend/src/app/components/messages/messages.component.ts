@@ -68,22 +68,22 @@ export class MessagesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.listenForMessages();
+    // this.listenForMessages();
   }
 
   ngOnDestroy(): void {
   //  this.socketService.disconnect();
   }
 
-  listenForMessages(): void {
-    this.socketService.listen('message').subscribe((data: any) => {
-      this.messages.push(data); // Додата порука у низ
-    });
-  }
+  // listenForMessages(): void {
+  //   this.socketService.listen('message').subscribe((data: any) => {
+  //     this.messages.push(data); // Додата порука у низ
+  //   });
+  // }
 
   sendMessage(): void {
     if (this.form.value.message.trim() && this.selectedUserId) { // Користите form.value.message
-      this.socketService.sendMessage(this.form.value.message, this.selectedUserId); // Шаљите поруку из форме
+      this.socketService.sendMessage(this.form.value.message); // Шаљите поруку из форме
       this.messages.push({ 
         type: 'chat_message',
         message: this.form.value.message, 
