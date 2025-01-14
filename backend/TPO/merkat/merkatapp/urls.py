@@ -7,6 +7,6 @@ urlpatterns = [
     path('create-profile/', views.create_profile, name='create_profile'),
     path('success/', views.success, name='success'),
 
-    path('', home, name='home'),  # Add this line for the root URL
+    path('', views.success, name='home'),  # Add this line for the root URL
 
 ]
