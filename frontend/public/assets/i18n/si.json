@@ -60,7 +60,11 @@
     "updateListing": "Posodobi oglas",
     "titleRequired": "Naslov je obvezen",
     "uploadImages": "Dodaj slike",
-    "maxImages": "Dodate lahko največ 5 slik!"
+    "maxImages": "Dodate lahko največ 5 slik!",
+    "chooseImages": "Izberite slike",
+    "deleteListing": "Izbriši oglas"
+
+
 
 
 

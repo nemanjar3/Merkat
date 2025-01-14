@@ -54,7 +54,7 @@
       </div>
 
       <div class="images-section">
-        <h2>Upload Images</h2>
+        <h2>{{"uploadImages" | translate}}</h2>
         <div class="image-preview-container">
           <div class="image-preview" *ngFor="let preview of imagePreviews; let i = index">
             <img [src]="preview" alt="Image preview" />
@@ -64,14 +64,14 @@
   
         <label class="upload-label">
           <input type="file" accept="image/*" multiple (change)="onImageChange($event)" />
-          <span>Choose Images</span>
+          <span>{{"chooseImages" | translate}}</span>
         </label>
   
-        <p *ngIf="images.length === 5">Maximum of 5 images uploaded</p>
+        <p *ngIf="images.length === 5">{{"maxImages" | translate}}</p>
       </div>
   
-      <button mat-raised-button color="primary" type="submit" [disabled]="listingForm.invalid">Update Listing</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="listingForm.invalid">{{"updateListing" | translate}}</button>
     </form>
-    <button mat-raised-button color="primary" class="deleteButton"  (click)="deleteListing()" [disabled]="listingForm.invalid">Delete Listing</button>
+    <button mat-raised-button color="primary" class="deleteButton"  (click)="deleteListing()" [disabled]="listingForm.invalid">{{"deleteListing" | translate}}</button>
   </div>
   

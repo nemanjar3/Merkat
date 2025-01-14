@@ -61,6 +61,9 @@
     "updateListing": "Update listing",
     "titleRequired": "Title is required",
     "uploadImages": "Upload images",
-    "maxImages": "Maximum 5 images can be uploaded!"
+    "maxImages": "Maximum 5 images can be uploaded!",
+    "chooseImages": "Choose images",
+    "deleteListing": "Delete listing"
+
 
 }
