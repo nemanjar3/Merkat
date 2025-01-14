@@ -1,44 +1,44 @@
 
 <div class="update-listing">
-    <h1>Update Listing</h1>
+    <h1>{{"updateListing" | translate}}</h1>
     <form [formGroup]="listingForm" (ngSubmit)="onSubmit()">
       <mat-form-field class="form-field" appearance="outline">
-        <mat-label>Title</mat-label>
+        <mat-label>{{"title" | translate}}</mat-label>
         <input matInput id="title" type="text" formControlName="title" placeholder="Enter listing title" />
-        <mat-error *ngIf="listingForm.get('title')?.hasError('required')">Title is required</mat-error>
+        <mat-error *ngIf="listingForm.get('title')?.hasError('required')">{{"titleError" | translate}}</mat-error>
       </mat-form-field>
   
       <mat-form-field class="form-field" appearance="outline">
-        <mat-label>Description</mat-label>
+        <mat-label>{{"description" | translate}}</mat-label>
         <textarea matInput id="description" formControlName="description" placeholder="Enter listing description"></textarea>
-        <mat-error *ngIf="listingForm.get('description')?.hasError('required')">Description is required</mat-error>
+        <mat-error *ngIf="listingForm.get('description')?.hasError('required')">{{"descriptionError" | translate}}</mat-error>
       </mat-form-field>
   
       <mat-form-field class="form-field" appearance="outline">
-        <mat-label>Price</mat-label>
+        <mat-label>{{"price" | translate}}</mat-label>
         <input matInput id="price" type="number" formControlName="price" placeholder="Enter price" />
-        <mat-error *ngIf="listingForm.get('price')?.hasError('required')">Price is required</mat-error>
+        <mat-error *ngIf="listingForm.get('price')?.hasError('required')">{{"priceError" | translate}}</mat-error>
       </mat-form-field>
   
       <mat-form-field class="form-field" appearance="outline">
-        <mat-label>Location</mat-label> 
+        <mat-label>{{"location" | translate}}</mat-label> 
         <input matInput id="location" type="text" formControlName="location" placeholder="Enter location (optional)" />
-        <mat-error *ngIf="listingForm.get('location')?.hasError('maxlength')">Location is too long</mat-error>
+        <mat-error *ngIf="listingForm.get('location')?.hasError('maxlength')">{{"locationError" | translate}}</mat-error>
       </mat-form-field>
   
       <mat-form-field class="form-field" appearance="outline">
-        <mat-label>Category</mat-label>
+        <mat-label>{{"category" | translate}}</mat-label>
         <mat-select id="category" formControlName="category" (selectionChange)="onCategoryChange($event)">
-          <mat-option value="">Select a category</mat-option>
+          <mat-option value="">{{"selectCategory"}}</mat-option>
           <mat-option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name }}</mat-option>
         </mat-select>
-        <mat-error *ngIf="listingForm.get('category')?.hasError('required')">Category is required</mat-error>
+        <mat-error *ngIf="listingForm.get('category')?.hasError('required')">{{"categoryError" | translate}}</mat-error>
       </mat-form-field>
   
       <mat-form-field class="form-field" appearance="outline" *ngIf="subcategories.length > 0">
-        <mat-label>Subcategory</mat-label>
+        <mat-label>{{"subcategory" | translate}}</mat-label>
         <mat-select id="subcategory" formControlName="subcategory" (selectionChange)="onSubCategoryChange($event)">
-          <mat-option value="">Select a subcategory</mat-option>
+          <mat-option value="">{{"categoryError" | translate}}</mat-option>
           <mat-option *ngFor="let sub of subcategories" [value]="sub">{{ sub }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -48,7 +48,7 @@
           <mat-form-field class="form-field" appearance="outline">
             <mat-label>{{ attr.get('attribute_name')?.value }}</mat-label>
             <input matInput type="text" formControlName="value" placeholder="Enter value" />
-            <mat-error *ngIf="attr.get('value')?.hasError('required')">Value is required</mat-error>
+            <mat-error *ngIf="attr.get('value')?.hasError('required')">{{"valueRequired" | translate}}</mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -62,10 +62,10 @@
           </div>
         </div>
         <input type="file" accept="image/*" multiple (change)="onImageChange($event)" />
-        <p *ngIf="images.length === 5">Maximum of 5 images uploaded</p>
+        <p *ngIf="images.length === 5"></p>
       </div>
   
-      <button mat-raised-button color="primary" type="submit" [disabled]="listingForm.invalid">Update Listing</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="listingForm.invalid">{{"updateListing" | translate}}</button>
     </form>
     <button mat-raised-button color="primary" class="deleteButton"  (click)="deleteListing()" [disabled]="listingForm.invalid">Delete Listing</button>
   </div>

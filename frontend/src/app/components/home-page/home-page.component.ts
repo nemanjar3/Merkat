@@ -3,13 +3,14 @@ import { Router } from '@angular/router';
 import { ListingService } from '../../services/listing.service';
 import { NavbarButtonComponent } from '../navbar-button/navbar-button.component';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
   selector: 'app-homepage',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
-  imports: [NavbarButtonComponent, CommonModule],
+  imports: [NavbarButtonComponent, CommonModule, TranslateModule],
 })
 export class HomepageComponent implements OnInit {
   oglasi: any[] = [];

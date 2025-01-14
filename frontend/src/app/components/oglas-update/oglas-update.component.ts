@@ -8,6 +8,7 @@ import { MatFormField, MatLabel, MatSelect, MatOption } from '@angular/material/
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
@@ -21,7 +22,8 @@ import { CommonModule } from '@angular/common';
     MatSelect,
     MatOption,
     MatInputModule,
-    ReactiveFormsModule]
+    ReactiveFormsModule,
+    TranslateModule]
 })
 export class OglasUpdateComponent implements OnInit {
   listingForm: FormGroup;

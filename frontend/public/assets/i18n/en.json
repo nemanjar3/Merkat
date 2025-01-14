@@ -55,6 +55,12 @@
     "subcategory": "Subcategory",
     "selectSubcategory": "Select subcategory",
     "valueRequired": "This field is required",
-    "createListingSuccess": "Listing created successfully"
+    "createListingSuccess": "Listing created successfully",
+    "filterby": "Filter by",
+    "resetfilter": "Reset filter",
+    "updateListing": "Update listing",
+    "titleRequired": "Title is required",
+    "uploadImages": "Upload images",
+    "maxImages": "Maximum 5 images can be uploaded!"
 
 }

@@ -54,5 +54,15 @@
     "subcategory": "Podkategorija",
     "selectSubcategory": "Izaberite podkategoriju",
     "valueRequired": "Ovo polje je obavezno",
-    "createListingSuccess": "Oglas je uspešno kreiran"
+    "createListingSuccess": "Oglas je uspešno kreiran",
+    "filterby": "Filtriraj po",
+    "resetfilter": "Poništi filter",
+    "updateListing": "Ažuriraj oglas",
+    "titleRequired": "Naslov je obavezan",
+    "uploadImages": "Dodaj slike",
+    "maxImages": "Najviše 5 slika se može dodati!"
+
+
+
+
 }
