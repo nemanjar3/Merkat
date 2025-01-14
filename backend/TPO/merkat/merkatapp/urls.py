@@ -7,8 +7,6 @@ urlpatterns = [
     path('create-profile/', views.create_profile, name='create_profile'),
     path('success/', views.success, name='success'),
 
-    # This is 2nd check for LOGIN and SIGNIN and ADD LISTING
-    path('signup/', views.signup, name='signup'),
-    path('login/', views.login, name='login'),
-    path('profile/', views.profile, name='profile'),
+    path('', home, name='home'),  # Add this line for the root URL
+
 ]
