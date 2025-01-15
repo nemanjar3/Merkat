@@ -1,11 +1,12 @@
 /* Footer Section */
 footer {
-  background-color: #bfd9d2;
-  color: #76b8a6;
+  background: linear-gradient(145deg, #d0e6f7, #eaf3fc); /* Blue gradient */
+  color: #2a4b68; /* Neutral blueish text color */
   padding: 3rem 0;
-  margin-top: auto; /* Pushes footer to the bottom */
-  border-top: 2px solid #76b8a6;
+  margin-top: auto;
+  border-top: 2px solid #5d9bd3; /* Blue border */
   font-family: 'Arial', sans-serif;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 /* Container inside the footer */
@@ -16,6 +17,7 @@ footer {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
+  flex-wrap: wrap; /* Adjust for smaller screens */
 }
 
 /* Links Section */
@@ -28,28 +30,34 @@ footer {
 }
 
 .links a {
-  color: #76b8a6;
+  color: #007acc; /* Vibrant blue link color */
   text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 500;
-  transition: color 0.3s ease, transform 0.3s ease;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.5rem;
 }
 
-/* Hover Effect on Links */
 .links a:hover {
-  color: #4a6b63; /* Darker shade on hover */
-  transform: translateY(-2px); /* Subtle lift effect */
+  color: #005a99; /* Slightly darker hover color */
+  transform: translateY(-3px); /* Lift effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow on hover */
+  background: #f0f8ff; /* Light hover background */
   cursor: pointer;
 }
 
-/* Add a little styling to the footer text */
+/* Footer Text */
 footer p {
-  font-size: 1rem;
-  color: #4a6b63; /* Darker text color for contrast */
+  font-size: 1.1rem;
+  color: #2a4b68;
   text-align: center;
   margin-top: 1rem;
   font-style: italic;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
 }
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -64,6 +72,10 @@ footer p {
   }
 
   .links a {
+    font-size: 1rem;
+  }
+
+  footer p {
     font-size: 1rem;
   }
 }

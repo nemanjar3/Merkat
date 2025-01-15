@@ -62,11 +62,15 @@
     "uploadImages": "Dodaj slike",
     "maxImages": "Najviše 5 slika se može dodati!",
     "chooseImages": "Izaberi slike",
-    "deleteListing": "Obriši oglas"
+    "deleteListing": "Obriši oglas",
 
-
-
-
-
-
+    "sortby": "Sortiraj po",
+    "priceasc": "Cena (Nisko visoko)",
+    "pricedesc": "Cena (Visoko nisko)", 
+    "filterbyprice": "Filtriraj po ceni",
+    "from": "Od",
+    "minPrice": "Minimalna cena",
+    "maxPrice": "Maksimalna cena",
+    "to": "Do",
+    "apply": "Primeni"
 }

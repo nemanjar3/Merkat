@@ -54,8 +54,6 @@ export class LoginComponent {
           this.translateService.get('logInSuccess').subscribe(
             (translation: string) => this.toastr.success(translation)
           );
-          // Optionally navigate to login page:
-          // this.router.navigate(['/login']);
         },
         error: (error: any) => {
           // Handle error

@@ -23,7 +23,6 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   navbarButtons = [
     { text: 'homePage', routerLink: '/' },
-    { text: 'categories', routerLink: '/kategorije' },
     { text: 'marketing', routerLink: '/marketing' },
     // Add more buttons as needed
   ];

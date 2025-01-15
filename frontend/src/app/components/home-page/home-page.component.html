@@ -1,59 +1,73 @@
 <div class="homepage-container">
-    <div class="filter-panel">
-      <h3>{{"filterby" | translate}}:</h3>
-  
-      <div class="filter-section">
-        <h4>{{"category" | translate}}</h4>
-        <ul>
-          <li *ngFor="let category of categories">
-            <label>
-              <input
-                type="checkbox"
-                [value]="category.category_name | translate"
-                (change)="toggleCategoryFilter(category.category_name)"
-              />
-              {{ category.category_name }}
-            </label>
-          </li>
-        </ul>
-      </div>
-  
-      <div class="filter-section" *ngIf="subcategories.length > 0">
-        <h4>{{"subcategory" | translate}}</h4>
-        <ul>
-          <li *ngFor="let subcategory of subcategories">
-            <label>
-              <input
-                type="checkbox"
-                [value]="subcategory | translate"
-                (change)="toggleSubcategoryFilter(subcategory)"
-              />
-              {{ subcategory}}
-            </label>
-          </li>
-        </ul>
-      </div>
-  
-      <button (click)="resetFilters()" class="reset-button">{{"resetfilter" | translate}}</button>
+  <div class="filter-panel">
+    <h3>{{ "filterby" | translate }}:</h3>
+    <!-- Sort by Price Dropdown -->
+    <div class="sort-section">
+      <label for="sortPrice">{{ "sortby" | translate }}:</label>
+      <select id="sortPrice" (change)="sortListings($event)">
+        <option value="asc">{{ "priceasc" | translate }}</option>
+        <option value="desc">{{ "pricedesc" | translate }}</option>
+      </select>
     </div>
-  
-    <div class="listings-container">
+
+
+
+    <div class="filter-section">
+      <h4>{{ "category" | translate }}</h4>
       <ul>
-        <li *ngFor="let oglas of filteredListings">
-          <a (click)="prikaziDetalje(oglas)">
-            <img src="{{apiUrl}}{{oglas.images[0]}}" alt="">
-            <div class="content">
-              <div class="naziv">{{ oglas.title }}</div>
-              <hr>
-              <div class="kategorije">
-                <span><app-button [text]="oglas.category.category_name | translate"></app-button></span>
-                <span><app-button [text]="oglas.subcategory.subcategory_name | translate"></app-button></span>
-              </div>
-              <div class="cijena">{{ oglas.price }} €</div>
-            </div>
-          </a>
+        <li *ngFor="let category of categories" [class.selected]="selectedCategories.includes(category.category_name)">
+          <input type="checkbox" id="{{category.category_name}}" [value]="category.category_name | translate"
+            (change)="toggleCategoryFilter(category.category_name)" />
+          <label for="{{category.category_name}}">
+            {{ category.category_name }}
+          </label>
         </li>
       </ul>
     </div>
+
+    <div class="filter-section" *ngIf="subcategories.length > 0">
+      <h4>{{ "subcategory" | translate }}</h4>
+      <ul>
+        <li *ngFor="let subcategory of subcategories" [class.selected]="selectedSubcategories.includes(subcategory)">
+          <input type="checkbox" id="{{subcategory}}" [value]="subcategory | translate"
+            (change)="toggleSubcategoryFilter(subcategory)" />
+          <label for="{{subcategory}}">
+            {{ subcategory }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Filter by Price Range -->
+    <div class="filter-section price-range">
+      <h4>{{ "filterbyprice" | translate }}</h4>
+      <label for="priceFrom">{{ "from" | translate }}:</label>
+      <input type="number" id="priceFrom" [(ngModel)]="priceFrom" placeholder='{{ "minPrice" | translate }}' />
+      <label for="priceTo">{{ "to" | translate }}:</label>
+      <input type="number" id="priceTo" [(ngModel)]="priceTo" placeholder='{{ "maxPrice" | translate }}' />
+      <button (click)="applyPriceFilter()">{{ "apply" | translate }}</button>
+    </div>
+
+    <button (click)="resetFilters()" class="reset-button">{{ "resetfilter" | translate }}</button>
   </div>
-  
+
+
+  <div class="listings-container">
+    <ul>
+      <li *ngFor="let oglas of filteredListings">
+        <a (click)="prikaziDetalje(oglas)">
+          <img src="{{apiUrl}}{{oglas.images[0]}}" alt="">
+          <div class="content">
+            <div class="naziv">{{ oglas.title }}</div>
+            <hr>
+            <div class="kategorije">
+              <span><app-button [text]="oglas.category.category_name | translate"></app-button></span>
+              <span><app-button [text]="oglas.subcategory.subcategory_name | translate"></app-button></span>
+            </div>
+            <div class="cijena">{{ oglas.price }} €</div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

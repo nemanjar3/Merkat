@@ -5,12 +5,16 @@ import { NavbarButtonComponent } from '../navbar-button/navbar-button.component'
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
 @Component({
   standalone: true,
   selector: 'app-homepage',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
-  imports: [NavbarButtonComponent, CommonModule, TranslateModule],
+  imports: [NavbarButtonComponent,
+    CommonModule,
+    TranslateModule,
+    FormsModule],
 })
 export class HomepageComponent implements OnInit {
   oglasi: any[] = [];
@@ -21,8 +25,12 @@ export class HomepageComponent implements OnInit {
   selectedSubcategories: string[] = [];
   categoryData: any[] = []; // Store the entire category data from the API
   apiUrl = environment.apiUrl;
+  // New variables for price range filtering
+  priceFrom: number | null = null;
+  priceTo: number | null = null;
 
-  constructor(private listingService: ListingService, private router: Router) {}
+
+  constructor(private listingService: ListingService, private router: Router) { }
 
   ngOnInit() {
     this.listingService.getAllListings().subscribe((data) => {
@@ -41,12 +49,34 @@ export class HomepageComponent implements OnInit {
     const index = this.selectedCategories.indexOf(category);
     if (index > -1) {
       this.selectedCategories.splice(index, 1);
+
     } else {
       this.selectedCategories.push(category);
     }
     this.updateSubcategories();
     this.applyFilters();
   }
+
+  applyPriceFilter() {
+    this.filteredListings = this.oglasi.filter((oglas) => {
+      const price = oglas.price;
+      const fromCondition = this.priceFrom === null || price >= this.priceFrom;
+      const toCondition = this.priceTo === null || price <= this.priceTo;
+      return fromCondition && toCondition;
+    });
+  }
+
+  sortListings(event: Event) {
+    const target = event.target as HTMLSelectElement; // Cast EventTarget to HTMLSelectElement
+    const order = target.value; // Access the value property
+
+    if (order === 'asc') {
+      this.filteredListings.sort((a, b) => a.price - b.price);
+    } else if (order === 'desc') {
+      this.filteredListings.sort((a, b) => b.price - a.price);
+    }
+  }
+
 
   toggleSubcategoryFilter(subcategory: string) {
     const index = this.selectedSubcategories.indexOf(subcategory);
@@ -55,6 +85,7 @@ export class HomepageComponent implements OnInit {
     } else {
       this.selectedSubcategories.push(subcategory);
     }
+    console.log("subcategories", this.selectedSubcategories);
     this.applyFilters();
   }
 
@@ -85,6 +116,8 @@ export class HomepageComponent implements OnInit {
     this.selectedSubcategories = [];
     this.subcategories = [];
     this.filteredListings = [...this.oglasi];
+    this.priceFrom = null;
+    this.priceTo = null;
   }
 
   prikaziDetalje(oglas: any) {

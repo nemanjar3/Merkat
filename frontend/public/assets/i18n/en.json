@@ -23,14 +23,13 @@
     "tel-num": "Phone number",
     "telNumError": "Enter a valid phone number",
     "username": "Username",
-    "usernameError": "Username is already taken",   
+    "usernameError": "Username is already taken",
     "profile": "My profile",
     "logout": "Logout",
     "newMessage": "New message",
     "send": "Send",
     "copyRight": "© 2024 Merkat. All rights reserved",
     "fieldRequired": "This field is required",
-
     "myListings": "My listings",
     "profil": "Profile",
     "addListing": "Add listing",
@@ -40,8 +39,6 @@
     "logInSuccess": "Logged in successfully",
     "registerSuccess": "Profile created successfully",
     "updateSuccess": "Profile updated successfully",
-
-    
     "createListing": "Create listing",
     "title": "Title",
     "titleError": "Enter title",
@@ -63,7 +60,16 @@
     "uploadImages": "Upload images",
     "maxImages": "Maximum 5 images can be uploaded!",
     "chooseImages": "Choose images",
-    "deleteListing": "Delete listing"
+    "deleteListing": "Delete listing",
 
 
+    "sortby": "Sort By",
+    "priceasc": "Price (Low to High)",
+    "pricedesc": "Price (High to Low)",
+    "filterbyprice": "Filter by price",
+    "from": "From",
+    "minPrice": "Minimum price",
+    "maxPrice": "Maximum price",
+    "to": "To",
+    "apply": "Apply"
 }
