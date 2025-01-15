@@ -84,5 +84,19 @@
     "contact-info": "Kontakt informacije",
     "phone": "Telefon",
     "invalidEmail": "Neispravna e-pošta",
-    "attributes": "Atributi"
+    "attributes": "Atributi",
+    "helpPage": {
+        "title": "Stranica za pomoć",
+        "faq": "Često postavljana pitanja",
+        "whatIsMerkat": "Šta je Merkat?",
+        "whatIsMerkatContent": "Merkat je online tržište posvećeno povezivanju kupaca i prodavaca u Ex-Yu regionu, pružajući korisnički prijatnu i sigurnu platformu.",
+        "howToCreateAccount": "Kako da kreiram nalog?",
+        "howToCreateAccountContent": "Da biste kreirali nalog, kliknite na dugme \"Registracija\" u gornjem desnom uglu početne stranice i popunite tražene informacije.",
+        "howToListItem": "Kako da postavim oglas za prodaju?",
+        "howToListItemContent": "Da biste postavili oglas za prodaju, prijavite se na svoj nalog, idite na odeljak \"Dodaj oglas\" i popunite detalje o vašem artiklu.",
+        "howToContactSeller": "Kako da kontaktiram prodavca?",
+        "howToContactSellerContent": "Možete kontaktirati prodavca klikom na dugme \"Kontaktiraj prodavca\" na stranici oglasa.",
+        "returnPolicy": "Koja je politika povrata?",
+        "returnPolicyContent": "Nemamo politiku povrata. Molimo vas da budete oprezni i svesni mogućih lažnih oglasa i prevara."
+    }
 }

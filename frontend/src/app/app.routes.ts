@@ -11,6 +11,7 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { AddListingComponent } from './components/add-listing/add-listing.component';
 import { OglasUpdateComponent } from './components/oglas-update/oglas-update.component';
 import { AboutComponent } from './components/about/about.component';
+import { HelpComponent } from './components/help/help.component';
 
 export const routes: Routes = [
     { path: 'register', component: RegistrationPageComponent },
@@ -19,9 +20,10 @@ export const routes: Routes = [
     { path: 'login', component: LoginPageComponent },
     { path: 'marketing', component: MarketingComponent },
     { path: 'messages', component: MessagesComponent },
-    { path: 'o-nama', component: AboutComponent },
     { path: 'add-listing', component: AddListingComponent },
     { path: 'about', component: AboutComponent },
+    { path: 'help', component: HelpComponent },
+
 
     { path: 'listing/:id', component: OglasUpdateComponent },
     { path: ':id', component: OglasDetaljiComponent },

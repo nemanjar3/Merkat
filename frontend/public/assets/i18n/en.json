@@ -81,6 +81,21 @@
     "contact-info": "Contact information",
     "phone": "Phone",
     "invalidEmail": "Invalid e-mail address",
-    "attributes": "Attributes"
+    "attributes": "Attributes",
+    "helpPage": {
+        "title": "Help Page",
+        "faq": "Frequently Asked Questions",
+        "whatIsMerkat": "What is Merkat?",
+        "whatIsMerkatContent": "Merkat is an online marketplace dedicated to serving the Ex-Yu region, connecting buyers and sellers with a user-friendly and secure platform.",
+        "howToCreateAccount": "How do I create an account?",
+        "howToCreateAccountContent": "To create an account, click on the \"Register\" button at the top right corner of the homepage and fill in the required information.",
+        "howToListItem": "How do I list an item for sale?",
+        "howToListItemContent": "To list an item for sale, log in to your account, go to the \"Add Listing\" section, and fill in the details of your item.",
+        "howToContactSeller": "How do I contact a seller?",
+        "howToContactSellerContent": "You can contact a seller by clicking on the \"Contact Seller\" button on the listing page.",
+        "returnPolicy": "What is the return policy?",
+        "returnPolicyContent": "We do not have a return policy. Buyers should be aware of false advertisements and scams."
+    }
+
 
 }
