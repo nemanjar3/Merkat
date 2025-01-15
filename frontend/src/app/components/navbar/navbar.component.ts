@@ -23,7 +23,6 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   navbarButtons = [
     { text: 'homePage', routerLink: '/' },
-    { text: 'categories', routerLink: '/kategorije' },
     { text: 'marketing', routerLink: '/marketing' },
     // Add more buttons as needed
   ];
@@ -45,7 +44,6 @@ export class NavbarComponent implements OnInit {
     this.authService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
       this.loggedInUserId = status ? this.authService.getUserId() : null; // Get user ID from AuthService
-      console.log('User ID:', this.loggedInUserId);
     });
   }
 

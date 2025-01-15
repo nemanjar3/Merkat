@@ -15,7 +15,7 @@
     "price": "Cena",
     "categories": "Kategorije",
     "publisher": "Objavil",
-    "call": "Pokliči",
+    "call": "Kontaktiraj",
     "sendMessage": "Pošlji sporočilo",
     "contact": "Kontakt",
     "about": "O nas",
@@ -29,7 +29,6 @@
     "send": "Pošlji",
     "copyRight": "© 2024 Merkat. Vse pravice pridržane",
     "fieldRequired": "To polje je obvezno",
-
     "myListings": "Moji oglasi",
     "profil": "Profil",
     "addListing": "Dodaj oglas",
@@ -39,8 +38,6 @@
     "logInSuccess": "Uspešno ste se prijavili",
     "registerSuccess": "Profil je uspešno ustvarjen",
     "updateSuccess": "Profil je uspešno posodobljen",
-
-    
     "createListing": "Ustvari oglas",
     "title": "Naslov",
     "titleError": "Vnesite naslov",
@@ -62,13 +59,26 @@
     "uploadImages": "Dodaj slike",
     "maxImages": "Dodate lahko največ 5 slik!",
     "chooseImages": "Izberite slike",
-    "deleteListing": "Izbriši oglas"
-
-
-
-
-
-
-    
-
+    "deleteListing": "Izbriši oglas",
+    "sortby": "Razvrsti po",
+    "priceasc": "Cena (Nizko visoko)",
+    "pricedesc": "Cena (Visoko nizko)",
+    "filterbyprice": "Filtriraj po ceni",
+    "from": "Od",
+    "minPrice": "Minimalna cena",
+    "maxPrice": "Maksimalna cena",
+    "to": "Do",
+    "apply": "Uporabi",
+    "about-us": {
+        "title": "O nama",
+        "welcome": "Dobrodošli na Merkat!",
+        "mission": "Naša misija je zagotoviti najboljšo izkušnjo nakupa in prodaje. Naša platforma je zasnovana tako, da vam pomaga najti najboljše izdelke in storitve po najboljših cenah.",
+        "community": "Naša skupnost je sestavljena iz ljudi, ki delijo iste interese in vrednote. Naš cilj je ustvariti varno in prijazno okolje za vse naše uporabnike.",
+        "thank-you": "Hvala, da ste del naše skupnosti! Upamo, da boste uživali v uporabi naše platforme.",
+        "explore": "Raziskujte našo platformo in odkrijte najboljše ponudbe!"
+    },
+    "contact-info": "Kontaktne informacije",
+    "phone": "Telefon",
+    "invalidEmail": "Neveljaven e-poštni naslov",
+    "attributes": "Atributi"
 }

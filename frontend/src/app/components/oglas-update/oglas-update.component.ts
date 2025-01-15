@@ -8,6 +8,7 @@ import { MatFormField, MatLabel, MatSelect, MatOption } from '@angular/material/
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../environments/environment';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -35,6 +36,7 @@ export class OglasUpdateComponent implements OnInit {
   imagePreviews: string[] = [];
   imagesToDelete: string[] = [];
   fetchedImages: string[] = [];
+  apiUrl = environment.apiUrl;
 
   constructor(
     private fb: FormBuilder,
@@ -106,8 +108,6 @@ export class OglasUpdateComponent implements OnInit {
           this.onSubCategoryChange({ value: data.subcategory.subcategory_name });
         }
 
-        console.log("Listing attributes fetched:");
-        console.log(data.attributes);
         // Populate attributes if available
         if (data.attributes) {
           this.updateAttributesFormArray(data.attributes.map((attr: any) => attr.attribute_name));
@@ -119,13 +119,13 @@ export class OglasUpdateComponent implements OnInit {
           });
         }
 
-
+ 
         // Load existing images into the preview array
         if (data.images && Array.isArray(data.images)) {
           this.imagePreviews = data.images.map((imgUrl: string) => {
             // Add base URL to image URL if it's not already a full URL
             if (!imgUrl.startsWith('http://') && !imgUrl.startsWith('https://')) {
-              imgUrl = `http://127.0.0.1:8000${imgUrl}`;
+              imgUrl = `${this.apiUrl}${imgUrl}`;
               this.fetchedImages.push(imgUrl);
             }
             return imgUrl;
@@ -196,7 +196,8 @@ export class OglasUpdateComponent implements OnInit {
   removeImage(index: number): void {
     if (index < this.imagePreviews.length) {
       // Remove existing image and add its relative URL to the imagesToDelete list
-      const imageUrl = this.imagePreviews[index].replace(/^http:\/\/127\.0\.0\.1:8000\//, '');
+      // const imageUrl = this.imagePreviews[index].replace(/^http:\/\/127\.0\.0\.1:8000\//, '');
+      const imageUrl = this.imagePreviews[index].replace(/^.*?\/media\//, '/media/');
       //check if the image is fetched from the server
       if (this.fetchedImages.includes(this.imagePreviews[index])) {
         this.imagesToDelete.push(imageUrl);
@@ -245,21 +246,14 @@ export class OglasUpdateComponent implements OnInit {
       if (this.imagesToDelete.length > 0) {
         this.imagesToDelete.forEach((imageUrl) => {
           this.listingService.deleteImage(imageUrl).subscribe({
-            next: () => console.log(`Image at URL ${imageUrl} successfully deleted.`),
             error: (err) => console.error(`Failed to delete image at URL ${imageUrl}:`, err),
           });
         });
       }
 
-      //console log the listing data
-      console.log("Listing data:");
-      console.log(listingData);
-  
       // Update listing data
       this.listingService.updateListing(this.listingId, listingData).subscribe({
         next: () => {
-          console.log('Listing updated successfully');
-  
           // Add new images
           if (this.images.length > 0) {
             this.listingService.addListingImages(this.listingId, this.images).subscribe({

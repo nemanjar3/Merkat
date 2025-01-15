@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { NavbarButtonComponent } from '../navbar-button/navbar-button.component';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-user-profile',
@@ -37,6 +38,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   userId!: string;
   profile_image: File | null = null;
   profileImagePreview: string = '';
+  apiUrl = environment.apiUrl;
 
   constructor(
     private userService: UserService,
@@ -65,8 +67,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
           this.userService.getUserByID(this.userId).subscribe({
             next: (user) => {
               this.user = user;
-              this.profileImagePreview = `http://127.0.0.1:8000/${user.profile_image}`;
-
+              this.profileImagePreview = `${this.apiUrl}${user.profile_image}`;
+ 
               this.userForm.patchValue({
                 ime: this.user.user_name,
                 prezime: this.user.user_surname,
@@ -112,10 +114,9 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
         formData.append('profile_image', this.profile_image);
       }
 
-      this.http.put(`http://127.0.0.1:8000/api/users/profile/update/${this.userId}/`, formData).subscribe({
+      this.http.put(`${this.apiUrl}/api/users/profile/update/${this.userId}/`, formData).subscribe({
         next: (response) => {
           this.translateService.get('updateSuccess').subscribe((translation: string) => this.toastr.success(translation));
-          console.log('Profile updated successfully:', response);
         },
         error: (error) => {
           if (error.error && error.error.username[0] === 'This username is already taken.') {

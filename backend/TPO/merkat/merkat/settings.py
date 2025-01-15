@@ -58,23 +58,21 @@ REST_FRAMEWORK = {
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne', # channels zapravo, ne diraj!
     'drf_yasg',
     'rest_framework',
     'corsheaders',
-    'merkatapp',
+    'merkatapp.apps.MerkatappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
 ]
 
 import os
 
-MEDIA_URL = '/media/profile_images/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # dodato
 
 MIDDLEWARE = [
@@ -160,13 +158,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-ASGI_APPLICATION = 'merkat.asgi.application'
-
-
-CHANNEL_LAYERS = {
-    'default':{
-        'BACKEND':'channels.layers.InMemoryChannelLayer' #preci na redis kasnije
-    }
-}

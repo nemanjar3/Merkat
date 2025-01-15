@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { User } from '../../shared/models/User';
 import { ListingService } from '../../services/listing.service';
 import { AuthService } from '../../services/auth.service';
+import { environment } from '../../../environments/environment';
+
 @Component({
   selector: 'app-oglas-detalji',
   standalone: true,
@@ -21,6 +23,9 @@ export class OglasDetaljiComponent implements OnInit, AfterViewInit {
   oglas: any;
   currentSlide = 0;
   user!: any;
+  apiUrl = environment.apiUrl;
+  isModalVisible: boolean = false;
+
   constructor(private oglasService: OglasService,
     private route: ActivatedRoute,
     private userService: UserService,
@@ -33,7 +38,6 @@ export class OglasDetaljiComponent implements OnInit, AfterViewInit {
       if (oglasId) {
         this.listingService.getListingById(oglasId).subscribe((data: any) => {
           this.oglas = data;
-          console.log('Oglas:', this.oglas);
           // Fetch user details after this.oglas is populated
           if (this.oglas?.user) {
             this.userService.getUserByID(this.oglas.user).subscribe(
@@ -62,6 +66,24 @@ export class OglasDetaljiComponent implements OnInit, AfterViewInit {
       this.currentSlide =
         (this.currentSlide - 1 + this.oglas.images.length) % this.oglas.images.length;
     }
+  }
+
+  openModal() {
+    this.isModalVisible = true;
+  }
+
+  // Function to close the modal
+  closeModal() {
+    this.isModalVisible = false;
+  }
+  // Prevent modal close when clicking inside modal content
+  onModalContentClick(event: MouseEvent) {
+    event.stopPropagation();
+  }
+
+  // Close modal when clicking outside the modal
+  onModalClick(event: MouseEvent) {
+    this.closeModal();
   }
 
   ngAfterViewInit() {

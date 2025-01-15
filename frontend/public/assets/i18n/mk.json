@@ -14,7 +14,7 @@
     "price": "Cena",
     "categories": "Kategorije",
     "publisher": "Objaveno od",
-    "call": "Javete se",
+    "call": "Kontaktiraj",
     "contact": "Kontakt",
     "about": "Za nas",
     "sendMessage": "Isprati poraka",
@@ -28,7 +28,6 @@
     "send": "Prati",
     "copyRight": "© 2024 Merkat. Site prava se zadržani",
     "fieldRequired": "Ova polje e obavezno",
-
     "myListings": "Moji oglasi",
     "profil": "Profil",
     "addListing": "Dodaj oglas",
@@ -38,8 +37,6 @@
     "logInSuccess": "Uspešno ste se prijavili",
     "registerSuccess": "Profil je uspešno kreiran",
     "updateSuccess": "Profil je uspešno ažuriran",
-
-    
     "createListing": "Kreiraj oglas",
     "title": "Naslov",
     "titleError": "Vnesete naslov",
@@ -60,10 +57,26 @@
     "uploadImages": "Prikačete sliki",
     "maxImages": "Može da se prikačat najmnogu 5 sliki!",
     "chooseImages": "Izberete sliki",
-    "deleteListing": "Izbrišite go oglasot"
-
-
-
-
-
+    "deleteListing": "Izbrišite go oglasot",
+    "sortby": "Sortiraj po",
+    "priceasc": "Cena (Nisko visoko)",
+    "pricedesc": "Cena (Visoko nisko)",
+    "filterbyprice": "Filtriraj po ceni",
+    "from": "Od",
+    "minPrice": "Minimalna cena",
+    "maxPrice": "Maksimalna cena",
+    "to": "Do",
+    "apply": "Primeni",
+    "about-us": {
+        "title": "Za nas",
+        "welcome": "Dobredojdovte na Merkat!",
+        "mission": "Nashata misija e da obezbedime najdobro iskustvo za kupuvanje i prodavanje. Nashata platforma e dizajnirana za da vi pomogne da najdete najdobri proizvodi i uslugi po najdobri ceni.",
+        "community": "Nashata zaednica se sostoi od lugje koi spodeluvaat isti interesi i vrednosti. Nashata cel e da sozdademe bezbedno i prijatno opkruzhuvanje za site nashi korisnici.",
+        "thank-you": "Vi blagodarime shto ste del od nashata zaednica! Se nadevame deka ke uzivate vo koristenenje na nashata platforma.",
+        "explore": "Istrazhuvajte ja nashata platforma i otkrijte gi najdobrite ponudi!"
+    },
+    "contact-info": "Kontakt informacii",
+    "phone": "Telefon",
+    "invalidEmail": "Vnesete validna e-pošta adresa",
+    "attributes": "Atributi"
 }

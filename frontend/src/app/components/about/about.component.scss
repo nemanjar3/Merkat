@@ -1,22 +1,56 @@
 .about-us {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(145deg, #d0e6f7, #eaf3fc);
+    padding: 3rem 1.5rem;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    margin-top: 4rem;
+    max-width: 900px;
+    margin: 4rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .about-us h1 {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 1rem;
+    font-size: 2.5rem;
+    color: #003f3f; /* Dark teal for strong heading contrast */
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .about-us p {
-  font-size: 1.2rem;
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    max-width: 800px;
+    margin: 0.5rem auto;
+    text-align: center; /* Center the text */
+    font-weight: 400;
+}
+
+.about-us p:last-child {
+    margin-bottom: 0; /* Remove margin for the last paragraph */
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+    .about-us {
+        padding: 2rem 1rem;
+    }
+
+    .about-us h1 {
+        font-size: 2rem;
+    }
+
+    .about-us p {
+        font-size: 1rem;
+    }
 }

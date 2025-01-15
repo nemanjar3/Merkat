@@ -87,15 +87,18 @@ button:disabled {
           }
           button {
             position: absolute;
-            top: 5px;
-            right: 5px;
-            background: red;
-            color: white;
+            top: 2px;
+            right: 2px;
+            font-size: x-large;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             border: none;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
             cursor: pointer;
+            padding-top: 13px;
           }
         }
       }
