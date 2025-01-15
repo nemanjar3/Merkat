@@ -108,8 +108,6 @@ export class OglasUpdateComponent implements OnInit {
           this.onSubCategoryChange({ value: data.subcategory.subcategory_name });
         }
 
-        console.log("Listing attributes fetched:");
-        console.log(data.attributes);
         // Populate attributes if available
         if (data.attributes) {
           this.updateAttributesFormArray(data.attributes.map((attr: any) => attr.attribute_name));
@@ -248,21 +246,14 @@ export class OglasUpdateComponent implements OnInit {
       if (this.imagesToDelete.length > 0) {
         this.imagesToDelete.forEach((imageUrl) => {
           this.listingService.deleteImage(imageUrl).subscribe({
-            next: () => console.log(`Image at URL ${imageUrl} successfully deleted.`),
             error: (err) => console.error(`Failed to delete image at URL ${imageUrl}:`, err),
           });
         });
       }
 
-      //console log the listing data
-      console.log("Listing data:");
-      console.log(listingData);
-  
       // Update listing data
       this.listingService.updateListing(this.listingId, listingData).subscribe({
         next: () => {
-          console.log('Listing updated successfully');
-  
           // Add new images
           if (this.images.length > 0) {
             this.listingService.addListingImages(this.listingId, this.images).subscribe({

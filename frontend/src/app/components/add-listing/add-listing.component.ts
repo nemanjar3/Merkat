@@ -118,8 +118,6 @@ export class AddListingComponent implements OnInit {
     const subcategoryAttributes = selectedSubcategory?.attributes || [];
     this.selectedAttributes = [...new Set([...parentAttributes, ...subcategoryAttributes])];
     this.updateAttributesFormArray(this.selectedAttributes);
-    console.log("Selected subcategory: ", selectedSubcategory)
-    console.log("Selected Attributes: ", this.selectedAttributes);
   }
 
   removeImage(index: number): void {
@@ -137,7 +135,6 @@ export class AddListingComponent implements OnInit {
       this.listingService.createListingNoImages(listingData).subscribe({
         next: (response) => {
           const listingId = response.listing_id; // Adjust based on API response structure
-          console.log('Listing created:', response);
           if (this.images.length > 0) {
             this.listingService.addListingImages(listingId, this.images).subscribe({
               next: () => {

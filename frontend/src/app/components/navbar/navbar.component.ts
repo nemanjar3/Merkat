@@ -44,7 +44,6 @@ export class NavbarComponent implements OnInit {
     this.authService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
       this.loggedInUserId = status ? this.authService.getUserId() : null; // Get user ID from AuthService
-      console.log('User ID:', this.loggedInUserId);
     });
   }
 

@@ -17,7 +17,6 @@ export class UserService {
     return this.http.get<any>(`${this.apiUrl}/api/users/profile/${userId}/`)
       .pipe(
         map(user => {
-          console.log('User:', user);
           return user; 
         })
       );

@@ -117,7 +117,6 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       this.http.put(`${this.apiUrl}/api/users/profile/update/${this.userId}/`, formData).subscribe({
         next: (response) => {
           this.translateService.get('updateSuccess').subscribe((translation: string) => this.toastr.success(translation));
-          console.log('Profile updated successfully:', response);
         },
         error: (error) => {
           if (error.error && error.error.username[0] === 'This username is already taken.') {

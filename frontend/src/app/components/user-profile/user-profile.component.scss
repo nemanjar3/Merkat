@@ -273,8 +273,8 @@ form button:hover {
 
 /* Styling for ad images */
 ul li a img {
-    width: 100%;
-    height: auto;
+    width: 250px;
+    height: 200px;
     object-fit: cover; /* Ensures images maintain aspect ratio while covering the area */
     max-width: 17rem; /* Ensures image fits within the card size */
     max-height: 12rem; /* Sets a fixed height for the images */

@@ -36,7 +36,6 @@ export class HomepageComponent implements OnInit {
     this.listingService.getAllListings().subscribe((data) => {
       this.oglasi = data;
       this.filteredListings = data;
-      this.oglasi.forEach(oglas => console.log("slika", oglas.images));
     });
 
     this.listingService.getCategories().subscribe((data: any[]) => {
@@ -85,7 +84,6 @@ export class HomepageComponent implements OnInit {
     } else {
       this.selectedSubcategories.push(subcategory);
     }
-    console.log("subcategories", this.selectedSubcategories);
     this.applyFilters();
   }
 

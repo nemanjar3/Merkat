@@ -13,7 +13,6 @@ export class TranslateService {
   }
 
   setLanguage(lang: string) {
-  //  console.log('Постављање језика на:', lang);
     this.translate.use(lang);
   }
 

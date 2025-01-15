@@ -16,7 +16,7 @@
     "price": "Cijena",
     "categories": "Kategorije",
     "publisher": "Objavljeno od",
-    "call": "Pozovi",
+    "call": "Kontaktiraj",
     "sendMessage": "Pošalji poruku",
     "contact": "Kontakt",
     "about": "O nama",
@@ -72,5 +72,17 @@
     "minPrice": "Minimalna cena",
     "maxPrice": "Maksimalna cena",
     "to": "Do",
-    "apply": "Primeni"
+    "apply": "Primeni",
+    "about-us": {
+        "title": "O nama",
+        "welcome": "Dobrodošli na Merkat!",
+        "mission": "Naša misija je da vam pružimo najbolje iskustvo kupovine i prodaje. Naša platforma je dizajnirana da vam pomogne da pronađete najbolje proizvode i usluge po najboljim cenama.",
+        "community": "Naša zajednica je sastavljena od ljudi koji dele iste interese i vrednosti. Naš cilj je da stvorimo sigurno i prijateljsko okruženje za sve naše korisnike.",
+        "thank-you": "Hvala vam što ste deo naše zajednice! Nadamo se da ćete uživati u korišćenju naše platforme.",
+        "explore": "Istražite našu platformu i pronađite najbolje ponude!"
+    },
+    "contact-info": "Kontakt informacije",
+    "phone": "Telefon",
+    "invalidEmail": "Neispravna e-pošta",
+    "attributes": "Atributi"
 }

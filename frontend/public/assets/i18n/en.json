@@ -16,7 +16,7 @@
     "price": "Price",
     "categories": "Categories",
     "publisher": "Published by",
-    "call": "Call",
+    "call": "Contact",
     "sendMessage": "Send message",
     "contact": "Contact us",
     "about": "About us",
@@ -61,8 +61,6 @@
     "maxImages": "Maximum 5 images can be uploaded!",
     "chooseImages": "Choose images",
     "deleteListing": "Delete listing",
-
-
     "sortby": "Sort By",
     "priceasc": "Price (Low to High)",
     "pricedesc": "Price (High to Low)",
@@ -71,5 +69,18 @@
     "minPrice": "Minimum price",
     "maxPrice": "Maximum price",
     "to": "To",
-    "apply": "Apply"
+    "apply": "Apply",
+    "about-us": {
+        "title": "About Us",
+        "welcome": "Welcome to Merkat!",
+        "mission": "Our mission is to provide the best buying and selling experience. Our platform is designed to help you find the best products and services at the best prices.",
+        "community": "Our community is made up of people who share the same interests and values. Our goal is to create a safe and friendly environment for all our users.",
+        "thank-you": "Thank you for being part of our community! We hope you enjoy using our platform.",
+        "explore": "Explore our platform and discover the best deals!"
+    },
+    "contact-info": "Contact information",
+    "phone": "Phone",
+    "invalidEmail": "Invalid e-mail address",
+    "attributes": "Attributes"
+
 }

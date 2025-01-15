@@ -31,7 +31,7 @@ export class RegisterComponent {
   errorMessage: string = "";
   profile_image: File | null = null;
   apiUrl = environment.apiUrl;
-  profileImagePreview: string = "${this.apiUrl}/media/profile_images/default_profile.jpg";
+  profileImagePreview: string = `${this.apiUrl}/media/profile_images/default_profile.jpg`;
 
 
   constructor(private fb: FormBuilder,
@@ -83,15 +83,9 @@ export class RegisterComponent {
       if (this.profile_image) {
         formData.append('profile_image', this.profile_image);
       }
-      console.log("Form submitted:");
-      formData.forEach((value, key) => {
-        console.log(key, value);
-      });
-
       // HTTP request observer
       const observer = {
         next: (response: any) => {
-          console.log('User created successfully:', response);
           this.translateService.get('registerSuccess').subscribe(
             (translation: string) => this.toastr.success(translation)
           );
@@ -102,8 +96,7 @@ export class RegisterComponent {
             this.registerForm.get('username')?.setErrors({ usernameExists: true });
           }
           this.toastr.error('Error creating profile');
-        },
-        complete: () => console.log('API call completed')
+        }
       };
 
       // Make the HTTP POST request

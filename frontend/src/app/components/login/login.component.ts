@@ -43,14 +43,12 @@ export class LoginComponent {
     });
   }
   onSubmit() {
-    console.log('Form submitted:', this.loginForm.value);
     if (this.loginForm.valid) {
       // Call the API using HttpClient
       const observer = {
         next: (response: any) => {
           // Handle successful response
           this.authService.saveUser(response);
-          console.log('Logged in:', response);
           this.translateService.get('logInSuccess').subscribe(
             (translation: string) => this.toastr.success(translation)
           );
@@ -69,7 +67,6 @@ export class LoginComponent {
         complete: () => {
           // Optional: Handle completion (e.g., hide loading indicator)
           this.router.navigate(['/']);
-          console.log('API call completed');
         }
       };
  

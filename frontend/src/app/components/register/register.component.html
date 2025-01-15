@@ -48,7 +48,7 @@
       {{ "fieldRequired" | translate }}
     </mat-error>
     <mat-error *ngIf="registerForm.get('email')?.hasError('email')">
-      {{ "Invalid email address" | translate }}
+      {{ "invalidEmail" | translate }}
     </mat-error>
   </mat-form-field>
 
