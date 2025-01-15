@@ -230,8 +230,8 @@ hr {
 }
 
 .listings-container ul {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    display: flex;
+    // grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.785rem;
     list-style: none;
     padding: 0;
@@ -331,3 +331,98 @@ hr {
     transform: translateY(0);
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3), -3px -3px 6px rgba(255, 255, 255, 0.3);
 }
+
+/* Responsive adjustments for mobile screens */
+@media (max-width: 768px) {
+    .homepage-container {
+      flex-direction: column; /* Stack filter panel and listings vertically */
+      gap: 1rem; /* Reduce spacing */
+    }
+  
+    .filter-panel {
+        width: 80vw;
+        box-shadow: none;
+        margin: 1rem auto;
+    }
+  
+    .filter-panel h3 {
+      font-size: 1.2rem; /* Smaller heading size */
+    }
+  
+    .filter-section {
+      margin-bottom: 1rem; /* Reduce spacing between sections */
+    }
+  
+    .filter-section h4 {
+      font-size: 1rem; /* Smaller section heading size */
+    }
+  
+    .filter-section ul {
+      max-height: 150px; /* Limit height for better scrolling */
+      overflow-y: auto; /* Enable scrolling for long lists */
+    }
+  
+    .filter-section li label {
+      font-size: 0.9rem; /* Smaller text size */
+    }
+  
+    .price-range {
+      padding: 0.5rem; /* Adjust padding */
+      gap: 0.5rem; /* Reduce spacing */
+    }
+  
+    .price-range h4 {
+      font-size: 1rem; /* Smaller heading size */
+    }
+  
+    .price-range input {
+      font-size: 0.9rem; /* Adjust input font size */
+    }
+  
+    .price-range button {
+      font-size: 0.9rem; /* Smaller button font size */
+    }
+  
+    .reset-button {
+      font-size: 0.9rem; /* Adjust button font size */
+      padding: 0.5rem; /* Reduce padding */
+    }
+  }
+  .mobile-filter-toggle {
+    display: none;
+    width: 85vw;
+    margin: 1rem auto;
+    padding: 0.75rem;
+    background: linear-gradient(145deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .mobile-filter-toggle:hover {
+    background: linear-gradient(145deg, #0056b3, #003e7a);
+  }
+  
+  .mobile-hidden {
+    display: none; /* Hide filter panel when toggled off */
+  }
+  
+  /* Show toggle button and adjust filter panel for small screens */
+  @media (max-width: 768px) {
+    .mobile-filter-toggle {
+      display: block; /* Show toggle button */
+    }
+  
+    .filter-panel {
+      display: none; /* Initially hide filter panel */
+    }
+  
+    .filter-panel.mobile-hidden {
+      display: block; /* Show filter panel when toggled on */
+    }
+  }
+    

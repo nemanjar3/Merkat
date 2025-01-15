@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ListingService } from '../../services/listing.service';
 import { NavbarButtonComponent } from '../navbar-button/navbar-button.component';
@@ -28,6 +28,7 @@ export class HomepageComponent implements OnInit {
   // New variables for price range filtering
   priceFrom: number | null = null;
   priceTo: number | null = null;
+  isFilterPanelHidden = false;
 
 
   constructor(private listingService: ListingService, private router: Router) { }
@@ -43,6 +44,14 @@ export class HomepageComponent implements OnInit {
       this.categories = data.map((item) => item.category); // Extract categories
     });
   }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    const screenWidth = (event.target as Window).innerWidth;
+    if (screenWidth > 600) {
+      this.isFilterPanelHidden = false; // Always show panel for larger screens
+    }
+  }
+
 
   toggleCategoryFilter(category: string) {
     const index = this.selectedCategories.indexOf(category);
@@ -54,6 +63,9 @@ export class HomepageComponent implements OnInit {
     }
     this.updateSubcategories();
     this.applyFilters();
+  }
+  toggleFilterPanel() {
+    this.isFilterPanelHidden = !this.isFilterPanelHidden;
   }
 
   applyPriceFilter() {
@@ -107,6 +119,7 @@ export class HomepageComponent implements OnInit {
 
       return matchesCategory && matchesSubcategory;
     });
+
   }
 
   resetFilters() {

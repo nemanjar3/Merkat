@@ -81,6 +81,7 @@
     "contact-info": "Contact information",
     "phone": "Phone",
     "invalidEmail": "Invalid e-mail address",
-    "attributes": "Attributes"
+    "attributes": "Attributes",
+    "filters": "Show filters"
 
 }

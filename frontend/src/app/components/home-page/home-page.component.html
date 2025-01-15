@@ -1,5 +1,8 @@
 <div class="homepage-container">
-  <div class="filter-panel">
+  <button class="mobile-filter-toggle" (click)="toggleFilterPanel()">
+    {{ "filters" | translate }}
+  </button>
+  <div class="filter-panel" [class.mobile-hidden]="isFilterPanelHidden">
     <h3>{{ "filterby" | translate }}:</h3>
     <!-- Sort by Price Dropdown -->
     <div class="sort-section">
