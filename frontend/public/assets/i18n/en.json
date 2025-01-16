@@ -82,6 +82,7 @@
     "phone": "Phone",
     "invalidEmail": "Invalid e-mail address",
     "attributes": "Attributes",
+    "filters": "Show filters",
     "helpPage": {
         "title": "Help Page",
         "faq": "Frequently Asked Questions",
