@@ -30,7 +30,7 @@
         <mat-label>{{"category" | translate}}</mat-label>
         <mat-select id="category" formControlName="category" (selectionChange)="onCategoryChange($event)">
           <mat-option value="">{{"selectCategory"}}</mat-option>
-          <mat-option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name }}</mat-option>
+          <mat-option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name | translate}}</mat-option>
         </mat-select>
         <mat-error *ngIf="listingForm.get('category')?.hasError('required')">{{"categoryError" | translate}}</mat-error>
       </mat-form-field>
@@ -39,14 +39,14 @@
         <mat-label>{{"subcategory" | translate}}</mat-label>
         <mat-select id="subcategory" formControlName="subcategory" (selectionChange)="onSubCategoryChange($event)">
           <mat-option value="">{{"categoryError" | translate}}</mat-option>
-          <mat-option *ngFor="let sub of subcategories" [value]="sub">{{ sub }}</mat-option>
+          <mat-option *ngFor="let sub of subcategories" [value]="sub">{{ sub | translate}}</mat-option>
         </mat-select>
       </mat-form-field>
   
       <div formArrayName="attributes" class="attributes">
         <div *ngFor="let attr of attributes.controls; let i = index" [formGroupName]="i">
           <mat-form-field class="form-field" appearance="outline">
-            <mat-label>{{ attr.get('attribute_name')?.value }}</mat-label>
+            <mat-label>{{ attr.get('attribute_name')?.value | translate}}</mat-label>
             <input matInput type="text" formControlName="value" placeholder="Enter value" />
             <mat-error *ngIf="attr.get('value')?.hasError('required')">{{"valueRequired" | translate}}</mat-error>
           </mat-form-field>

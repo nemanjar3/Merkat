@@ -19,7 +19,7 @@
           <input type="checkbox" id="{{category.category_name}}" [value]="category.category_name | translate"
             (change)="toggleCategoryFilter(category.category_name)" />
           <label for="{{category.category_name}}">
-            {{ category.category_name }}
+            {{ category.category_name | translate}}
           </label>
         </li>
       </ul>
@@ -32,7 +32,7 @@
           <input type="checkbox" id="{{subcategory}}" [value]="subcategory | translate"
             (change)="toggleSubcategoryFilter(subcategory)" />
           <label for="{{subcategory}}">
-            {{ subcategory }}
+            {{ subcategory | translate}}
           </label>
         </li>
       </ul>
@@ -61,6 +61,7 @@
             <div class="naziv">{{ oglas.title }}</div>
             <hr>
             <div class="kategorije">
+              <!-- <span><app-button [text]="oglas.category.category_name | translate"></app-button></span> -->
               <span><app-button [text]="oglas.category.category_name | translate"></app-button></span>
               <span><app-button [text]="oglas.subcategory.subcategory_name | translate"></app-button></span>
             </div>

@@ -28,17 +28,17 @@
   <p class="oglas-categories">
     <strong>{{"categories" | translate}}: </strong>
     <span class="oglas-category">
-      <app-button [text]="oglas.category.category_name"></app-button>
+      <app-button [text]="oglas.category.category_name | translate"></app-button>
     </span>
     <span class="oglas-category">
-      <app-button [text]="oglas.subcategory.subcategory_name"></app-button>
+      <app-button [text]="oglas.subcategory.subcategory_name | translate"></app-button>
     </span>
   </p>
 
   <div class="oglas-attributes">
     <h2>{{ "attributes" | translate }}</h2>
     <div *ngFor="let attribute of oglas.attributes" class="attribute-item">
-      <span class="attribute-name">{{ attribute.attribute_name }}:</span>
+      <span class="attribute-name">{{ attribute.attribute_name | translate}}:</span>
       <span class="attribute-value">{{ attribute.value }}</span>
     </div>
   </div>
